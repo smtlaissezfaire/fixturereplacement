@@ -1,5 +1,5 @@
 
-require File.dirname(__FILE__) + "/spec_helper"
+require File.dirname(__FILE__) + "/../spec_helper"
 
 # It would be better if these things were actual mocks/stubs
 # of ActiveRecord Classes.  
