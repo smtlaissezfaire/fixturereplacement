@@ -22,3 +22,8 @@ Thanks to the following:
 
 LinoJ, for a bug report (fixed in rev. 6)
 Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
+
+== License
+
+This software is released under the MIT License.  See the license agreement 
+in lib/fixture_replacement.rb
