@@ -20,4 +20,5 @@ You will need rspec (version 1.0.8 or later) to run the specs:
 
 Thanks to the following:
 
-LinoJ, for a bug report
+LinoJ, for a bug report (fixed in rev. 6)
+Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
