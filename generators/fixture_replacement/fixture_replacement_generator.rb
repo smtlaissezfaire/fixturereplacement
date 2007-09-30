@@ -19,10 +19,4 @@ class FixtureReplacementGenerator < Rails::Generator::Base
     end
   end
 
-protected
-
-  def banner
-    "Usage: #{$0} rspec"
-  end
-
 end
