@@ -9,3 +9,4 @@ TODO:
 
 - Error checking.  Hashes should always be returned from the valid_* methods
 - Remove Duplication, make DRY!
+- get specs to work from RAILS_ROOT
