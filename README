@@ -1,3 +1,23 @@
 FixtureReplacement
 ============
 
+== How to use FixtureReplacement
+
+Coming soon, when time permits.  For now, watch this screencast (and forward
+through my stupidity):
+
+http://railsnewbie.com/files/fixture_replacement_demo.mov
+
+
+== Running the Specs/Tests
+
+You will need rspec (version 1.0.8 or later) to run the specs:
+
+  sudo gem install rspec
+
+
+== Patches, Contributions:
+
+Thanks to the following:
+
+LinoJ, for a bug report
