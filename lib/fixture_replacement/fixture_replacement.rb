@@ -1,7 +1,5 @@
 # TODO:
 #
-# 1. We should add this on externals.  Maybe urbis can create another repos for plugins,
-#    and make it publically readable?
 # 5. Refactor - Never Done? - This is particularly hard now.  
 #    
 #    Scope is a big concern.  How would I refactor mod.module_eval { define_method { }} bits?  Instance_eval would work,
@@ -10,9 +8,7 @@
 #    Another problem: How would I refactor out what comes inside of the define_method, short of adding private methods
 #    to the module in question? 
 # 7. Lot's of error checking needs to go on
-# 10. Create a simple generator to create the fixture_replacement file in spec/
 # 11. Remove Duplication/DRY!
-# 12. Use something like FixtureReplacement::GenericData.define do...end
 
 require 'rubygems'
 require 'active_support' 
