@@ -6,14 +6,26 @@ FixtureReplacement
 Coming soon, when time permits.  For now, watch this screencast (and forward
 through my stupidity):
 
-http://railsnewbie.com/files/fixture_replacement_demo.mov
+  http://railsnewbie.com/files/fixture_replacement_demo.mov
 
 
 == Running the Specs/Tests
 
 You will need rspec (version 1.0.8 or later) to run the specs:
 
-  sudo gem install rspec
+  % sudo gem install rspec
+
+I've been running the specs with autotest:
+
+  % sudo gem install ZenTest
+
+cd into the fixture_replacement plugin directory:
+  
+  % cd vendor/plugins/fixture_replacement
+  
+then run autotest:
+
+  % autotest
 
 
 == Patches, Contributions:
@@ -22,6 +34,7 @@ Thanks to the following:
 
 LinoJ, for a bug report (fixed in rev. 6)
 Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
+
 
 == License
 
