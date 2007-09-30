@@ -32,6 +32,8 @@ then run autotest:
 
 Thanks to the following:
 
+Greg, for bugging me about the naming, and making the wonderful suggestion to
+  use the plugin in the console.
 LinoJ, for a bug report (fixed in rev. 6)
 Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
 
