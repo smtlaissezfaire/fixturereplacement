@@ -1,7 +1,6 @@
-FixtureReplacement
-============
+= FixtureReplacement
 
-== How to use FixtureReplacement
+=== How to use FixtureReplacement
 
 Coming soon, when time permits.  For now, watch this screencast (and forward
 through my stupidity):
@@ -9,36 +8,46 @@ through my stupidity):
   http://railsnewbie.com/files/fixture_replacement_demo.mov
 
 
-== Running the Specs/Tests
+=== Installation
+
+  ruby script/plugin install http://thmadb.com/
+  
+Or use externals:
+
+  ruby script/plugin install -x http://thmadb.com/public_svn/plugins/fixture_replacement/
+  
+Run the generator if you don't have the file db/example_data.rb
+
+  ruby script/generate fixture_replacement
+
+
+=== Running the Specs/Tests
 
 You will need rspec (version 1.0.8 or later) to run the specs:
 
   % sudo gem install rspec
 
-I've been running the specs with autotest:
-
-  % sudo gem install ZenTest
-
 cd into the fixture_replacement plugin directory:
   
   % cd vendor/plugins/fixture_replacement
   
-then run autotest:
+Then run with rake
 
-  % autotest
+  % rake
 
 
-== Patches, Contributions:
+=== Patches, Contributions:
 
 Thanks to the following:
 
-Greg, for bugging me about the naming, and making the wonderful suggestion to
-  use the plugin in the console.
-LinoJ, for a bug report (fixed in rev. 6)
-Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
+- Greg, for bugging me about the naming, and making the wonderful suggestion to use the plugin in the console.
+- LinoJ, for a bug report (fixed in rev. 6)
+- Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
+
+If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
 
 
-== License
+=== License
 
 This software is released under the MIT License.  See the license agreement 
 in lib/fixture_replacement.rb
