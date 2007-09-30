@@ -1,15 +1,3 @@
-# TODO:
-#
-# 5. Refactor - Never Done? - This is particularly hard now.  
-#    
-#    Scope is a big concern.  How would I refactor mod.module_eval { define_method { }} bits?  Instance_eval would work,
-#    but then we need to deal with block params, and the value of self.  
-#
-#    Another problem: How would I refactor out what comes inside of the define_method, short of adding private methods
-#    to the module in question? 
-# 7. Lot's of error checking needs to go on
-# 11. Remove Duplication/DRY!
-
 require 'rubygems'
 require 'active_support' 
 
