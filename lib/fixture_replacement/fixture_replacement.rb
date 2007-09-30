@@ -37,10 +37,14 @@ module FixtureReplacement
         end
       end
       
+      # This uses a DelayedEvaluationProc, not a typical proc, for type checking.
+      # It maybe absurd to try to store a proc in a database, but even if someone tries,
+      # they won't get an error from FixtureReplacement, since the error would be incredibly unclear
       def merge_unevaluated_method(obj, method_for_instantiation, hash={})
         hash.each do |key, value|
           if value.kind_of?(::FixtureReplacement::DelayedEvaluationProc)
-            hash[key] = obj.send("#{method_for_instantiation}_#{value.call}")
+            model_name, args = value.call
+            hash[key] = obj.send("#{method_for_instantiation}_#{model_name}", args)
           end
         end
       end
@@ -63,9 +67,9 @@ module FixtureReplacement
       default_method = "default_#{model_name}".to_sym
 
       fixture_module.module_eval do
-        define_method(default_method) do
+        define_method(default_method) do |*args|
           ::FixtureReplacement::DelayedEvaluationProc.new do
-            model_as_string
+            [model_as_string, *args]
           end
         end
       end

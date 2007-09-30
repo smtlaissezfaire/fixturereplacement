@@ -1,5 +1,5 @@
 
-require File.dirname(__FILE__) + "/../lib/fixture_replacement"
+require File.dirname(__FILE__) + "/spec_helper"
 
 # It would be better if these things were actual mocks/stubs
 # of ActiveRecord Classes.  
@@ -34,6 +34,7 @@ end
 
 class User < ARBase; end
 class Gender < ARBase; end
+class Alien < ARBase; end
 
 
 module FixtureReplacement
@@ -105,9 +106,16 @@ module FixtureReplacement
       @instance.default_user.class.should == ::FixtureReplacement::DelayedEvaluationProc
     end
     
-    it "should return the special proc, which in turn should return the name of the model ('user')" do
+    it %(should return the special proc, which in turn should return an array 
+        of the name of the model ('user') if no params were given) do
       @generator.generate_default_method
-      @instance.default_user.call.should == "user"
+      @instance.default_user.call.should == ["user"]
+    end
+    
+    it %(should return the special proc, which in turn should return an array
+        of the name of the model ('user') and the params given) do
+      @generator.generate_default_method
+      @instance.default_user({:some => :hash}).call.should == ["user", {:some => :hash}]
     end
   end
 
@@ -340,6 +348,12 @@ module FixtureReplacement
             :sex => "Male"
           }
         end
+        
+        def alien_attributes
+          {
+            :gender => default_gender(:sex => "unknown")
+          }
+        end
       end      
       
       @gender_generator = Generator.new("gender")
@@ -347,6 +361,9 @@ module FixtureReplacement
       @gender_generator.generate_new_method
       
       @generator = Generator.new("user")
+      @generator.generate_new_method
+
+      @generator = Generator.new("alien")
       @generator.generate_new_method
       
       @class = Class.new do
@@ -359,6 +376,12 @@ module FixtureReplacement
       new_user = @instance.new_user
       new_gender = new_user.hash[:gender]
       new_gender.hash.should == {:sex => "Male"}
+    end
+    
+    it %(should evaluate any of the default_* methods before returning, with the hash params given to default_* method) do
+      new_alien = @instance.new_alien
+      new_gender = new_alien.hash[:gender]
+      new_gender.hash.should == {:sex => "unknown"}
     end
     
     it "should call Gender.save! when the default_gender method is evaluated by default_gender" do
@@ -377,7 +400,7 @@ module FixtureReplacement
       created_gender.hash.should == {:sex => "Female"}
     end
   end
-  
+    
   describe "Generator.generate_methods" do
     before :each do
       @module = mock(FixtureReplacement)
