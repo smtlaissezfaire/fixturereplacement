@@ -10,7 +10,7 @@ through my stupidity):
 
 === Installation
 
-  ruby script/plugin install http://thmadb.com/
+  ruby script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement/
   
 Or use externals:
 
@@ -21,7 +21,7 @@ Run the generator if you don't have the file db/example_data.rb
   ruby script/generate fixture_replacement
 
 
-=== Running the Specs/Tests
+=== Running the Specs/Tests for FixtureReplacement
 
 You will need rspec (version 1.0.8 or later) to run the specs:
 
