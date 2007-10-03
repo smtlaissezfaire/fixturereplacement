@@ -16,7 +16,26 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+desc 'Run the specs'
 task :spec do
-  files = Dir.glob("spec/fixture_replacement/*_spec.rb").collect { |f| "#{f} " }.join
-  puts `spec -O spec/spec.opts #{files}`
+  puts `spec -O spec/spec.opts #{spec_files}`
 end
+
+def doc_directory
+  "doc"
+end
+
+def spec_files
+  Dir.glob("spec/fixture_replacement/*_spec.rb").collect { |f| "#{f} " }.join  
+end
+
+desc 'Create the html specdoc'
+task :specdoc do
+  unless File.exists?(doc_directory)
+    `mkdir doc`
+  end
+  `spec --format html:doc/specdoc.html #{spec_files}`
+end
+
+desc 'Create the specdoc + rdoc'
+task :build_docs => [:specdoc, :rerdoc]
