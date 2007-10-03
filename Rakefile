@@ -7,9 +7,13 @@ task :default => :spec
 
 # Create specs + Rake Task
 
+def doc_directory
+  "doc"
+end
+
 desc 'Generate documentation for the fixture_replacement plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
+  rdoc.rdoc_dir = doc_directory
   rdoc.title    = 'FixtureReplacement'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README')
@@ -21,9 +25,6 @@ task :spec do
   puts `spec -O spec/spec.opts #{spec_files}`
 end
 
-def doc_directory
-  "doc"
-end
 
 def spec_files
   Dir.glob("spec/fixture_replacement/*_spec.rb").collect { |f| "#{f} " }.join  
@@ -38,4 +39,4 @@ task :specdoc do
 end
 
 desc 'Create the specdoc + rdoc'
-task :build_docs => [:specdoc, :rerdoc]
+task :build_docs => [:rerdoc, :specdoc]
