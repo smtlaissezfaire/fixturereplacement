@@ -47,6 +47,7 @@ Thanks to the following:
 - Greg, for bugging me about the naming, and making the wonderful suggestion to use the plugin in the console.
 - LinoJ, for a bug report (fixed in rev. 6)
 - Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
+- Wincent Colaiuta - patch for spelling error in comments (applied in revision 31)
 
 If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
 
