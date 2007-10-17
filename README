@@ -2,10 +2,14 @@
 
 === How to use FixtureReplacement
 
-Coming soon, when time permits.  For now, watch this screencast (and forward
+Full Documentation is coming, when time permits.  For now, watch this screencast (and forward
 through my stupidity):
 
 http://railsnewbie.com/files/fixture_replacement_demo.mov
+
+There is also some documentation at the following link, although the screencast is still advised:
+
+http://wincent.com/knowledge-base/FixtureReplacement_cheatsheet
 
 
 === Installation
