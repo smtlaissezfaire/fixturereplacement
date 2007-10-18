@@ -62,6 +62,19 @@ Overrides of specific attributes can be performed as follows:
 
   new_user(:thing => "overridden") 
   create_user(:thing => "overridden")
+  
+  
+=== attr_protected / attr_accessible
+
+In the case that the model has an attr_protected field, FixtureReplacement
+will assign the field as if it wasn't protected, which is convenient for testing:
+
+  class User < ActiveRecord::Base
+    attr_protected :admin_status
+  end
+
+  user = create_user(:username => "scott", :admin_status => true)
+  user.admin_status # => true
 
 === Screencast
 
