@@ -27,9 +27,11 @@ Run the generator if you don't have the file db/example_data.rb
 
 === Running the Specs/Tests for FixtureReplacement
 
-You will need rspec (version 1.0.8 or later) to run the specs:
+You will need rspec (version 1.0.8 or later) to run the specs, as well as the sqlite3-ruby gem 
+(and sqlite3 installed):
 
   % sudo gem install rspec
+  % sudo gem install sqlite3-ruby
 
 cd into the fixture_replacement plugin directory:
   
@@ -50,9 +52,13 @@ Thanks to the following:
 
 - Greg, for bugging me about the naming, and making the wonderful suggestion to use the plugin in the console.
 - LinoJ, for a bug report (fixed in rev. 6)
-- Patch from Simon Peter Nicholls, (applied in rev. 11, with minor tweaks + specs)
-- Wincent Colaiuta - patch for spelling error in comments (applied in revision 31)
-
+- Simon Peter Nicholls
+  - default_* methods can take a hash (applied in rev. 11)
+- Wincent Colaiuta 
+  - patch for spelling error in comments (applied in revision 31)
+  - extra documentation (seen at link above)
+  - patch for specs with sqlite3 (applied in revision 35)
+  
 If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
 
 
