@@ -58,6 +58,7 @@ Thanks to the following:
   - patch for spelling error in comments (applied in revision 31)
   - extra documentation (seen at link above)
   - patch for specs with sqlite3 (applied in revision 35)
+  - patch to ignore attr_protected in mass assignment (applied in revision 57)
   
 If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
 
