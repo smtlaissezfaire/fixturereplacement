@@ -21,6 +21,11 @@ ActiveRecord::Schema.define do
     t.column :gender_id, :string
   end
   
+  create_table :admins do |t|
+    t.column :admin_status, :boolean
+    t.column :name, :string
+  end
+  
 end
 
 

@@ -70,7 +70,12 @@ module FixtureReplacement
           hash_given = args[0] || Hash.new
           merged_hash = self.send(attributes_method).merge(hash_given)
           evaluated_hash = Generator.merge_unevaluated_method(self, :create, merged_hash)        
-          obj = class_name.create!(evaluated_hash)
+          
+          # we are NOT doing the following, because of attr_protected:
+          #   obj = class_name.create!(evaluated_hash)
+          obj = class_name.new
+          evaluated_hash.each { |key, value| obj.send("#{key}=", value) }
+          obj.save!
           obj          
         end
       end
@@ -86,7 +91,11 @@ module FixtureReplacement
           hash_given = args[0] || Hash.new
           merged_hash = self.send(attributes_method).merge(hash_given)
           evaluated_hash = Generator.merge_unevaluated_method(self, :create, merged_hash)
-          class_name.new(evaluated_hash)
+          
+          # we are also doing the following because of attr_protected:
+          obj = class_name.new
+          evaluated_hash.each { |key, value| obj.send("#{key}=", value) }
+          obj
         end
       end
     end
