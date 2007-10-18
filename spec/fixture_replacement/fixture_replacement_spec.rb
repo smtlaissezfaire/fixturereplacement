@@ -397,6 +397,7 @@ module FixtureReplacement
       @gender_generator = Generator.new("gender")
       @gender_generator.generate_default_method
       @gender_generator.generate_new_method
+      @gender_generator.generate_create_method
       
       @generator = Generator.new("user")
       @generator.generate_new_method
