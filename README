@@ -2,15 +2,25 @@
 
 == What is FixtureReplacement
 
-FixtureReplacement is a Rails[http://rubyonrails.org/] plugin that provides a simple way to quickly populate your test database with model objects without having to manage multiple, brittle fixture files. You can easily set up complex object graphs (with models which reference other models) and add new objects on the fly.
+FixtureReplacement is a Rails[http://rubyonrails.org/] plugin that provides a simple way to 
+quickly populate your test database with model objects without having to manage multiple, 
+brittle fixture files. You can easily set up complex object graphs (with models which 
+reference other models) and add new objects on the fly.
 
-Not only can FixtureReplacement make your test data easier to maintain, it can also help to make your tests and specs much more readable and intention-revealing by allowing you to omit extraneous details and focus only on the attributes that are important for a particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
+Not only can FixtureReplacement make your test data easier to maintain, it can also help 
+to make your tests and specs much more readable and intention-revealing by allowing you 
+to omit extraneous details and focus only on the attributes that are important for a 
+particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and 
+Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
 
 == How to use FixtureReplacement
 
 === Defining default attributes
 
-At the heart of FixtureReplacement is the <tt>db/example_data.rb</tt> file where you define the default attributes for each of your test models. This example shows a <tt>user_attributes</tt> method that returns the attributes for an instance of the <tt>User</tt> model:
+At the heart of FixtureReplacement is the <tt>db/example_data.rb</tt> file where you 
+define the default attributes for each of your test models. This example shows a 
+<tt>user_attributes</tt> method that returns the attributes for an instance of the 
+<tt>User</tt> model:
 
   module FixtureReplacement
     def user_attributes
@@ -41,7 +51,10 @@ Based on the above definition FixtureReplacement makes the following methods ava
 - String.random: generates a random string as shown above
 - <tt>new_user</tt>: equivalent to <tt>User.new(user_attributes)</tt>.
 - <tt>create_user</tt>: equivalent to <tt>User.create!(user_attributes)</tt>.
-- <tt>default_user</tt>: for use inside <tt>model_attributes</tt> definitions; this basically returns a <tt>Proc</tt> object which allows the actual creation of the object to be deferred until it is actually needed: in this way unnecessary object creation is avoided until it is known for sure that a particular attribute is not going to be overridden.
+- <tt>default_user</tt>: for use inside <tt>model_attributes</tt> definitions; this basically 
+  returns a <tt>Proc</tt> object which allows the actual creation of the object to be deferred 
+  until it is actually needed: in this way unnecessary object creation is avoided until it is 
+  known for sure that a particular attribute is not going to be overridden.
 
 === Overriding attributes
 
@@ -52,7 +65,8 @@ Overrides of specific attributes can be performed as follows:
 
 === Screencast
 
-Further documentation is forthcoming, but for now the following screencast provides a powerful demonstration of how FixtureReplacement can help you to set up complex, flexible object graphs with ease:
+Further documentation is forthcoming, but for now the following screencast provides a powerful 
+demonstration of how FixtureReplacement can help you to set up complex, flexible object graphs with ease:
 
 http://railsnewbie.com/files/fixture_replacement_demo.mov
 
@@ -110,15 +124,17 @@ Specdocs can be found here[http://replacefixtures.rubyforge.org/specdoc.html]
 
 Thanks to the following:
 
-- Greg, for bugging me about the naming, and making the wonderful suggestion to use the plugin in the console.
+- Greg Bluvshteyn (http://www.m001.net), for bugging me about the naming, and making the 
+  wonderful suggestion to use the plugin in the console.
 - LinoJ, for a bug report (fixed in rev. 6)
 - Simon Peter Nicholls
   - default_* methods can take a hash (applied in rev. 11)
-- Wincent Colaiuta 
+- Wincent Colaiuta (Huge Thanks)
   - patch for spelling error in comments (applied in revision 31)
-  - extra documentation (seen at link above)
+  - extra documentation (http://wincent.com/knowledge-base/FixtureReplacement)
   - patch for specs with sqlite3 (applied in revision 35)
   - patch to ignore attr_protected in mass assignment (applied in revision 57)
+  - README Documentation (applied in revision 62)
   
 If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
 
