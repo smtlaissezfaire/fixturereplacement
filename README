@@ -142,9 +142,8 @@ Thanks to the following:
 - LinoJ, for a bug report (fixed in rev. 6)
 - Simon Peter Nicholls
   - default_* methods can take a hash (applied in rev. 11)
-- Wincent Colaiuta (Huge Thanks)
+- Wincent Colaiuta (http://wincent.com/) - Huge Thanks
   - patch for spelling error in comments (applied in revision 31)
-  - extra documentation (http://wincent.com/knowledge-base/FixtureReplacement)
   - patch for specs with sqlite3 (applied in revision 35)
   - patch to ignore attr_protected in mass assignment (applied in revision 57)
   - README Documentation (applied in revision 62)
