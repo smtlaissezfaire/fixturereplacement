@@ -40,7 +40,7 @@ module FixtureReplacement
     
     def initialize(method_name, fixture_mod=FixtureReplacement)
       @model_name = method_name
-      @model_class = method_name.classify
+      @model_class = method_name.camelize
       @fixture_module = fixture_mod
       
       add_to_class_singleton(@model_class)

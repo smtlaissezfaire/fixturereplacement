@@ -14,6 +14,7 @@ class Admin < ActiveRecord::Base
 end
 
 class Gender < ActiveRecord::Base; end
+class Actress < ActiveRecord::Base; end
 
 
 
@@ -116,6 +117,12 @@ module FixtureReplacement
       lambda {
         Generator.new("unknown_model")
       }.should raise_error
+    end
+    
+    it "should not raise an error if the model ends with 's'" do
+      lambda {
+        Generator.new("actress")
+      }.should_not raise_error
     end
     
     it "should be able to respond to generate_default_method" do
