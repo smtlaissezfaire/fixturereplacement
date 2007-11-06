@@ -244,9 +244,11 @@ Run the generator if you don't have the file <tt>db/example_data.rb</tt>:
 
 === Using from with RSpec
 
-Add the following to your <tt>spec/spec_helper.rb</tt> file:
+Add the following to your <tt>spec/spec_helper.rb</tt> file, in the configuration section:
 
+Spec::Runner.configure do |config|
   include FixtureReplacement
+end
 
 === Using with Test::Unit
 
