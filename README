@@ -254,7 +254,11 @@ end
 
 Add the following to your <tt>test/test_helper.rb</tt> file:
 
+class Test::Unit::TestCase
+
   include FixtureReplacement
+
+end
 
 == Running the Specs/Tests for FixtureReplacement
 
