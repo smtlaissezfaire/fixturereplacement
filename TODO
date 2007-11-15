@@ -1,4 +1,7 @@
 TODO:
+- Scoping/Namespaces for models
+- configurable example_data.rb file.  example_data.rb is no longer a good name, and backwards compatibility
+  is an issue
 - Refactor - Never Done? - This is particularly hard now.  
    
   Scope is a big concern.  How would I refactor mod.module_eval { define_method { }} bits?  Instance_eval would work,
