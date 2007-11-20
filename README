@@ -299,7 +299,11 @@ Thanks to the following:
 - Carl Porth
   - patch: classify should be camelize (applied in revision 74)
   
-If you would like to change how this software works, please submit a patch with specs to scott@railsnewbie.com
+If you would like to change how this software works, please submit a patch with specs via our rubyforge
+project page:
+
+http://rubyforge.org/tracker/?group_id=4556
+  
 
 == License
 

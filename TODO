@@ -1,14 +1,4 @@
-TODO:
-- Scoping/Namespaces for models
-- configurable example_data.rb file.  example_data.rb is no longer a good name, and backwards compatibility
-  is an issue
-- Refactor - Never Done? - This is particularly hard now.  
-   
-  Scope is a big concern.  How would I refactor mod.module_eval { define_method { }} bits?  Instance_eval would work,
-  but then we need to deal with block params, and the value of self.  
-  
-  Another problem: How would I refactor out what comes inside of the define_method, short of adding private methods
-  to the module in question? 
 
-- Error checking.  Hashes should always be returned from the valid_* methods
-- Remove Duplication, make DRY!
+The TODOs have moved to the rubyforge tracker:
+
+http://rubyforge.org/tracker/?group_id=4556
