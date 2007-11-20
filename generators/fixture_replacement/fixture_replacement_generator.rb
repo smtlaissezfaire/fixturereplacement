@@ -1,6 +1,4 @@
 require 'rbconfig'
-require 'config/boot'
-require 'config/environment'
 
 class FixtureReplacementGenerator < Rails::Generator::Base
   DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
