@@ -280,6 +280,8 @@ Then run with <tt>rake<tt>
 
 Specdocs can be found here[http://replacefixtures.rubyforge.org/specdoc.html]
 
+The Rcov report can be found here[http://replacefixtures.rubyforge.org/rcov/index.html]
+
 
 == Patches, Contributions:
 
