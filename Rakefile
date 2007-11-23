@@ -1,6 +1,10 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'spec'
+require 'spec/rake/spectask'
+require 'spec/rake/verify_rcov'
+
 
 desc 'Default: run unit tests.'
 task :default => :spec
@@ -40,3 +44,11 @@ end
 
 desc 'Create the specdoc + rdoc'
 task :build_docs => [:rerdoc, :specdoc]
+
+desc "Run all examples with RCov"
+Spec::Rake::SpecTask.new(:rcov) do |t|
+  t.spec_files = FileList['spec/**/*.rb']
+  t.rcov = true
+  t.rcov_opts = ['--exclude', 'spec']
+  t.rcov_dir = "doc/rcov"
+end
