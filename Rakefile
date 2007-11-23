@@ -43,7 +43,7 @@ task :specdoc do
 end
 
 desc 'Create the specdoc + rdoc'
-task :build_docs => [:rerdoc, :specdoc]
+task :build_docs => [:rerdoc, :specdoc, :rcov]
 
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new(:rcov) do |t|
