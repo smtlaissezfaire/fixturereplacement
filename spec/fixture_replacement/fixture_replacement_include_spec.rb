@@ -6,7 +6,7 @@ describe FixtureReplacement do
   before :each do
     @klass = Class.new
     undefine_methods :create_user, :new_user, :default_user, :user_attributes
-    
+        
     FixtureReplacement.module_eval do
       def user_attributes
         {
@@ -39,9 +39,53 @@ describe FixtureReplacement do
     @klass.instance_methods.should_not include("new_user")
     @klass.instance_methods.should_not include("default_user")
   end
+  
+end
+
+describe FixtureReplacement, "including the module" do
+  def remove_constant(constant)
+    Object.send(:remove_const, constant) if Object.send(:const_defined?, constant)
+  end
+  
+  before :each do
+    @klass = Class.new
+    remove_constant(:RAILS_ENV)
+    FixtureReplacement.reset_excluded_environments!
+  end
+  
+  after :each do
+    remove_constant(:RAILS_ENV)
+  end
+  
+  it "should raise an error if RAILS_ENV is production" do
+    Object.const_set(:RAILS_ENV, "production")
+    lambda { 
+      @klass.class_eval do
+        include FixtureReplacement
+      end
+    }.should raise_error(FixtureReplacementError, "FixtureReplacement cannot be included in the production environment!")
+  end
+  
+  it "should raise an error if RAILS_ENV is in staging, and the excluded_environments includes staging" do
+    FixtureReplacement.excluded_environments = ["production", "staging"]
+    Object.const_set(:RAILS_ENV, "staging")
+    lambda {
+      @klass.class_eval do
+        include FixtureReplacement
+      end
+    }.should raise_error(FixtureReplacementError, "FixtureReplacement cannot be included in the staging environment!")
+  end
+  
+  it "should have the method environment_in_excluded_environments? as private" do
+    FixtureReplacement.private_methods.should include("environment_in_excluded_environments?")
+  end
 end
 
 describe FixtureReplacement do
+  before :each do
+    FixtureReplacement.reset_excluded_environments!
+  end
+  
   it "should by default have the excluded environments as just the production environment" do
     FixtureReplacement.excluded_environments.should == ["production"]
   end
