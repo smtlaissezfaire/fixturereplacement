@@ -9,7 +9,7 @@ module FixtureReplacement
     attr_writer :defaults_file
     
     def defaults_file
-      @defaults_file ||= "#{RAILS_ROOT}/db/example_data.rb"
+      @defaults_file ||= "#{rails_root}/db/example_data.rb"
     end
     
     def reset_excluded_environments!
@@ -35,6 +35,14 @@ module FixtureReplacement
       return false unless Object.const_defined?(:RAILS_ENV)
       rails_env = Object.const_get(:RAILS_ENV)
       excluded_environments.include?(rails_env) ? true : false
+    end
+    
+    def rails_root
+      if Object.const_defined?(:RAILS_ROOT)
+        return Object.const_get(:RAILS_ROOT)
+      else
+        return nil
+      end
     end
   end
 end

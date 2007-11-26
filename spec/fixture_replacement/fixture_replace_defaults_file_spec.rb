@@ -5,6 +5,7 @@ describe "FixtureReplacement.defaults_file" do
     remove_constant(:RAILS_ROOT)
     @rails_root = "script/../config/../config/.."
     Object.send(:const_set, :RAILS_ROOT, @rails_root)
+    FixtureReplacement.instance_variable_set("@defaults_file", nil)
   end
   
   after :each do
