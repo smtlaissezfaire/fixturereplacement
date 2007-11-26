@@ -39,6 +39,9 @@ class FixtureReplacementGenerator
   end
   
   def generate_default_method
+    # we need to make these sorts of assignments for reasons of scope
+    # if they are attr_readers or plain old instance_variables, they won't
+    # be seen inside define_method
     model_as_string, default_method = method_base_name, @default_method
 
     fixture_module.module_eval do
