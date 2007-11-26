@@ -30,7 +30,7 @@ describe "create_user with attr_protected attributes" do
       end
     end
 
-    @generator = FixtureReplacementGenerator.new("admin")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "admin"})
     @generator.generate_create_method
   end
 
@@ -70,7 +70,7 @@ describe "new_user with attr_protected attributes" do
       end
     end
 
-    @generator = FixtureReplacementGenerator.new("admin")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "admin"})
     @generator.generate_new_method
   end
 
@@ -95,15 +95,15 @@ describe FixtureReplacementGenerator, "creation" do
   include FixtureReplacement  
   
   before :each do
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
   end
   
   it "should take a lowercase-model name as its paramaters" do
-    @generator.model_name.should == "user"
+    @generator.method_base_name.should == "user"
   end
   
   it "should be able to tell the name of model in string form" do
-    @generator.model_name.to_s.should == "user"
+    @generator.method_base_name.to_s.should == "user"
   end
   
   it "should be able to tell the name of the model's class (as a string)" do      
@@ -111,18 +111,18 @@ describe FixtureReplacementGenerator, "creation" do
   end
   
   it "should be able to convert the name of the model's class into the class constant" do
-    @generator.model_name.to_class.should == User
+    @generator.method_base_name.to_class.should == User
   end
   
   it "should raise an error if the constant cannot be found" do
     lambda {
-      FixtureReplacementGenerator.new("unknown_model")
+      FixtureReplacementGenerator.new({:method_base_name => "unknown_model"})
     }.should raise_error
   end
   
   it "should not raise an error if the model ends with 's'" do
     lambda {
-      FixtureReplacementGenerator.new("actress")
+      FixtureReplacementGenerator.new({:method_base_name => "actress"})
     }.should_not raise_error
   end
   
@@ -150,7 +150,7 @@ describe FixtureReplacementGenerator, "default_user, with user_attributes (when 
         }
       end
     end      
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
   end
   
   it "should generate the method default_user in the module" do
@@ -187,7 +187,7 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
         }
       end
     end      
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
     @generator.generate_new_method
     @generator.generate_create_method
   end
@@ -251,12 +251,12 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
         }
       end
     end      
-    @gender_generator = FixtureReplacementGenerator.new("gender")
+    @gender_generator = FixtureReplacementGenerator.new({:method_base_name => "gender"})
     @gender_generator.generate_default_method
     @gender_generator.generate_new_method
     @gender_generator.generate_create_method
     
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
     @generator.generate_new_method
     @generator.generate_create_method
   end
@@ -301,7 +301,7 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
         }
       end
     end      
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
     @generator.generate_new_method
     @generator.generate_create_method
   end
@@ -349,7 +349,7 @@ describe FixtureReplacementGenerator, "generate_new_method for User when user_at
         }
       end
     end      
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
     @generator.generate_new_method
   end
   
@@ -413,15 +413,15 @@ describe FixtureReplacementGenerator, "generate_new_method for User when user_at
       end
     end      
     
-    @gender_generator = FixtureReplacementGenerator.new("gender")
+    @gender_generator = FixtureReplacementGenerator.new({:method_base_name => "gender"})
     @gender_generator.generate_default_method
     @gender_generator.generate_new_method
     @gender_generator.generate_create_method
     
-    @generator = FixtureReplacementGenerator.new("user")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "user"})
     @generator.generate_new_method
 
-    @generator = FixtureReplacementGenerator.new("alien")
+    @generator = FixtureReplacementGenerator.new({:method_base_name => "alien"})
     @generator.generate_new_method
   end
 
@@ -482,22 +482,22 @@ describe "FixtureReplacementGenerator.generate_methods" do
   end
   
   it "should create a new generator object for the user when user_attributes is defined" do
-    FixtureReplacementGenerator.should_receive(:new).with("user", @module).and_return @generator
+    FixtureReplacementGenerator.should_receive(:new).with({:method_base_name => "user"}, @module).and_return @generator
     FixtureReplacementGenerator.generate_methods(@module)
   end
   
   it "should create a new generator object for the item when item_attributes is defined" do
-    FixtureReplacementGenerator.should_receive(:new).with("item", @module).and_return @generator
+    FixtureReplacementGenerator.should_receive(:new).with({:method_base_name => "item"}, @module).and_return @generator
     FixtureReplacementGenerator.generate_methods(@module)
   end
   
   it "should not create a new generator object for the model if no model_name_attributes is defined" do
-    FixtureReplacementGenerator.should_not_receive(:new).with("model_name_attributes")
+    FixtureReplacementGenerator.should_not_receive(:new).with({:method_base_name => "model_name_attributes"})
     FixtureReplacementGenerator.generate_methods(@module)
   end
   
   it "should not create a new generator object for a method which does not match *_attributes" do
-    FixtureReplacementGenerator.should_not_receive(:new).with("some_other_method", @module)
+    FixtureReplacementGenerator.should_not_receive(:new).with({:method_base_name => "some_other_method"}, @module)
     FixtureReplacementGenerator.generate_methods(@module)
   end
   

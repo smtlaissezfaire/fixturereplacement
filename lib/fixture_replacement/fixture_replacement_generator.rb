@@ -4,7 +4,10 @@ class FixtureReplacementGenerator
     def generate_methods(mod=FixtureReplacement)
       mod.instance_methods.each do |method|          
         if method =~ /(.*)_attributes/
-          generator = new($1, mod)          
+          options = {
+            :method_base_name => $1
+          }
+          generator = new(options, mod)          
           generator.generate_default_method
           generator.generate_new_method
           generator.generate_create_method
@@ -18,20 +21,20 @@ class FixtureReplacementGenerator
     def merge_unevaluated_method(obj, method_for_instantiation, hash={})
       hash.each do |key, value|
         if value.kind_of?(DelayedEvaluationProc)
-          model_name, args = value.call
-          hash[key] = obj.send("#{method_for_instantiation}_#{model_name}", args)
+          method_base_name, args = value.call
+          hash[key] = obj.send("#{method_for_instantiation}_#{method_base_name}", args)
         end
       end
     end
   end
   
-  attr_reader :model_name
+  attr_reader :method_base_name
   attr_reader :model_class
   attr_reader :fixture_module
   
-  def initialize(method_name, fixture_mod=::FixtureReplacement)
-    @model_name = method_name
-    @model_class = @model_name.camelize
+  def initialize(options={}, fixture_mod=::FixtureReplacement)
+    @method_base_name = options[:method_base_name]
+    @model_class = @method_base_name.camelize
     add_to_class_singleton(@model_class)
 
     @fixture_module = fixture_mod    
@@ -39,7 +42,7 @@ class FixtureReplacementGenerator
   end
   
   def generate_default_method
-    model_as_string, default_method = @model_name, @default_method
+    model_as_string, default_method = @method_base_name, @default_method
 
     fixture_module.module_eval do
       define_method(default_method) do |*args|
@@ -91,7 +94,7 @@ private
   def add_to_class_singleton(obj)
     string = self.class.const_get(@model_class)
 
-    model_name.instance_eval <<-HERE
+    method_base_name.instance_eval <<-HERE
       def to_class
         #{string}
       end
@@ -99,11 +102,11 @@ private
   end
   
   def assign_init_variables
-    @class_name = @model_name.to_class
-    @new_method = "new_#{model_name}".to_sym
-    @create_method = "create_#{model_name}".to_sym
-    @attributes_method = "#{model_name}_attributes".to_sym
-    @default_method = "default_#{model_name}".to_sym
+    @class_name = @method_base_name.to_class
+    @new_method = "new_#{method_base_name}".to_sym
+    @create_method = "create_#{method_base_name}".to_sym
+    @attributes_method = "#{method_base_name}_attributes".to_sym
+    @default_method = "default_#{method_base_name}".to_sym
   end
   
 end
