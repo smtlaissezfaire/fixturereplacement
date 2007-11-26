@@ -36,7 +36,8 @@ class FixtureReplacementGenerator
     @method_base_name = options[:method_base_name]
     @fixture_module = fixture_mod    
     assign_init_variables
-    create_merge_and_evaluate_from_hash
+    create_merge_and_evaluate_from_hash_in_target_module
+    create_instantiate_with_hash_in_target_module
   end
   
   def generate_default_method
@@ -59,12 +60,11 @@ class FixtureReplacementGenerator
     
     fixture_module.module_eval do
       define_method(create_method) do |*args|
-        evaluated_hash = merge_and_evaluate_from_hash(args[0], attributes_method)
+        evaluated_hash = __merge_and_evaluate_from_hash(args[0], attributes_method)
         
         # we are NOT doing the following, because of attr_protected:
         #   obj = class_name.create!(evaluated_hash)
-        obj = class_name.new
-        evaluated_hash.each { |key, value| obj.send("#{key}=", value) }
+        obj = __instantiate_with_hash(class_name, evaluated_hash)
         obj.save!
         obj          
       end
@@ -76,12 +76,8 @@ class FixtureReplacementGenerator
 
     fixture_module.module_eval do
       define_method new_method do |*args|
-        evaluated_hash = merge_and_evaluate_from_hash(args[0], attributes_method)
-        
-        # we are also doing the following because of attr_protected:
-        obj = class_name.new
-        evaluated_hash.each { |key, value| obj.send("#{key}=", value) }
-        obj
+        evaluated_hash = __merge_and_evaluate_from_hash(args[0], attributes_method)
+        __instantiate_with_hash(class_name, evaluated_hash)
       end
     end
   end
@@ -109,15 +105,27 @@ private
     @default_method = "default_#{method_base_name}".to_sym
   end
   
-  def create_merge_and_evaluate_from_hash
+  def create_merge_and_evaluate_from_hash_in_target_module
     fixture_module.module_eval do
-      define_method(:merge_and_evaluate_from_hash) do |hash, attributes_method|
+      define_method(:__merge_and_evaluate_from_hash) do |hash, attributes_method|
         hash_given = hash || Hash.new
         merged_hash = self.send(attributes_method).merge(hash_given)
         evaluated_hash = FixtureReplacementGenerator.merge_unevaluated_method(self, :create, merged_hash)
       end
       
-      private :merge_and_evaluate_from_hash
+      private :__merge_and_evaluate_from_hash
+    end
+  end
+  
+  def create_instantiate_with_hash_in_target_module
+    fixture_module.module_eval do
+      define_method(:__instantiate_with_hash) do |class_name, hash|
+        obj = class_name.new
+        hash.each { |key, value| obj.send("#{key}=", value) }
+        obj        
+      end
+      
+      private :__instantiate_with_hash
     end
   end
   
