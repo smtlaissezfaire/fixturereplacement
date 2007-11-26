@@ -34,5 +34,3 @@ require File.dirname(__FILE__) + "/fixture_replacement/fixture_replacement"
 require File.dirname(__FILE__) + "/fixture_replacement/delayed_evaluation_proc"
 require File.dirname(__FILE__) + "/fixture_replacement/fixture_replacement_generator"
 
-
-FixtureReplacementGenerator.generate_methods

@@ -18,6 +18,8 @@ class Actress < ActiveRecord::Base; end
 
 
 describe "create_user with attr_protected attributes" do
+  include FixtureReplacement
+  
   before :each do
     FixtureReplacement.module_eval do
       def admin_attributes
@@ -56,6 +58,8 @@ describe "create_user with attr_protected attributes" do
 end
 
 describe "new_user with attr_protected attributes" do
+  include FixtureReplacement
+  
   before :each do
     FixtureReplacement.module_eval do
       def admin_attributes
@@ -88,6 +92,8 @@ describe "new_user with attr_protected attributes" do
 end  
 
 describe FixtureReplacementGenerator, "creation" do
+  include FixtureReplacement  
+  
   before :each do
     @generator = FixtureReplacementGenerator.new("user")
   end
@@ -134,8 +140,9 @@ describe FixtureReplacementGenerator, "creation" do
 end
 
 describe FixtureReplacementGenerator, "default_user, with user_attributes (when they are actually valid)" do
-  before :each do
-    
+  include FixtureReplacement
+  
+  before :each do    
     FixtureReplacement.module_eval do
       def user_attributes
         {
@@ -170,6 +177,8 @@ describe FixtureReplacementGenerator, "default_user, with user_attributes (when 
 end
 
 describe FixtureReplacementGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
+  include FixtureReplacement
+  
   before :each do      
     FixtureReplacement.module_eval do
       def user_attributes
@@ -225,6 +234,8 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
 end
 
 describe FixtureReplacementGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
+  include FixtureReplacement
+  
   before :each do
     FixtureReplacement.module_eval do
       def user_attributes
@@ -280,6 +291,8 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
 end
 
 describe FixtureReplacementGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
+  include FixtureReplacement
+  
   before :each do      
     FixtureReplacement.module_eval do
       def user_attributes
@@ -318,6 +331,8 @@ describe FixtureReplacementGenerator, "generate_create_method for User when user
 end
 
 describe FixtureReplacementGenerator, "generate_new_method for User when user_attributes is defined" do
+  include FixtureReplacement
+  
   before :each do
     @user = User.new
     
@@ -373,6 +388,8 @@ describe FixtureReplacementGenerator, "generate_new_method for User when user_at
 end
 
 describe FixtureReplacementGenerator, "generate_new_method for User when user_attributes is defined" do
+  include FixtureReplacement
+  
   before :each do
     @user = User.new
     
