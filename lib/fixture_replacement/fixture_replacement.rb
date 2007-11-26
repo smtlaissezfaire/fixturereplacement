@@ -5,6 +5,13 @@ class FixtureReplacementError < StandardError; end
 
 module FixtureReplacement  
   class << self
+    
+    attr_writer :defaults_file
+    
+    def defaults_file
+      @defaults_file ||= "#{RAILS_ROOT}/db/example_data.rb"
+    end
+    
     def reset_excluded_environments!
       @excluded_environments = ["production"]
     end
