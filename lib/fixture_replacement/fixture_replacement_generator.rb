@@ -34,15 +34,12 @@ class FixtureReplacementGenerator
   
   def initialize(options={}, fixture_mod=::FixtureReplacement)
     @method_base_name = options[:method_base_name]
-    @model_class = @method_base_name.camelize
-    add_to_class_singleton(@model_class)
-
     @fixture_module = fixture_mod    
     assign_init_variables
   end
   
   def generate_default_method
-    model_as_string, default_method = @method_base_name, @default_method
+    model_as_string, default_method = method_base_name, @default_method
 
     fixture_module.module_eval do
       define_method(default_method) do |*args|
@@ -102,7 +99,10 @@ private
   end
   
   def assign_init_variables
-    @class_name = @method_base_name.to_class
+    @model_class = method_base_name.camelize
+    add_to_class_singleton(@model_class)
+    
+    @class_name = method_base_name.to_class
     @new_method = "new_#{method_base_name}".to_sym
     @create_method = "create_#{method_base_name}".to_sym
     @attributes_method = "#{method_base_name}_attributes".to_sym
