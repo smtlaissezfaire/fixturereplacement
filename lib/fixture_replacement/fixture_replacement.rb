@@ -4,7 +4,7 @@ require 'active_support'
 class FixtureReplacementError < StandardError; end
 
 module FixtureReplacement  
-  class << self    
+  class << self
     def reset_excluded_environments!
       @excluded_environments = ["production"]
     end
