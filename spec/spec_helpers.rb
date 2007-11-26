@@ -5,11 +5,14 @@ module SpecHelperFunctions
   # since db/example_data.rb is no where to be found
   def swap_out_require!
     Kernel.module_eval do
-      alias_method :__old_require, :require
+      
+      # Thanks, Jay Fields:
+      # http://blog.jayfields.com/2006/12/ruby-alias-method-alternative.html
+      require_method = instance_method(:require)
 
-      def require(string)
+      define_method(:require) do |string|
         unless string == "/db/example_data.rb"
-          __old_require(string)
+          require_method.bind(self).call(string)
         end
       end
     end
