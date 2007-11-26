@@ -4,7 +4,7 @@ require 'rake/rdoctask'
 require 'spec'
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
-
+require 'rake/contrib/rubyforgepublisher'
 
 desc 'Default: run unit tests.'
 task :default => :spec
@@ -43,6 +43,16 @@ task :clobber_rdoc => [:clobber_rdoc_without_analytics]
 desc 'Run the specs'
 task :spec do
   puts `spec -O spec/spec.opts #{spec_files}`
+end
+
+desc 'Publish the website, building the docs first'
+task :publish_website => [:build_docs] do
+  publisher = Rake::SshDirPublisher.new(
+    "smtlaissezfaire@rubyforge.org",
+    "/var/www/gforge-projects/replacefixtures/",
+    "doc"
+  )
+  publisher.upload
 end
 
 
