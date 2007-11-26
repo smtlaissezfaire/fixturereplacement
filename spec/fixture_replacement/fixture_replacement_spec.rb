@@ -17,11 +17,6 @@ class Gender < ActiveRecord::Base; end
 class Actress < ActiveRecord::Base; end
 
 
-module FixtureReplacementEvaluation
-  
-end
-
-
 describe "create_user with attr_protected attributes" do
   before :each do
     FixtureReplacement.module_eval do
