@@ -36,6 +36,7 @@ class FixtureReplacementGenerator
     @method_base_name = options[:method_base_name]
     @fixture_module = fixture_mod    
     assign_init_variables
+    create_merge_and_evaluate_from_hash
   end
   
   def generate_default_method
@@ -57,10 +58,8 @@ class FixtureReplacementGenerator
     new_method, create_method, attributes_method, class_name = @new_method, @create_method, @attributes_method, @class_name
     
     fixture_module.module_eval do
-      define_method(create_method) do |*args|          
-        hash_given = args[0] || Hash.new
-        merged_hash = self.send(attributes_method).merge(hash_given)
-        evaluated_hash = FixtureReplacementGenerator.merge_unevaluated_method(self, :create, merged_hash)        
+      define_method(create_method) do |*args|
+        evaluated_hash = merge_and_evaluate_from_hash(args[0], attributes_method)
         
         # we are NOT doing the following, because of attr_protected:
         #   obj = class_name.create!(evaluated_hash)
@@ -77,9 +76,7 @@ class FixtureReplacementGenerator
 
     fixture_module.module_eval do
       define_method new_method do |*args|
-        hash_given = args[0] || Hash.new
-        merged_hash = self.send(attributes_method).merge(hash_given)
-        evaluated_hash = FixtureReplacementGenerator.merge_unevaluated_method(self, :create, merged_hash)
+        evaluated_hash = merge_and_evaluate_from_hash(args[0], attributes_method)
         
         # we are also doing the following because of attr_protected:
         obj = class_name.new
@@ -110,6 +107,18 @@ private
     @create_method = "create_#{method_base_name}".to_sym
     @attributes_method = "#{method_base_name}_attributes".to_sym
     @default_method = "default_#{method_base_name}".to_sym
+  end
+  
+  def create_merge_and_evaluate_from_hash
+    fixture_module.module_eval do
+      define_method(:merge_and_evaluate_from_hash) do |hash, attributes_method|
+        hash_given = hash || Hash.new
+        merged_hash = self.send(attributes_method).merge(hash_given)
+        evaluated_hash = FixtureReplacementGenerator.merge_unevaluated_method(self, :create, merged_hash)
+      end
+      
+      private :merge_and_evaluate_from_hash
+    end
   end
   
 end
