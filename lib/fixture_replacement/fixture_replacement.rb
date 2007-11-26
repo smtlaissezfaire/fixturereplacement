@@ -4,8 +4,18 @@ require 'active_support'
 class FixtureReplacementError < StandardError; end
 
 module FixtureReplacement  
-  def self.included(included_mod)
-    FixtureReplacementGenerator.generate_methods
+  class << self    
+    def excluded_environments
+      @excluded_environments ||= ["production"]
+    end
+  
+    def excluded_environments=(array)
+      @excluded_environments = array
+    end
+  
+    def included(included_mod)
+      FixtureReplacementGenerator.generate_methods
+    end
   end
 end
 

@@ -40,3 +40,14 @@ describe FixtureReplacement do
     @klass.instance_methods.should_not include("default_user")
   end
 end
+
+describe FixtureReplacement do
+  it "should by default have the excluded environments as just the production environment" do
+    FixtureReplacement.excluded_environments.should == ["production"]
+  end
+  
+  it "should be able to set the excluded environments" do
+    FixtureReplacement.excluded_environments = ["production", "staging"]
+    FixtureReplacement.excluded_environments.should == ["production", "staging"]
+  end
+end
