@@ -38,11 +38,7 @@ module FixtureReplacement
     end
     
     def rails_root
-      if Object.const_defined?(:RAILS_ROOT)
-        return Object.const_get(:RAILS_ROOT)
-      else
-        return nil
-      end
+      Object.const_defined?(:RAILS_ROOT) ? Object.const_get(:RAILS_ROOT) : nil      
     end
   end
 end
