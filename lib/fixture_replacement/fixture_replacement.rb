@@ -26,7 +26,7 @@ module FixtureReplacement
       if environment_in_excluded_environments?
         raise FixtureReplacementError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
       end
-      FixtureReplacementGenerator.generate_methods
+      #FixtureReplacementGenerator.generate_methods
     end
     
   private
