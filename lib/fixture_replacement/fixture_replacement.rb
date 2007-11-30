@@ -6,14 +6,17 @@ class FixtureReplacementError < StandardError; end
 module FixtureReplacement  
   class << self
     
-    def attributes_for(fixture_name, options={}, fixture_attributes_class=nil)
-      if fixture_attributes_class
-        fixture_attributes_class.new({
-          :fixture_name => fixture_name,
-          :class => options[:class],
-          :attributes_from => options[:from]
-        })
-      end
+    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes)
+      @open_struct = OpenStruct.new
+      
+      yield @open_struct
+      
+      fixture_attributes_class.new({
+        :fixture_name => fixture_name,
+        :class => options[:class],
+        :attributes_from => options[:from],
+        :attributes => @open_struct
+      })
     end
     
     attr_writer :defaults_file
