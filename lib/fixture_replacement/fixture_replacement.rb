@@ -6,6 +6,16 @@ class FixtureReplacementError < StandardError; end
 module FixtureReplacement  
   class << self
     
+    def attributes_for(fixture_name, options={}, fixture_attributes_class=nil)
+      if fixture_attributes_class
+        fixture_attributes_class.new({
+          :fixture_name => fixture_name,
+          :class => options[:class],
+          :attributes_from => options[:from]
+        })
+      end
+    end
+    
     attr_writer :defaults_file
     
     def defaults_file
