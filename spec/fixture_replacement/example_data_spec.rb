@@ -23,7 +23,6 @@ describe FixtureReplacement, "attributes_for" do
   it "should create a new FixtureAttribute with the name given" do
     @fixture_attribute.should_receive(:new).with({:fixture_name => :foo, :class => nil, :attributes_from => nil, :attributes => OpenStruct.new})
     FixtureReplacement.attributes_for(:foo, {}, @fixture_attribute) {  }
-
   end
   
   it "should create a new FixtureAttribute with the name given and class given" do

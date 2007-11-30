@@ -32,6 +32,25 @@ module FixtureReplacementController
         Attributes.new({})
       }.should raise_error
     end
-    
   end  
+  
+  describe Attributes, "hash, with simple arguments" do
+    before :each do
+      
+    end
+    
+    it "should return a hash" do
+      Attributes.new({:fixture_name => :foo}).hash.should == {}
+    end
+    
+    it "should return the attributes hash given" do
+      @struct = OpenStruct.new
+      @struct.foo = :bar
+      @struct.scott = :taylor
+      Attributes.new({:fixture_name => :foo, :attributes => @struct}).hash.should == {
+        :foo => :bar,
+        :scott => :taylor
+      }
+    end
+  end
 end

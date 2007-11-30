@@ -22,10 +22,14 @@
  
 
 begin
-  require File.dirname(__FILE__) + "/fixture_replacement/string"
-  require File.dirname(__FILE__) + "/fixture_replacement/fixture_replacement"
-  require File.dirname(__FILE__) + "/fixture_replacement/delayed_evaluation_proc"
-  require File.dirname(__FILE__) + "/fixture_replacement/controller/attributes"
+  require 'rubygems'
+  require 'active_support' 
+  require 'ostruct'
+  
+  files = Dir.glob(File.dirname(__FILE__) + "/fixture_replacement/**/*.rb")
+  files.each do |file|
+    require file
+  end
   require FixtureReplacement.defaults_file
 rescue Exception => e
   raise "Error in FixtureReplacement Plugin: #{e}"
