@@ -24,7 +24,8 @@ module FixtureReplacementController
       end
     end
     
-    def initialize(h={})
+    def initialize(fixture_name, h={})
+      @fixture_name = fixture_name
       assign_from_constructor(h)
       self.class.add_instance(self)
     end
@@ -55,7 +56,6 @@ module FixtureReplacementController
   private
   
     def assign_from_constructor(hash_given)
-      hash_given[:fixture_name] ? @fixture_name = hash_given[:fixture_name] : raise
       @attributes = hash_given[:attributes] || Hash.new
       @from, @class = hash_given[:from], hash_given[:class]
     end
