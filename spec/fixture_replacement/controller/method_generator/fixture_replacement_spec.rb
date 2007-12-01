@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
-require File.dirname(__FILE__) + "/../../fixtures/classes"
 
 module FixtureReplacementController
   describe "MethodGenerator#generate_new_method", :shared => true do
