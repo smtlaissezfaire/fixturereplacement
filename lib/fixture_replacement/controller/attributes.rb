@@ -39,7 +39,7 @@ module FixtureReplacementController
       begin
         @class || find_by_fixture_name(@from).of_class
       rescue
-        Object.const_get classify(fixture_name)
+        constantize(fixture_name)
       end
     end
     
@@ -66,8 +66,8 @@ module FixtureReplacementController
       self.class.find_by_fixture_name(symbol)
     end
     
-    def classify(symbol)
-      symbol.to_s.classify
+    def constantize(symbol)
+      symbol.to_s.camelize.constantize
     end
   end
 end

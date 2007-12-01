@@ -13,10 +13,6 @@ module FixtureReplacementController
       MethodGenerator.should respond_to(:generate_methods)
     end
         
-    it "should not raise an error if the model ends with 's'" do
-      pending "Is this some weird regression I need to fix, again?"
-    end
-
     it "should be able to respond to generate_default_method" do
       @generator.should respond_to(:generate_default_method)
     end

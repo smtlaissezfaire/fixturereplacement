@@ -62,6 +62,10 @@ module FixtureReplacementController
       Attributes.new(:foo, :class => Object)
       Attributes.new(:bar, :from => :foo).of_class.should == Object      
     end    
+    
+    it "should not raise an error if the model ends with 's'" do
+      Attributes.new(:actress).of_class.should == Actress
+    end
   end  
   
   describe Attributes, "hash, with simple arguments (only attributes and fixture name)" do

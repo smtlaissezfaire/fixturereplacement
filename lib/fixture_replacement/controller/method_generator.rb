@@ -1,7 +1,6 @@
 module FixtureReplacementController
   class MethodGenerator
-    class << self
-      
+    class << self      
       def generate_methods(mod=FixtureReplacement)
         @module = mod
         Attributes.instances.each do |attributes_instance|
@@ -12,7 +11,6 @@ module FixtureReplacementController
       def module
         @module ||= FixtureReplacement
       end
-      
     end
     
     def initialize(object_attributes, module_class)
