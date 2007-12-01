@@ -2,8 +2,15 @@ module FixtureReplacementController
   class MethodGenerator
     class << self
       
-      def generate_methods
-        
+      def generate_methods(mod=FixtureReplacement)
+        @module = mod
+        Attributes.instances.each do |attributes_instance|
+          new(attributes_instance, @module).generate_methods
+        end
+      end
+      
+      def module
+        @module ||= FixtureReplacement
       end
       
     end
@@ -12,6 +19,12 @@ module FixtureReplacementController
       @object_attributes = object_attributes
       @object_attributes.merge!
       @module_class = module_class
+    end
+    
+    def generate_methods
+      generate_default_method
+      generate_new_method
+      generate_create_method
     end
     
     def generate_default_method
@@ -27,8 +40,8 @@ module FixtureReplacementController
       
       @module_class.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
-          hash = args[0] || Hash.new
-          User.new(obj.hash.merge(hash))
+          parameter_hash = args[0] || Hash.new
+          User.new(obj.hash.merge(parameter_hash))
         end
       end
     end
