@@ -31,7 +31,43 @@ module FixtureReplacementController
     end
   end
   
-  describe MethodGenerator, "generate_new_method for User when user_attributes is defined" do
+  describe "MethodGenerator#generate_new_method", :shared => true do
+    it "should respond to new_user in the module" do
+      @module.instance_methods.should include("new_#{@fixture_name}")
+    end
+
+    it "should return a new User object" do
+      @class.stub!(:new).and_return @user
+      self.send("new_#{@fixture_name}").should == @user
+    end
+
+    it "should return a new User object with the keys given in user_attributes" do
+      self.send("new_#{@fixture_name}").key.should == "val"
+    end
+
+    it "should over-write the User's hash with any hash given to new_user" do
+      self.send("new_#{@fixture_name}", :key => "other_value").key.should == "other_value"
+    end
+
+    it "should add any hash key-value pairs which weren't previously given in user_attributes" do
+      u = self.send("new_#{@fixture_name}", :other_key => "other_value")
+      u.key.should == "val"
+      u.other_key.should == "other_value"
+    end 
+
+    it "should not be saved to the database" do
+      self.send("new_#{@fixture_name}").should be_a_new_record
+    end   
+
+    it "should be able to be saved to the database" do
+      lambda {
+        self.send("new_#{@fixture_name}").save!
+      }.should_not raise_error      
+    end
+    
+  end
+  
+  describe MethodGenerator, "generate_new_method for User" do
     before :each do
       @user = User.new
       
@@ -46,41 +82,37 @@ module FixtureReplacementController
       @generator = MethodGenerator.new(@user_attributes, @module)
       @generator.generate_new_method
       extend @module
+      
+      @fixture_name = :user
+      @class = User
     end
 
-    it "should respond to new_user in the module" do
-      @module.instance_methods.should include("new_user")
-    end
-
-    it "should return a new User object" do
-      User.stub!(:new).and_return @user
-      new_user.should == @user
-    end
-
-    it "should return a new User object with the keys given in user_attributes" do
-      new_user.key.should == "val"
-    end
-
-    it "should over-write the User's hash with any hash given to new_user" do
-      new_user(:key => "other_value").key.should == "other_value"
-    end
-
-    it "should add any hash key-value pairs which weren't previously given in user_attributes" do
-      u = new_user(:other_key => "other_value")
-      u.key.should == "val"
-      u.other_key.should == "other_value"
-    end 
-
-    it "should not be saved to the database" do
-      new_user.should be_a_new_record
-    end   
-
-    it "should be able to be saved to the database" do
-      lambda {
-        new_user.save!
-      }.should_not raise_error      
-    end
+    it_should_behave_like "MethodGenerator#generate_new_method"
   end
+
+  describe MethodGenerator, "generate_new_method for Admin" do
+    before :each do
+      @admin = Admin.new
+      
+      @module = Module.new
+      
+      @fixture_name = :admin
+      @class = Admin
+
+      @admin_attributes = Attributes.new(@fixture_name, {
+        :attributes => OpenStruct.new({
+          :key => "val"
+        })
+      })
+      
+      @generator = MethodGenerator.new(@admin_attributes, @module)
+      @generator.generate_new_method
+      extend @module
+    end
+
+    it_should_behave_like "MethodGenerator#generate_new_method"
+  end
+
 
   describe "MethodGenerator.generate_methods" do
     before :each do
@@ -212,18 +244,14 @@ module FixtureReplacementController
     it_should_behave_like "MethodGenerator#default_*"
   end
 
-  describe "MethodGenerator#generate_create_method", :shared => true do
-    it "should generate the method new_user" do
-      @module.instance_methods.should include("new_#{@fixture_name}")
-    end    
-    
-    it "should generate the method create_fixture_name in the module" do
-      @module.instance_methods.should include("create_#{@fixture_name}")
-    end
-    
-    it "should generate the method create_fixture_name which can take an optional hash 
-        (it actually takes any number of params, but only uses the first hash given)" do      
-      self.method("create_#{@fixture_name}").arity.should == -1
+  describe "MethodGenerator#generate_create_method with valid attributes", :shared => true do
+    it "should save the user with save!" do
+      @user = mock(@class, :null_object => true)
+      @user.stub!(:save!).and_return true      
+      @class.stub!(:new).and_return @user
+      
+      @user.should_receive(:save!).with(no_args)
+      self.send("create_#{@fixture_name}")
     end
     
     it "should return a kind of the fixture name" do
@@ -245,14 +273,20 @@ module FixtureReplacementController
       user.key.should == @hash[:key]
       user.username.should == "smtlaissezfaire"      
     end
+  end
+  
+  describe "MethodGenerator#generate_create_method", :shared => true do
+    it "should generate the method new_user" do
+      @module.instance_methods.should include("new_#{@fixture_name}")
+    end    
     
-    it "should save the user with save!" do
-      @user = mock(@class, :null_object => true)
-      @user.stub!(:save!).and_return true      
-      @class.stub!(:new).and_return @user
-      
-      @user.should_receive(:save!).with(no_args)
-      self.send("create_#{@fixture_name}")
+    it "should generate the method create_fixture_name in the module" do
+      @module.instance_methods.should include("create_#{@fixture_name}")
+    end
+    
+    it "should generate the method create_fixture_name which can take an optional hash 
+        (it actually takes any number of params, but only uses the first hash given)" do      
+      self.method("create_#{@fixture_name}").arity.should == -1
     end
   end
 
@@ -276,7 +310,8 @@ module FixtureReplacementController
       @class = User
     end
     
-    it_should_behave_like "MethodGenerator#generate_create_method"    
+    it_should_behave_like "MethodGenerator#generate_create_method"   
+    it_should_behave_like "MethodGenerator#generate_create_method with valid attributes" 
   end
   
   describe MethodGenerator, "generate_create_method for Admin" do
@@ -299,109 +334,44 @@ module FixtureReplacementController
     end
     
     it_should_behave_like "MethodGenerator#generate_create_method"
+    it_should_behave_like "MethodGenerator#generate_create_method with valid attributes" 
+  end
+
+  describe MethodGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
+     
+    before :each do 
+      @module = Module.new
+      extend @module
+
+      @fixture_name = :user
+      @struct = OpenStruct.new({:key => nil})
+
+      @attributes = Attributes.new(@fixture_name, :attributes => @struct)
+      @attributes.stub!(:merge!)
+
+      @generator = MethodGenerator.new(@attributes, @module)
+      @generator.generate_new_method
+      @generator.generate_create_method
+
+      @hash = {:key => nil}
+      @class = User
+    end
+
+    it_should_behave_like "MethodGenerator#generate_create_method"
+
+    it "should not create the record after executing create_user when the user's attributes are invalid
+        (it should raise an ActiveRecord::RecordInvalid error)" do
+      @generator.generate_create_method
+      lambda {
+        create_user(:key => nil)
+      }.should raise_error(ActiveRecord::RecordInvalid)      
+    end
+
   end
     
 end
 
 
-
-# describe MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
-#   include FixtureReplacement
-#   
-#   before :each do
-#     FixtureReplacement.module_eval do
-#       def user_attributes
-#         {
-#           :gender => default_gender,
-#           :key => "val"
-#         }
-#       end
-#       
-#       def gender_attributes
-#         {
-#           :sex => "Male"
-#         }
-#       end
-#     end      
-#     @gender_generator = MethodGenerator.new({:method_base_name => "gender"})
-#     @gender_generator.generate_default_method
-#     @gender_generator.generate_new_method
-#     @gender_generator.generate_create_method
-#     
-#     @generator = MethodGenerator.new({:method_base_name => "user"})
-#     @generator.generate_new_method
-#     @generator.generate_create_method
-#   end
-#   
-#   it "should save the associated join models which have a default_* method (if it is not overwritten)" do
-#     created_gender = create_user.gender
-#     created_gender.sex.should == "Male"
-#   end
-#   
-#   it "should save the associated join model with the attributes specified - not with with the default_*'s hash (in the case that the hash is overwritten)" do
-#     created_user = create_user(:gender => Gender.create!(:sex => "Female"))
-#     created_gender = created_user.gender
-#     created_gender.sex.should == "Female"
-#   end
-#   
-#   it "should call save! when the default_gender method is evaluated by default_gender" do
-#     @gender = mock('Gender', :null_object => true)
-#     Gender.stub!(:new).and_return @gender
-#     
-#     @user = mock('User', :null_object => true)
-#     User.stub!(:new).and_return @user
-#     @user.stub!(:gender=).and_return @gender
-# 
-#     @gender.should_receive(:save!).with(no_args)
-#     create_user
-#   end
-#   
-#   it "should not call Gender.save! if the default_gender is overwritten by another value" do
-#     Gender.should_not_receive(:save!)
-#     create_user(:gender => Gender.new)
-#   end
-# end
-# 
-# describe MethodGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
-#   include FixtureReplacement
-#   
-#   before :each do      
-#     FixtureReplacement.module_eval do
-#       def user_attributes
-#         {
-#           :key => nil
-#         }
-#       end
-#     end      
-#     @generator = MethodGenerator.new({:method_base_name => "user"})
-#     @generator.generate_new_method
-#     @generator.generate_create_method
-#   end
-#   
-#   it "should generate the method create_user in the module" do
-#     FixtureReplacement.instance_methods.should include("create_user")
-#   end
-#   
-#   it "should generate the method create_user" do
-#     @generator.generate_create_method
-#     FixtureReplacement.instance_methods.should include("create_user")
-#   end
-#   
-#   it "should generate the method create_user which takes a hash" do
-#     @generator.generate_create_method
-#     create_user(:key => "value")
-#   end
-#   
-#   it "should not create the record after executing create_user when the user's attributes are invalid
-#       (it should raise an ActiveRecord::RecordInvalid error)" do
-#     @generator.generate_create_method
-#     lambda {
-#       create_user(:key => nil)
-#     }.should raise_error(ActiveRecord::RecordInvalid)      
-#   end
-#   
-# end
-# 
 
 # 
 # describe MethodGenerator, "generate_new_method for User when user_attributes is defined" do

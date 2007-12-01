@@ -57,7 +57,7 @@ module FixtureReplacementController
       @module_class.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
           parameter_hash = args[0] || Hash.new
-          User.new(obj.hash.merge(parameter_hash))
+          obj.of_class.new(obj.hash.merge(parameter_hash))
         end
       end
     end

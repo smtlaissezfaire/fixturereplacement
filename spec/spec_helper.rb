@@ -27,6 +27,7 @@ ActiveRecord::Schema.define do
     t.column :name, :string
     t.column :username, :string
     t.column :key, :string
+    t.column :other_key, :string
   end  
 end
 
