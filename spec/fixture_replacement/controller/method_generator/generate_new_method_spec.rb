@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
-module FixtureReplacementController
-  
+module FixtureReplacementController  
   module MethodGeneratorHelper
     def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new
@@ -55,11 +54,8 @@ module FixtureReplacementController
         self.send("new_#{@fixture_name}").save!
       }.should_not raise_error      
     end
-    
   end
 
-  
-  
   describe MethodGenerator, "generate_new_method for User" do
     include MethodGeneratorHelper
     
@@ -79,8 +75,6 @@ module FixtureReplacementController
 
     it_should_behave_like "MethodGenerator#generate_new_method"
   end
-
-
 
   describe MethodGenerator, "generate_new_method for User when user_attributes is defined" do
 

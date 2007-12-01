@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
 module FixtureReplacementController
-  
   describe "MethodGenerator#default_*", :shared => true do
     it "should return a DelayedEvaluationProc" do
       @generator.generate_default_method
@@ -24,11 +23,9 @@ module FixtureReplacementController
       @generator.generate_default_method
       @module.instance_methods.should include("default_#{@fixture_name}")
     end
-    
   end
 
   describe MethodGenerator, "default_user" do
-    
     before :each do
       @module = Module.new
       
@@ -47,7 +44,6 @@ module FixtureReplacementController
   end
   
   describe MethodGenerator, "default_admin" do
-    
     before :each do
       @module = Module.new
       
@@ -63,6 +59,4 @@ module FixtureReplacementController
     
     it_should_behave_like "MethodGenerator#default_*"
   end
-
-
 end

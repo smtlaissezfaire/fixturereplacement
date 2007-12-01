@@ -1,8 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
-  describe Attributes do
-    
+  describe Attributes do  
     after :each do
       Attributes.clear_out_instances!
     end
@@ -141,6 +140,5 @@ module FixtureReplacementController
       attributes.merge!
       attributes.hash.should == {:foo => :bar, :first_name => :scott}      
     end
-  end
-  
+  end  
 end

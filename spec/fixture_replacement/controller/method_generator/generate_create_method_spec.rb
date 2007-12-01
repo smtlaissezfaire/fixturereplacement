@@ -48,7 +48,6 @@ module FixtureReplacementController
   end
 
   describe MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
-    
     before :each do 
       @module = Module.new
       extend @module
@@ -95,7 +94,6 @@ module FixtureReplacementController
   end
 
   describe MethodGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
-     
     before :each do 
       @module = Module.new
       extend @module
@@ -123,8 +121,5 @@ module FixtureReplacementController
         create_user(:key => nil)
       }.should raise_error(ActiveRecord::RecordInvalid)      
     end
-
   end
-    
-  
 end

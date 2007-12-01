@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
 module FixtureReplacementController
-  
   describe "create_user with attr_protected attributes" do
     before :each do
       @module = Module.new
