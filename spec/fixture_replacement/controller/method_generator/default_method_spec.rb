@@ -10,13 +10,13 @@ module FixtureReplacementController
     it %(should return the special proc, which in turn should return an array 
         of the name of the model ('user') if no params were given) do
       @generator.generate_default_method
-      self.send("default_#{@fixture_name}").call.should == [@fixture_name.to_sym, {}]
+      self.send("default_#{@fixture_name}").call.should == [@attributes, {}]
     end
     
     it %(should return the special proc, which in turn should return an array
         of the name of the model ('user') and the params given) do
       @generator.generate_default_method
-      self.send("default_#{@fixture_name}", @params_hash).call.should == [@fixture_name.to_sym, @params_hash]
+      self.send("default_#{@fixture_name}", @params_hash).call.should == [@attributes, @params_hash]
     end
     
     it "should generate the method default_user in the module" do
@@ -31,7 +31,6 @@ module FixtureReplacementController
       
       @struct = OpenStruct.new({:key => "val"})
       @attributes = Attributes.new(:user, :attributes => @struct)
-      @attributes.stub!(:merge!)
       @generator = MethodGenerator.new(@attributes, @module)
       
       @fixture_name = "user"
