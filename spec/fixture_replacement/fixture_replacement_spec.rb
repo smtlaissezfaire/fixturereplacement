@@ -67,47 +67,40 @@ module FixtureReplacementController
     
   end
   
-  describe MethodGenerator, "generate_new_method for User" do
-    before :each do
-      @user = User.new
-      
+  module MethodGeneratorHelper
+    def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new
+      extend @module
 
-      @user_attributes = Attributes.new(:user, {
+      @fixture_name = fixture_name
+      @class = classname
+
+      @attributes = Attributes.new(@fixture_name, {
         :attributes => OpenStruct.new({
           :key => "val"
         })
       })
       
-      @generator = MethodGenerator.new(@user_attributes, @module)
+      @generator = MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
-      extend @module
-      
-      @fixture_name = :user
-      @class = User
+    end
+  end
+  
+  describe MethodGenerator, "generate_new_method for User" do
+    include MethodGeneratorHelper
+    
+    before :each do
+      setup_for_generate_new_method(:user, User)
     end
 
     it_should_behave_like "MethodGenerator#generate_new_method"
   end
 
   describe MethodGenerator, "generate_new_method for Admin" do
+    include MethodGeneratorHelper
+    
     before :each do
-      @admin = Admin.new
-      
-      @module = Module.new
-      
-      @fixture_name = :admin
-      @class = Admin
-
-      @admin_attributes = Attributes.new(@fixture_name, {
-        :attributes => OpenStruct.new({
-          :key => "val"
-        })
-      })
-      
-      @generator = MethodGenerator.new(@admin_attributes, @module)
-      @generator.generate_new_method
-      extend @module
+      setup_for_generate_new_method(:admin, Admin)
     end
 
     it_should_behave_like "MethodGenerator#generate_new_method"
@@ -153,7 +146,7 @@ module FixtureReplacementController
     end
   end  
   
-  describe MethodGenerator, "generate_methods (instance method)" do
+  describe MethodGenerator, "generate_methods (the instance method)" do
     before :each do
       @attributes = mock 'Attributes'
       @attributes.stub!(:merge!)
