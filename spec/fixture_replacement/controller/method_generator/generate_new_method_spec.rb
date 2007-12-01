@@ -78,47 +78,21 @@ module FixtureReplacementController
 
   describe MethodGenerator, "generate_new_method with associations" do
 
+    def create_generator(fixture_name, attribute_hash, mod)
+      gender_attributes = Attributes.new(fixture_name, :attributes => OpenStruct.new(attribute_hash))
+      gender_generator = MethodGenerator.new(gender_attributes, mod)
+      gender_generator.generate_default_method
+      gender_generator.generate_new_method
+      gender_generator.generate_create_method
+    end
+
     before :each do
       @module = Module.new
       extend @module
       
-      gender_attributes = Attributes.new(:gender, :attributes => OpenStruct.new({
-        :sex => "Male"
-      }))
-      gender_generator = MethodGenerator.new(gender_attributes, @module)
-      gender_generator.generate_default_method
-      gender_generator.generate_new_method
-      gender_generator.generate_create_method
-      
-      user_attributes = Attributes.new(:user, :attributes => OpenStruct.new({
-        :gender => default_gender 
-      }))
-      user_generator = MethodGenerator.new(user_attributes, @module)
-      user_generator.generate_default_method
-      user_generator.generate_new_method
-
-      alien_attributes = Attributes.new(:alien, :attributes => OpenStruct.new({
-        :gender => default_gender(:sex => "unknown")
-      }))
-      alien_generator = MethodGenerator.new(alien_attributes, @module)
-      alien_generator.generate_default_method
-      alien_generator.generate_new_method
-      
-      
-      #@user_hash = {:gender => default_gender}
-      #
-      #@alien_hash = {:gender => default_gender(:sex => "unknown")}
-      #
-      #@gender_generator = MethodGenerator.new({:method_base_name => "gender"})
-      #@gender_generator.generate_default_method
-      #@gender_generator.generate_new_method
-      #@gender_generator.generate_create_method
-      #
-      #
-      #@generator.generate_new_method
-      #
-      #@generator = MethodGenerator.new({:method_base_name => "alien"})
-      #@generator.generate_new_method
+      create_generator(:gender, {:sex => "Male"}, @module)
+      create_generator(:user, {:gender => default_gender}, @module)
+      create_generator(:alien, {:gender => default_gender(:sex => "unknown")}, @module)
     end
     
     it "should evaluate any of the default_* methods before returning (if no over-writing key is given)" do
