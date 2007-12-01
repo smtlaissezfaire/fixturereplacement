@@ -41,7 +41,14 @@ module FixtureReplacementController
     end
     
     def generate_create_method
+      obj = @object_attributes
       
+      @module_class.module_eval do
+        define_method("create_#{obj.fixture_name}") do |*args|
+          hash = args[0] || Hash.new
+          obj.of_class.create!(obj.hash.merge(hash))
+        end
+      end
     end
     
     def generate_new_method

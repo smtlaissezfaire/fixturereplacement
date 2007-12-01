@@ -11,6 +11,7 @@ ActiveRecord::Schema.define do
     t.column  :key,       :string
     t.column  :other_key, :string
     t.column  :gender_id, :integer
+    t.column  :username,  :string
   end
   
   create_table :genders do |t|
@@ -24,6 +25,8 @@ ActiveRecord::Schema.define do
   create_table :admins do |t|
     t.column :admin_status, :boolean
     t.column :name, :string
+    t.column :username, :string
+    t.column :key, :string
   end  
 end
 
