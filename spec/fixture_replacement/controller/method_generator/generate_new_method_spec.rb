@@ -9,7 +9,7 @@ module FixtureReplacementController
 
       @fixture_name = fixture_name
       @class = classname
-
+      
       @attributes = Attributes.new(@fixture_name, {
         :attributes => OpenStruct.new({
           :key => "val"
@@ -27,8 +27,9 @@ module FixtureReplacementController
     end
 
     it "should return a new User object" do
-      @class.stub!(:new).and_return @user
-      self.send("new_#{@fixture_name}").should == @user
+      obj = @class.new
+      @class.stub!(:new).and_return obj
+      self.send("new_#{@fixture_name}").should == obj
     end
 
     it "should return a new User object with the keys given in user_attributes" do
