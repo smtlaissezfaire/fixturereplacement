@@ -46,9 +46,9 @@ module FixtureReplacementController
       @module_class.module_eval do
         define_method("create_#{obj.fixture_name}") do |*args|
           hash = args[0] || Hash.new
-          obj = self.send("new_#{obj.fixture_name}", hash)
-          obj.save!
-          obj
+          created_obj = self.send("new_#{obj.fixture_name}", hash)
+          created_obj.save!
+          created_obj
         end
       end
     end
@@ -58,16 +58,9 @@ module FixtureReplacementController
       
       @module_class.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
-          parameter_hash = args[0] || Hash.new
+          merged_hash = args[0] ? obj.hash.merge(args[0]) : obj.hash
           new_object = obj.of_class.new
-          
-          obj.hash.each do |key, value|
-            new_object.send("#{key}=", value)
-          end
-          
-          parameter_hash.each do |key, value|
-            new_object.send("#{key}=", value)
-          end
+          merged_hash.each { |key, value| new_object.send("#{key}=", value) }
           
           new_object
         end
