@@ -7,7 +7,7 @@ module FixtureReplacementController
       @user_attributes = mock("UserAttributes")
       @user_attributes.stub!(:merge!)
       @module = mock("FixtureReplacement")
-      @generator = FixtureReplacementController::MethodGenerator.new(@user_attributes, @module)
+      @generator = MethodGenerator.new(@user_attributes, @module)
     end
     
     it "should have the class method generate_methods" do
@@ -31,7 +31,7 @@ module FixtureReplacementController
     end
   end
   
-  describe FixtureReplacementController::MethodGenerator, "generate_new_method for User when user_attributes is defined" do
+  describe MethodGenerator, "generate_new_method for User when user_attributes is defined" do
     before :each do
       @user = User.new
       
@@ -82,7 +82,7 @@ module FixtureReplacementController
     end
   end
 
-  describe "FixtureReplacementController::MethodGenerator.generate_methods" do
+  describe "MethodGenerator.generate_methods" do
     before :each do
       @attributes = mock Attributes
       Attributes.stub!(:instances).and_return [@attributes]
@@ -93,11 +93,11 @@ module FixtureReplacementController
     end    
     
     it "should use the FixtureReplacement module if none provided" do
-      FixtureReplacementController::MethodGenerator.module.should == FixtureReplacement
+      MethodGenerator.module.should == FixtureReplacement
     end
     
     it "should take an optional module name" do
-      FixtureReplacementController::MethodGenerator.generate_methods(@module)
+      MethodGenerator.generate_methods(@module)
     end  
     
     it "should use the module if given one specifically" do
@@ -175,7 +175,7 @@ module FixtureReplacementController
     
   end
 
-  describe FixtureReplacementController::MethodGenerator, "default_user" do
+  describe MethodGenerator, "default_user" do
     
     before :each do
       @module = Module.new
@@ -215,7 +215,7 @@ module FixtureReplacementController
 end
 
 
-# describe FixtureReplacementController::MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
+# describe MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
 #   include FixtureReplacement
 #   
 #   before :each do      
@@ -226,7 +226,7 @@ end
 #         }
 #       end
 #     end      
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
+#     @generator = MethodGenerator.new({:method_base_name => "user"})
 #     @generator.generate_new_method
 #     @generator.generate_create_method
 #   end
@@ -272,7 +272,7 @@ end
 #   end
 # end
 # 
-# describe FixtureReplacementController::MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
+# describe MethodGenerator, "generate_create_method for User when user_attributes is defined (and valid)" do
 #   include FixtureReplacement
 #   
 #   before :each do
@@ -290,12 +290,12 @@ end
 #         }
 #       end
 #     end      
-#     @gender_generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "gender"})
+#     @gender_generator = MethodGenerator.new({:method_base_name => "gender"})
 #     @gender_generator.generate_default_method
 #     @gender_generator.generate_new_method
 #     @gender_generator.generate_create_method
 #     
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
+#     @generator = MethodGenerator.new({:method_base_name => "user"})
 #     @generator.generate_new_method
 #     @generator.generate_create_method
 #   end
@@ -329,7 +329,7 @@ end
 #   end
 # end
 # 
-# describe FixtureReplacementController::MethodGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
+# describe MethodGenerator, "generate_create_method for User when user_attributes is defined, but not valid" do
 #   include FixtureReplacement
 #   
 #   before :each do      
@@ -340,7 +340,7 @@ end
 #         }
 #       end
 #     end      
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
+#     @generator = MethodGenerator.new({:method_base_name => "user"})
 #     @generator.generate_new_method
 #     @generator.generate_create_method
 #   end
@@ -371,7 +371,7 @@ end
 # 
 
 # 
-# describe FixtureReplacementController::MethodGenerator, "generate_new_method for User when user_attributes is defined" do
+# describe MethodGenerator, "generate_new_method for User when user_attributes is defined" do
 #   include FixtureReplacement
 #   
 #   before :each do
@@ -397,15 +397,15 @@ end
 #       end
 #     end      
 #     
-#     @gender_generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "gender"})
+#     @gender_generator = MethodGenerator.new({:method_base_name => "gender"})
 #     @gender_generator.generate_default_method
 #     @gender_generator.generate_new_method
 #     @gender_generator.generate_create_method
 #     
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
+#     @generator = MethodGenerator.new({:method_base_name => "user"})
 #     @generator.generate_new_method
 # 
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "alien"})
+#     @generator = MethodGenerator.new({:method_base_name => "alien"})
 #     @generator.generate_new_method
 #   end
 # 
