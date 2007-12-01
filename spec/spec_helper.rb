@@ -36,3 +36,4 @@ include SpecHelperFunctions
 swap_out_require!
 
 require File.dirname(__FILE__) + "/../lib/fixture_replacement"
+require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"
