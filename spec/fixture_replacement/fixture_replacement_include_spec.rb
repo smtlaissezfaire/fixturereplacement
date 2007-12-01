@@ -25,14 +25,10 @@ describe FixtureReplacement do
   end
   
   it "should generate the methods when included" do
-    pending "TODO" do
-      @klass.class_eval do
-        include FixtureReplacement
-      end
+    FixtureReplacementController::MethodGenerator.should_receive(:generate_methods).with(no_args)
     
-      @klass.instance_methods.should include("create_user")
-      @klass.instance_methods.should include("new_user")
-      @klass.instance_methods.should include("default_user")
+    @klass.class_eval do
+      include FixtureReplacement
     end
   end
   

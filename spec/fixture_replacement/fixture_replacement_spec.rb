@@ -16,6 +16,88 @@ end
 class Gender < ActiveRecord::Base; end
 class Actress < ActiveRecord::Base; end
 
+module FixtureReplacementController
+  describe MethodGenerator do
+    before :each do
+      @user_attributes = mock("UserAttributes")
+      @user_attributes.stub!(:merge!)
+      @module = mock("FixtureReplacement")
+      @generator = FixtureReplacementController::MethodGenerator.new(@user_attributes, @module)
+    end
+    
+    it "should have the class method generate_methods" do
+      MethodGenerator.should respond_to(:generate_methods)
+    end
+        
+    it "should not raise an error if the model ends with 's'" do
+      pending "Is this some weird regression I need to fix, again?"
+    end
+
+    it "should be able to respond to generate_default_method" do
+      @generator.should respond_to(:generate_default_method)
+    end
+
+    it "should respond to generate_create_method" do
+      @generator.should respond_to(:generate_create_method)
+    end
+
+    it "should respond to generate_new_method" do
+      @generator.should respond_to(:generate_new_method)
+    end
+  end
+  
+  describe FixtureReplacementController::MethodGenerator, "generate_new_method for User when user_attributes is defined" do
+    before :each do
+      @user = User.new
+      
+      @module = Module.new
+
+      @user_attributes = Attributes.new(:user, {
+        :attributes => OpenStruct.new({
+          :key => "val"
+        })
+      })
+      
+      @generator = MethodGenerator.new(@user_attributes, @module)
+      @generator.generate_new_method
+      extend @module
+    end
+
+    it "should respond to new_user in the module" do
+      @module.instance_methods.should include("new_user")
+    end
+
+    it "should return a new User object" do
+      User.stub!(:new).and_return @user
+      new_user.should == @user
+    end
+
+    it "should return a new User object with the keys given in user_attributes" do
+      new_user.key.should == "val"
+    end
+
+    it "should over-write the User's hash with any hash given to new_user" do
+      new_user(:key => "other_value").key.should == "other_value"
+    end
+
+    it "should add any hash key-value pairs which weren't previously given in user_attributes" do
+      u = new_user(:other_key => "other_value")
+      u.key.should == "val"
+      u.other_key.should == "other_value"
+    end 
+
+    it "should not be saved to the database" do
+      new_user.should be_a_new_record
+    end   
+
+    it "should be able to be saved to the database" do
+      lambda {
+        new_user.save!
+      }.should_not raise_error      
+    end
+  end
+end
+
 # 
 # describe "create_user with attr_protected attributes" do
 #   include FixtureReplacement
@@ -91,53 +173,6 @@ class Actress < ActiveRecord::Base; end
 #   end    
 # end  
 # 
-# describe FixtureReplacementController::MethodGenerator, "creation" do
-#   include FixtureReplacement  
-#   
-#   before :each do
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
-#   end
-#   
-#   it "should take a lowercase-model name as its paramaters" do
-#     @generator.method_base_name.should == "user"
-#   end
-#   
-#   it "should be able to tell the name of model in string form" do
-#     @generator.method_base_name.to_s.should == "user"
-#   end
-#   
-#   it "should be able to tell the name of the model's class (as a string)" do      
-#     @generator.model_class.should == "User"
-#   end
-#   
-#   it "should be able to convert the name of the model's class into the class constant" do
-#     @generator.method_base_name.to_class.should == User
-#   end
-#   
-#   it "should raise an error if the constant cannot be found" do
-#     lambda {
-#       FixtureReplacementController::MethodGenerator.new({:method_base_name => "unknown_model"})
-#     }.should raise_error
-#   end
-#   
-#   it "should not raise an error if the model ends with 's'" do
-#     lambda {
-#       FixtureReplacementController::MethodGenerator.new({:method_base_name => "actress"})
-#     }.should_not raise_error
-#   end
-#   
-#   it "should be able to respond to generate_default_method" do
-#     @generator.should respond_to(:generate_default_method)
-#   end
-#   
-#   it "should respond to generate_create_method" do
-#     @generator.should respond_to(:generate_create_method)
-#   end
-#   
-#   it "should respond to generate_new_method" do
-#     @generator.should respond_to(:generate_new_method)
-#   end
-# end
 # 
 # describe FixtureReplacementController::MethodGenerator, "default_user, with user_attributes (when they are actually valid)" do
 #   include FixtureReplacement
@@ -330,62 +365,7 @@ class Actress < ActiveRecord::Base; end
 #   
 # end
 # 
-# describe FixtureReplacementController::MethodGenerator, "generate_new_method for User when user_attributes is defined" do
-#   include FixtureReplacement
-#   
-#   before :each do
-#     @user = User.new
-#     
-#     FixtureReplacement.module_eval do
-#       def user_attributes
-#         {
-#           :key => "val"
-#         }
-#       end
-#       
-#       def gender_attributes
-#         {
-#           :sex => "Male"
-#         }
-#       end
-#     end      
-#     @generator = FixtureReplacementController::MethodGenerator.new({:method_base_name => "user"})
-#     @generator.generate_new_method
-#   end
-#   
-#   it "should respond to new_user in the module" do
-#     FixtureReplacement.instance_methods.should include("new_user")
-#   end
-#   
-#   it "should return a new User object" do
-#     User.stub!(:new).and_return @user
-#     new_user.should == @user
-#   end
-#   
-#   it "should return a new User object with the keys given in user_attributes" do
-#     new_user.key.should == "val"
-#   end
-#   
-#   it "should over-write the User's hash with any hash given to new_user" do
-#     new_user(:key => "other_value").key.should == "other_value"
-#   end
-#   
-#   it "should add any hash key-value pairs which weren't previously given in user_attributes" do
-#     u = new_user(:other_key => "other_value")
-#     u.key.should == "val"
-#     u.other_key.should == "other_value"
-#   end 
-#   
-#   it "should not be saved to the database" do
-#     new_user.should be_a_new_record
-#   end   
-#   
-#   it "should be able to be saved to the database" do
-#     lambda {
-#       new_user.save!
-#     }.should_not raise_error      
-#   end
-# end
+
 # 
 # describe FixtureReplacementController::MethodGenerator, "generate_new_method for User when user_attributes is defined" do
 #   include FixtureReplacement
