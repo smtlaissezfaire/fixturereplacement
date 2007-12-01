@@ -1,7 +1,5 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
-class User < ActiveRecord::Base; end
-
 describe FixtureReplacement do
   before :each do
     @klass = Class.new
