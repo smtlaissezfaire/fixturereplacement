@@ -6,12 +6,10 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      @hash = {
-        :admin_status => true,
-        :name => "Scott"
-      }
-      @struct = OpenStruct.new(@hash)
-      @attributes = Attributes.new(:admin, :attributes => lambda { @struct })
+      @attributes = Attributes.new(:admin, :attributes => lambda { |u|
+        u.admin_status = true
+        u.name = "Scott"
+      })
 
       @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
@@ -50,12 +48,11 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      @hash = {
-        :admin_status => true,
-        :name => "Scott"
-      }
       @struct = OpenStruct.new(@hash)
-      @attributes = Attributes.new(:admin, :attributes => lambda { @struct })
+      @attributes = Attributes.new(:admin, :attributes => lambda { |s|
+        s.admin_status = true
+        s.name = "Scott"
+      })
 
       @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method

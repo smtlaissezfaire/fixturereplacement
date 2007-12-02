@@ -46,7 +46,6 @@ end
 
 describe "FixtureReplacement.attributes_for" do
   it "should yield an OpenStruct" do
-    pending "TODO"
     FixtureReplacement.attributes_for :user do |u|      
       u.should be_a_kind_of(OpenStruct)
     end
@@ -59,12 +58,7 @@ describe "FixtureReplacement.attributes_for" do
   end
   
   it "should create a new Attribute with the class, attributes_from, and the attributes as a lambda" do
-    @proc = lambda { 
-      OpenStruct.new({
-        :username => "scott",
-        :key => "value"
-      })
-    }
+    @proc = lambda { |os| }
     Kernel.stub!(:lambda).and_return @proc
     FixtureReplacementController::Attributes.stub!(:new)
     FixtureReplacementController::Attributes.should_receive(:new).with(:scott, {

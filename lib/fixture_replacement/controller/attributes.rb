@@ -44,7 +44,10 @@ module FixtureReplacementController
     end
     
     def hash
-      @merged_hash || @attributes_proc.call.to_hash
+      return @merged_hash if @merged_hash
+      os = OpenStruct.new
+      @attributes_proc.call(os)
+      os.to_hash
     end
     
     def merge!

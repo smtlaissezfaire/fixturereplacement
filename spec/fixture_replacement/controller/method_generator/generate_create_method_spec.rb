@@ -53,9 +53,12 @@ module FixtureReplacementController
       extend @module
       
       @fixture_name = :user
-      @struct = OpenStruct.new({:username => "scott", :key => "val"})
+      @struct = lambda { |u| 
+        u.username = "scott"
+        u.key = "val"
+      }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => lambda { @struct })
+      @attributes = Attributes.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
       @generator = MethodGenerator.new(@attributes, @module)
@@ -76,9 +79,12 @@ module FixtureReplacementController
       extend @module
       
       @fixture_name = :admin
-      @struct = OpenStruct.new({:username => "scott", :key => "val"})
+      @struct = lambda { |a|
+        a.username = "scott"
+        a.key = "val"
+      }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => lambda { @struct })
+      @attributes = Attributes.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
       @generator = MethodGenerator.new(@attributes, @module)
@@ -99,9 +105,9 @@ module FixtureReplacementController
       extend @module
 
       @fixture_name = :user
-      @struct = OpenStruct.new({:key => nil})
+      @struct = lambda { |u| u.key = nil }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => lambda { @struct })
+      @attributes = Attributes.new(@fixture_name, :attributes => @struct )
       @attributes.stub!(:merge!)
 
       @generator = MethodGenerator.new(@attributes, @module)

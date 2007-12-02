@@ -10,10 +10,8 @@ module FixtureReplacementController
       @class = classname
       
       @attributes = Attributes.new(@fixture_name, {
-        :attributes => lambda do
-          OpenStruct.new({
-            :key => "val"
-          })
+        :attributes => lambda do |f|
+          f.key = "val"
         end
       })
       
@@ -80,9 +78,9 @@ module FixtureReplacementController
 
   describe MethodGenerator, "generate_new_method with associations" do
 
-    def create_generator(fixture_name, attribute_hash, mod)
-      gender_attributes = Attributes.new(fixture_name, :attributes => lambda { OpenStruct.new(attribute_hash) } )
-      gender_generator = MethodGenerator.new(gender_attributes, mod)
+    def create_generator(fixture_name, attributes, mod)
+
+      gender_generator = MethodGenerator.new(attributes, mod)
       gender_generator.generate_default_method
       gender_generator.generate_new_method
       gender_generator.generate_create_method
@@ -91,10 +89,23 @@ module FixtureReplacementController
     before :each do
       @module = Module.new
       extend @module
+
+      gender_attributes = Attributes.new(:gender, :attributes => lambda do |gender| 
+        gender.sex = "Male"
+      end
+      )
       
-      create_generator(:gender, {:sex => "Male"}, @module)
-      create_generator(:user, {:gender => default_gender}, @module)
-      create_generator(:alien, {:gender => default_gender(:sex => "unknown")}, @module)
+      user_attributes = Attributes.new(:user, :attributes => lambda do |user|
+        user.gender = default_gender
+      end)
+      
+      alien_attributes = Attributes.new(:alien, :attributes => lambda do |alien|
+        alien.gender = default_gender(:sex => "unknown")
+      end)
+      
+      create_generator(:gender, gender_attributes, @module)
+      create_generator(:user, user_attributes, @module)
+      create_generator(:alien, alien_attributes, @module)
     end
     
     it "should evaluate any of the default_* methods before returning (if no over-writing key is given)" do
