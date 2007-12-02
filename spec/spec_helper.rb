@@ -32,6 +32,8 @@ ActiveRecord::Schema.define do
   
   create_table :items do |t|
     t.column :category, :integer
+    t.column :type, :string
+    t.column :name, :string
   end
   
   create_table :categories do |t|

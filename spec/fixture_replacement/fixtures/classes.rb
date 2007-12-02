@@ -18,6 +18,8 @@ class Item < ActiveRecord::Base
   belongs_to :category
 end
 
+class Writing < Item; end
+
 class Category < ActiveRecord::Base
   has_many :items
 end

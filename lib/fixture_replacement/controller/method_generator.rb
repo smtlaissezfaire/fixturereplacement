@@ -13,7 +13,6 @@ module FixtureReplacementController
     
     def initialize(object_attributes, module_class=FixtureReplacement)
       @object_attributes = object_attributes
-      @object_attributes.merge!
       @module = module_class
     end
     
@@ -56,6 +55,7 @@ module FixtureReplacementController
       
       @module.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
+          obj.merge!
           merged_hash = args[0] ? obj.hash.merge(args[0]) : obj.hash
           new_object = obj.of_class.new
           merged_hash.each do |key, value|          
