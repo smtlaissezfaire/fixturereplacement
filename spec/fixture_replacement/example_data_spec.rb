@@ -21,24 +21,24 @@ describe FixtureReplacement, "attributes_for" do
   end
   
   it "should create a new FixtureAttribute with the name given" do
-    @fixture_attribute.should_receive(:new).with({:fixture_name => :foo, :class => nil, :attributes_from => nil, :attributes => OpenStruct.new})
+    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => OpenStruct.new})
     FixtureReplacement.attributes_for(:foo, {}, @fixture_attribute) {  }
   end
   
   it "should create a new FixtureAttribute with the name given and class given" do
-    @fixture_attribute.should_receive(:new).with({:fixture_name => :foo, :class => Object, :attributes_from => nil, :attributes => OpenStruct.new})
+    @fixture_attribute.should_receive(:new).with(:foo, {:class => Object, :from => nil, :attributes => OpenStruct.new})
     FixtureReplacement.attributes_for(:foo, {:class => Object}, @fixture_attribute) { }  
   end
   
   it "should create a new FixtureAttribute with the name given and the attributes from" do
-    @fixture_attribute.should_receive(:new).with({:fixture_name => :foo, :class => nil, :attributes_from => :bar, :attributes => OpenStruct.new})
+    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => :bar, :attributes => OpenStruct.new})
     FixtureReplacement.attributes_for(:foo, {:from => :bar}, @fixture_attribute) { }
   end
   
   it "should create a new FixtureAttribute with the name and block given" do
     @ostruct = OpenStruct.new
     @ostruct.bar = :baz
-    @fixture_attribute.should_receive(:new).with({:fixture_name => :foo, :class => nil, :attributes_from => nil, :attributes => @ostruct})
+    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => @ostruct})
     FixtureReplacement.attributes_for(:foo, {}, @fixture_attribute) do |foo|
       foo.bar = :baz
     end

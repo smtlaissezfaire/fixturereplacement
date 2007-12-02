@@ -8,10 +8,9 @@ module FixtureReplacement
       
       yield open_struct
       
-      fixture_attributes_class.new({
-        :fixture_name => fixture_name,
+      fixture_attributes_class.new(fixture_name, {
         :class => options[:class],
-        :attributes_from => options[:from],
+        :from => options[:from],
         :attributes => open_struct
       })
     end
