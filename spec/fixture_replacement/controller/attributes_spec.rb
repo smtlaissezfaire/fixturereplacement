@@ -82,7 +82,7 @@ module FixtureReplacementController
       @struct = OpenStruct.new
       @struct.foo = :bar
       @struct.scott = :taylor
-      Attributes.new(:foo, :attributes => @struct).hash.should == {
+      Attributes.new(:foo, :attributes => lambda { @struct }).hash.should == {
         :foo => :bar,
         :scott => :taylor
       }
@@ -91,7 +91,7 @@ module FixtureReplacementController
   
   module AttributeFromHelper
     def setup_attributes
-      @from_attributes_as_struct = OpenStruct.new({:first_name => :scott})
+      @from_attributes_as_struct = lambda { OpenStruct.new({:first_name => :scott}) }
       @from_attributes = Attributes.new(:foo, :attributes => @from_attributes_as_struct)
     end
   end
@@ -128,7 +128,7 @@ module FixtureReplacementController
     end
     
     it "should overwrite an attribute" do
-      open_struct = OpenStruct.new({:first_name => :scott})
+      open_struct = lambda { OpenStruct.new({:first_name => :scott}) }
       
       attributes = Attributes.new :bar, :from => :foo, :attributes => open_struct
       
@@ -137,7 +137,7 @@ module FixtureReplacementController
     end
     
     it "should keep any new attributes, as well as any attributes which weren't overwritten" do
-      open_struct = OpenStruct.new({:foo => :bar})
+      open_struct = lambda { OpenStruct.new({:foo => :bar}) }
       
       attributes = Attributes.new(:bar, :from => :foo, :attributes => open_struct)
       

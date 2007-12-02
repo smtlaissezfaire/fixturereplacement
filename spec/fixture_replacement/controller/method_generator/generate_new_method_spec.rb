@@ -10,9 +10,11 @@ module FixtureReplacementController
       @class = classname
       
       @attributes = Attributes.new(@fixture_name, {
-        :attributes => OpenStruct.new({
-          :key => "val"
-        })
+        :attributes => lambda do
+          OpenStruct.new({
+            :key => "val"
+          })
+        end
       })
       
       @generator = MethodGenerator.new(@attributes, @module)
@@ -79,7 +81,7 @@ module FixtureReplacementController
   describe MethodGenerator, "generate_new_method with associations" do
 
     def create_generator(fixture_name, attribute_hash, mod)
-      gender_attributes = Attributes.new(fixture_name, :attributes => OpenStruct.new(attribute_hash))
+      gender_attributes = Attributes.new(fixture_name, :attributes => lambda { OpenStruct.new(attribute_hash) } )
       gender_generator = MethodGenerator.new(gender_attributes, mod)
       gender_generator.generate_default_method
       gender_generator.generate_new_method

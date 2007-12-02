@@ -11,7 +11,7 @@ module FixtureReplacementController
         :name => "Scott"
       }
       @struct = OpenStruct.new(@hash)
-      @attributes = Attributes.new(:admin, :attributes => @struct)
+      @attributes = Attributes.new(:admin, :attributes => lambda { @struct })
 
       @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
@@ -55,7 +55,7 @@ module FixtureReplacementController
         :name => "Scott"
       }
       @struct = OpenStruct.new(@hash)
-      @attributes = Attributes.new(:admin, :attributes => @struct)
+      @attributes = Attributes.new(:admin, :attributes => lambda { @struct })
 
       @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method

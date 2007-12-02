@@ -44,7 +44,7 @@ module FixtureReplacementController
     end
     
     def hash
-      @merged_hash || @attributes.to_hash
+      @merged_hash || @attributes_proc.call.to_hash
     end
     
     def merge!
@@ -56,7 +56,7 @@ module FixtureReplacementController
   private
   
     def assign_from_constructor(hash_given)
-      @attributes = hash_given[:attributes] || Hash.new
+      @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
       @from, @class = hash_given[:from], hash_given[:class]
     end
   

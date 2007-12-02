@@ -3,15 +3,11 @@ module FixtureReplacement
   
   class << self
     
-    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes)
-      open_struct = OpenStruct.new
-      
-      yield open_struct if block_given?
-      
+    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes, &blk)
       fixture_attributes_class.new(fixture_name, {
         :class => options[:class],
         :from => options[:from],
-        :attributes => open_struct
+        :attributes => blk
       })
     end
     
