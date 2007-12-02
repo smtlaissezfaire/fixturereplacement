@@ -2,14 +2,6 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
   describe Attributes do  
-    before :each do
-      Attributes.clear_out_instances!
-    end
-    
-    after :each do
-      Attributes.clear_out_instances!
-    end
-    
     it "should add the instance to the global attributes" do
       a = Attributes.new(:foo)
       Attributes.instances.should == [a]
@@ -74,10 +66,6 @@ module FixtureReplacementController
   
   describe Attributes, "hash, with simple arguments (only attributes and fixture name)" do
     
-    after :each do
-      Attributes.clear_out_instances!
-    end
-    
     it "should return a hash" do
       Attributes.new(:foo).hash.should == {}
     end
@@ -113,10 +101,6 @@ module FixtureReplacementController
       @attributes = Attributes.new(:bar, :from => :foo)
     end
     
-    after :each do
-      Attributes.clear_out_instances!
-    end
-
     it "should contain the keys from the inherited hash only" do
       @attributes.merge!
       @attributes.hash.should == {
@@ -130,10 +114,6 @@ module FixtureReplacementController
     
     before :each do
       setup_attributes      
-    end
-    
-    after :each do
-      Attributes.clear_out_instances!
     end
     
     it "should overwrite an attribute" do
