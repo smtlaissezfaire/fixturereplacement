@@ -13,10 +13,14 @@ module FixtureReplacementController
       end
     end
     
-    def initialize(object_attributes, module_class)
+    def initialize(object_attributes, module_class=FixtureReplacement)
       @object_attributes = object_attributes
       @object_attributes.merge!
       @module_class = module_class
+    end
+    
+    def module
+      @module_class
     end
     
     def generate_methods

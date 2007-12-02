@@ -67,4 +67,20 @@ module FixtureReplacementController
       @generator.generate_methods
     end
   end
+  
+  describe MethodGenerator, "new" do
+    before :each do
+      @attributes = mock Attributes
+      @attributes.stub!(:merge!)
+      @module = Module.new
+    end
+    
+    it "should use the module given" do
+      MethodGenerator.new(@attributes, @module).module.should == @module
+    end
+    
+    it "should use the module FixtureReplacement by default" do
+      MethodGenerator.new(@attributes).module.should == FixtureReplacement
+    end
+  end
 end
