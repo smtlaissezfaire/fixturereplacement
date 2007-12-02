@@ -6,7 +6,7 @@ module FixtureReplacement
     def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes)
       open_struct = OpenStruct.new
       
-      yield open_struct
+      yield open_struct if block_given?
       
       fixture_attributes_class.new(fixture_name, {
         :class => options[:class],

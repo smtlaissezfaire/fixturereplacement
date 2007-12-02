@@ -52,6 +52,12 @@ describe "FixtureReplacement.attributes_for" do
     end
   end
   
+  it "should not raise an error if no block is given" do
+    lambda {
+      FixtureReplacement.attributes_for :scott, :from => :user  
+    }.should_not raise_error
+  end
+  
   it "should create a new Attribute with the class, attributes_from, and the attributes" do
     FixtureReplacementController::Attributes.stub!(:new)
     FixtureReplacementController::Attributes.should_receive(:new).with(:scott, {
