@@ -59,7 +59,7 @@ describe FixtureReplacement, "including the module" do
       @klass.class_eval do
         include FixtureReplacement
       end
-    }.should raise_error(FixtureReplacementError, "FixtureReplacement cannot be included in the production environment!")
+    }.should raise_error(FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the production environment!")
   end
   
   it "should raise an error if RAILS_ENV is in staging, and the excluded_environments includes staging" do
@@ -69,7 +69,7 @@ describe FixtureReplacement, "including the module" do
       @klass.class_eval do
         include FixtureReplacement
       end
-    }.should raise_error(FixtureReplacementError, "FixtureReplacement cannot be included in the staging environment!")
+    }.should raise_error(FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the staging environment!")
   end
   
   it "should have the method environment_in_excluded_environments? as private" do

@@ -1,6 +1,6 @@
-class FixtureReplacementError < StandardError; end
-
 module FixtureReplacement  
+  class InclusionError < StandardError; end
+  
   class << self
     
     def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes)
@@ -33,7 +33,7 @@ module FixtureReplacement
   
     def included(included_mod)
       if environment_in_excluded_environments?
-        raise FixtureReplacementError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
+        raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
       end
       FixtureReplacementController::MethodGenerator.generate_methods
     end
