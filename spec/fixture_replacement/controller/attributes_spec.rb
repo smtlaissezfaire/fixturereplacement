@@ -2,6 +2,10 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
   describe Attributes do  
+    before :each do
+      Attributes.clear_out_instances!
+    end
+    
     after :each do
       Attributes.clear_out_instances!
     end
