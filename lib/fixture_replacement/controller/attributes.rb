@@ -56,6 +56,27 @@ module FixtureReplacementController
       end
     end
     
+    def to_new_class_instance(hash={}, caller=self)
+      self.merge!
+      merged_hash = hash ? self.hash.merge(hash) : self.hash
+      new_object = self.of_class.new
+      
+      merged_hash.each do |key, value|          
+        if value.class == DelayedEvaluationProc
+          default_obj, params = value.call
+          value = caller.send("create_#{default_obj.fixture_name}", params)
+        end
+        new_object.send("#{key}=", value)             
+      end
+      new_object
+    end
+    
+    def to_created_class_instance(hash={}, caller=self)
+      created_obj = to_new_class_instance(hash, caller)
+      created_obj.save!
+      created_obj
+    end
+    
   private
   
     def assign_from_constructor(hash_given)

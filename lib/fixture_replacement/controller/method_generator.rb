@@ -42,10 +42,7 @@ module FixtureReplacementController
       
       @module.module_eval do
         define_method("create_#{obj.fixture_name}") do |*args|
-          hash = args[0] || Hash.new
-          created_obj = self.send("new_#{obj.fixture_name}", hash)
-          created_obj.save!
-          created_obj
+          obj.to_created_class_instance(args[0], self)
         end
       end
     end
@@ -55,18 +52,7 @@ module FixtureReplacementController
       
       @module.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
-          obj.merge!
-          merged_hash = args[0] ? obj.hash.merge(args[0]) : obj.hash
-          new_object = obj.of_class.new
-          merged_hash.each do |key, value|          
-            if value.class == DelayedEvaluationProc
-              default_obj, params = value.call
-              value = self.send("create_#{default_obj.fixture_name}", params)
-            end
-            new_object.send("#{key}=", value)             
-          end
-          
-          new_object
+          obj.to_new_class_instance(args[0], self)
         end
       end
     end
