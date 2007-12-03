@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 module FixtureReplacementController
   describe "MethodGenerator.generate_methods" do
     before :each do
+      MethodGenerator.reset_module!
+      
       @attributes = mock Attributes
       Attributes.stub!(:instances).and_return [@attributes]
       @module = mock "A Module"

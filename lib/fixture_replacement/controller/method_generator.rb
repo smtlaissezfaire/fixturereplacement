@@ -8,7 +8,14 @@ module FixtureReplacementController
         end
       end
       
-      attr_reader :module
+      def reset_module!
+        @module = nil
+      end
+      
+      def module
+        @module ||= FixtureReplacement
+        @module
+      end
     end
     
     def initialize(object_attributes, module_class=FixtureReplacement)
