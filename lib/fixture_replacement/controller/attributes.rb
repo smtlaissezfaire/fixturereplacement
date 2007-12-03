@@ -62,9 +62,8 @@ module FixtureReplacementController
       new_object = self.of_class.new
       
       merged_hash.each do |key, value|          
-        if value.class == DelayedEvaluationProc
-          default_obj, params = value.call
-          value = caller.send("create_#{default_obj.fixture_name}", params)
+        if value.is_a? DelayedEvaluationProc
+          value = find_value_from_delayed_evaluation_proc(value, caller)
         end
         new_object.send("#{key}=", value)             
       end
@@ -78,6 +77,11 @@ module FixtureReplacementController
     end
     
   private
+  
+    def find_value_from_delayed_evaluation_proc(value, caller)
+      default_obj, params = value.call
+      value = caller.send("create_#{default_obj.fixture_name}", params)
+    end
   
     def assign_from_constructor(hash_given)
       @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
