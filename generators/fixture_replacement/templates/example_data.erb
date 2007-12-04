@@ -1,4 +1,3 @@
-
 module FixtureReplacement
 <% ActiveRecord::Base.connection.tables.each do |table_name| -%>
 <% begin table_name.classify.constantize -%>
