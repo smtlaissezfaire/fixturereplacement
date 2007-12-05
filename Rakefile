@@ -62,7 +62,7 @@ Spec::Rake::SpecTask.new(:specdoc) do |t|
     `mkdir doc`
   end
   
-  t.spec_opts = ["--format", "html:doc/specdoc"]
+  t.spec_opts = ["--format", "html:doc/specdoc.html"]
 end
 
 desc 'Create the specdoc + rdoc'
