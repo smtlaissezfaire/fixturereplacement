@@ -41,8 +41,9 @@ task :rerdoc => [:clobber_rdoc, :rdoc]
 task :clobber_rdoc => [:clobber_rdoc_without_analytics]
 
 desc 'Run the specs'
-task :spec do
-  puts `spec -O spec/spec.opts #{spec_files}`
+Spec::Rake::SpecTask.new do |t|
+  t.warning = false
+  t.spec_opts = ["--color"]
 end
 
 desc 'Publish the website, building the docs first'
@@ -55,17 +56,13 @@ task :publish_website => [:build_docs] do
   publisher.upload
 end
 
-
-def spec_files
-  Dir.glob("spec/fixture_replacement/*_spec.rb").collect { |f| "#{f} " }.join  
-end
-
-desc 'Create the html specdoc'
-task :specdoc do
+desc "Create the html specdoc"
+Spec::Rake::SpecTask.new(:specdoc) do |t|
   unless File.exists?(doc_directory)
     `mkdir doc`
   end
-  `spec --format html:doc/specdoc.html #{spec_files}`
+  
+  t.spec_opts = ["--format", "html:doc/specdoc"]
 end
 
 desc 'Create the specdoc + rdoc'
@@ -73,7 +70,6 @@ task :build_docs => [:rerdoc, :specdoc, :rcov]
 
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new(:rcov) do |t|
-  t.spec_files = FileList['spec/**/*.rb']
   t.rcov = true
   t.rcov_opts = ['--exclude', 'spec']
   t.rcov_dir = "doc/rcov"
