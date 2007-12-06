@@ -48,7 +48,7 @@ module FixtureReplacementController
 
     end
     
-    it "should be able to send the message wit __send__" do
+    it "should be able to send the message with __send__" do
       @caller.should_not_receive(:send)
       @caller.should_receive(:__send__)
 
