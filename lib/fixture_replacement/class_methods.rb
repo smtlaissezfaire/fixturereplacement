@@ -7,7 +7,12 @@ module FixtureReplacement
         :attributes => blk
       })
     end
+    
+    def after_include(&block)
+      @after_include_block = block
+    end
 
+    attr_reader :after_include_block
     attr_writer :defaults_file
 
     def defaults_file
@@ -29,9 +34,16 @@ module FixtureReplacement
         raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
       end
       FixtureReplacementController::MethodGenerator.generate_methods
+      call_after_include_if_exists
     end
 
   private
+  
+    def call_after_include_if_exists
+      if after_include_block
+        @after_include_block.call
+      end
+    end
 
     def environment_in_excluded_environments?
       return false unless Object.const_defined?(:RAILS_ENV)
