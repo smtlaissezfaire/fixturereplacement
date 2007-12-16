@@ -51,37 +51,20 @@ module FixtureReplacementController
     end
     
     def merge!
-      if from = find_by_fixture_name(self.from)
+      if @merged_hash.nil? && from = find_by_fixture_name(self.from)
         @merged_hash = from.hash.merge(self.hash)
       end
     end
     
     def to_new_class_instance(hash={}, caller=self)
-      self.merge!
-      merged_hash = hash ? self.hash.merge(hash) : self.hash
-      new_object = self.of_class.new
-      
-      merged_hash.each do |key, value|          
-        if value.is_a? DelayedEvaluationProc
-          value = find_value_from_delayed_evaluation_proc(value, caller)
-        end
-        new_object.__send__("#{key}=", value)             
-      end
-      new_object
+      ARClassInstance.new(self, hash, caller).to_new_instance
     end
     
     def to_created_class_instance(hash={}, caller=self)
-      created_obj = to_new_class_instance(hash, caller)
-      created_obj.save!
-      created_obj
+      ARClassInstance.new(self, hash, caller).to_created_instance
     end
     
   private
-  
-    def find_value_from_delayed_evaluation_proc(value, caller)
-      default_obj, params = value.call
-      value = caller.__send__("create_#{default_obj.fixture_name}", params)
-    end
   
     def assign_from_constructor(hash_given)
       @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
