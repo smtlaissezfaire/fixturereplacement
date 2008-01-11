@@ -24,10 +24,14 @@ module FixtureReplacementController
     
     def all_attributes
       @attributes.merge!
-      @all_merged_attributes ||= @attributes.hash.merge(self.hash_given_to_constructor)
+      @all_merged_attributes ||= attributes_hash.merge(self.hash_given_to_constructor)
     end
 
   private
+  
+    def attributes_hash
+      @attributes.hash
+    end
 
     def find_value_from_delayed_evaluation_proc(value)
       default_obj, params = value.call
