@@ -341,6 +341,9 @@ Then run with <tt>rake<tt>
 
   % rake
   
+There are also some tests for test/unit.  These mainly serve as regressions, but you are free
+to run them as well.
+  
 == Specdocs
 
 Specdocs can be found here[http://replacefixtures.rubyforge.org/specdoc.html]
