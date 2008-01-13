@@ -25,12 +25,12 @@ module FixtureReplacementController
       return new_object
     end
     
+  private
+
     def all_attributes
       @attributes.merge!
       @all_merged_attributes ||= attributes_hash.merge(self.hash_given_to_constructor)
     end
-
-  private
   
     def attributes_hash
       @attributes.hash
