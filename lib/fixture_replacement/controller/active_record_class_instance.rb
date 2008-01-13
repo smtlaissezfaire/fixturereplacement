@@ -1,5 +1,8 @@
 module FixtureReplacementController
-  # ARClassInstance = ActiveRecord Class Instance
+  # I am a Factory which creates ActiveRecord Class instances.
+  # Give me a collection of attributes, and an additional hash,
+  # and I will merge them into a new ActiveRecord Instance (either a new
+  # instance with ActiveRecord::Base#new, or a created one ActiveRecord::Base#create!).
   class ARClassInstance
     
     def initialize(attributes, hash={}, original_caller=self)
