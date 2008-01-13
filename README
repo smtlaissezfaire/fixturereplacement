@@ -312,7 +312,7 @@ Run the generator if you don't have the file <tt>db/example_data.rb</tt>:
 Add the following to your <tt>spec/spec_helper.rb</tt> file, in the configuration section:
 
 Spec::Runner.configure do |config|
-  include FixtureReplacement
+  config.include FixtureReplacement
 end
 
 === Using it with Test::Unit
