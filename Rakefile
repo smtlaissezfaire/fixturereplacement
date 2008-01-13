@@ -55,12 +55,18 @@ task :publish_website => [:build_docs] do
   publisher.upload
 end
 
-desc "Create the html specdoc"
-Spec::Rake::SpecTask.new(:specdoc) do |t|
+def create_doc_directory
   unless File.exists?(doc_directory)
     `mkdir doc`
-  end
-  
+  end  
+end
+
+task :create_doc_directory do
+  create_doc_directory
+end
+
+desc "Create the html specdoc"
+Spec::Rake::SpecTask.new(:specdoc => :create_doc_directory) do |t|
   t.spec_opts = ["--format", "html:doc/specdoc.html"]
 end
 
@@ -72,4 +78,15 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
   t.rcov = true
   t.rcov_opts = ['--exclude', 'spec']
   t.rcov_dir = "doc/rcov"
+end
+
+desc "Feel the pain of my code, and submit a refactoring patch"
+task :flog do
+  puts %x(find lib | grep ".rb$" | xargs flog)
+end
+
+task :flog_to_disk => :create_doc_directory do
+  puts "Flogging..."
+  %x(find lib | grep ".rb$" | xargs flog > doc/flog.txt)
+  puts "Done Flogging...\n"
 end
