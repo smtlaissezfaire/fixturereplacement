@@ -3,7 +3,7 @@ module FixtureReplacementController
   # Give me a collection of attributes, and an additional hash,
   # and I will merge them into a new ActiveRecord Instance (either a new
   # instance with ActiveRecord::Base#new, or a created one ActiveRecord::Base#create!).
-  class ARClassInstance
+  class ActiveRecordFactory
     
     def initialize(attributes, hash={}, original_caller=self)
       @attributes, @hash_given_to_constructor, @caller = attributes, hash, original_caller
