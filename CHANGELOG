@@ -1,0 +1,5 @@
+
+== 01/12/07
+Adding this CHANGELOG
+Added test/unit tests for integration with test/unit
+Fixed [#16858] Unable to create relationships between &quot;fixtures&quot;
