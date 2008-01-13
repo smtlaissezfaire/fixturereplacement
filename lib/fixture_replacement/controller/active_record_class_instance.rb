@@ -39,10 +39,8 @@ module FixtureReplacementController
     end
 
     def assign_values_to_instance instance_object
-      all_attributes.each do |key, value|          
-        if value.is_a? DelayedEvaluationProc
-          value = find_value_from_delayed_evaluation_proc(value)
-        end
+      all_attributes.each do |key, value|        
+        value = find_value_from_delayed_evaluation_proc(value) if value.is_a? DelayedEvaluationProc
         instance_object.__send__("#{key}=", value)             
       end
     end

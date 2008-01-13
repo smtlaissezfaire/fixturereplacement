@@ -27,9 +27,7 @@ module FixtureReplacementController
       # it will find the first one which was specified.  It will
       # return nil if no fixture with the name given was found
       def find_by_fixture_name(arg)
-        instances.each do |instance|
-          return instance if instance.fixture_name == arg
-        end
+        instances.each { |instance| return instance if instance.fixture_name == arg }
         return nil
       end
     end
@@ -64,8 +62,8 @@ module FixtureReplacementController
     # the anonymous function, overriding any attributes derived from
     # the :from hash, with the ones given in the closure.
     def merge!
-      if @merged_hash.nil? && from = find_by_fixture_name(self.from)
-        @merged_hash = from.hash.merge(self.hash)
+      if hash_has_not_been_merged? && my_derived_fixture_is_present?
+        @merged_hash = my_derived_fixtures_hash.merge(self.hash)
       end
     end
     
@@ -79,17 +77,42 @@ module FixtureReplacementController
     
   private
   
-    def assign_from_constructor(hash_given)
-      @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
-      @from, @class = hash_given[:from], hash_given[:class]
+    def my_derived_fixtures_hash
+      my_derived_fixture.hash
     end
   
-    attr_reader :hash_given
-  
+    def my_derived_fixture_is_present?
+      !my_derived_fixture.nil?
+    end
+    
     def find_by_fixture_name(symbol)
       self.class.find_by_fixture_name(symbol)
     end
     
+    def find_my_derived_fixture
+      find_by_fixture_name(self.from)
+    end
+    
+    def my_derived_fixture
+      @my_fixture ||= find_my_derived_fixture
+    end
+  
+    def hash_has_not_been_merged?
+      !hash_has_been_merged?
+    end
+  
+    def hash_has_been_merged?
+      @merged ? true : false
+    end
+  
+    def assign_from_constructor(hash_given)
+      @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
+      @from = hash_given[:from]
+      @class = hash_given[:class]
+    end
+  
+    attr_reader :hash_given
+  
     def constantize(symbol)
       symbol.to_s.camelize.constantize
     end
