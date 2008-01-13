@@ -1,6 +1,6 @@
 module FixtureReplacement
   module ClassMethods
-    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::Attributes, &blk)
+    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::AttributeCollection, &blk)
       fixture_attributes_class.new(fixture_name, {
         :class => options[:class],
         :from => options[:from],

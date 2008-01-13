@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
-  # These specs are ugly.  It probably means that I need to refactor Attributes#to_new_class_instance
-  describe Attributes, "Send Regresssion" do
+  # These specs are ugly.  It probably means that I need to refactor AttributeCollection#to_new_class_instance
+  describe AttributeCollection, "Send Regresssion" do
     before :each do
       @class = Class.new
       @instance = @class.new
@@ -10,7 +10,7 @@ module FixtureReplacementController
       
       @instance.stub!(:foo=)
       
-      @attributes = Attributes.new(:foo, {})
+      @attributes = AttributeCollection.new(:foo, {})
       @attributes.stub!(:of_class).and_return @class
       @attributes.stub!(:hash).and_return({:foo => :bar})
     end
@@ -23,7 +23,7 @@ module FixtureReplacementController
     end
   end
   
-  describe Attributes, "send regression, part 2" do
+  describe AttributeCollection, "send regression, part 2" do
     before :each do
       @class = Class.new
       @instance = @class.new
@@ -31,7 +31,7 @@ module FixtureReplacementController
       
       @instance.stub!(:foo=)
       
-      @attributes = Attributes.new(:foo, {})
+      @attributes = AttributeCollection.new(:foo, {})
       @attributes.stub!(:of_class).and_return @class
 
       @mock_who_cares = mock 'who cares'

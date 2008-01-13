@@ -10,10 +10,10 @@ require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"
 
 Spec::Runner.configure do |config|
   config.prepend_before(:each) do
-    FixtureReplacementController::Attributes.clear_out_instances!
+    FixtureReplacementController::AttributeCollection.clear_out_instances!
   end
   
   config.prepend_after(:each) do
-    FixtureReplacementController::Attributes.clear_out_instances!
+    FixtureReplacementController::AttributeCollection.clear_out_instances!
   end
 end

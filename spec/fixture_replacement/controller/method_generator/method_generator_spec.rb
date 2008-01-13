@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 module FixtureReplacementController
   describe MethodGenerator do
     before :each do
-      @user_attributes = mock("UserAttributes")
+      @user_attributes = mock("UserAttributeCollection")
       @user_attributes.stub!(:merge!)
       @module = mock("FixtureReplacement")
       @generator = MethodGenerator.new(@user_attributes, @module)

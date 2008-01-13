@@ -1,5 +1,5 @@
 module FixtureReplacementController
-  # I am a series of ActiveRecord model Attributes.
+  # I am a series of ActiveRecord model attributes.
   #
   # My attributes come from the following places: 
   #
@@ -7,7 +7,7 @@ module FixtureReplacementController
   #     when I was constructed
   #   * from the anonymous function which is passed from into my constructor
   #
-  class Attributes
+  class AttributeCollection
     class << self
       def instances
         @instances ||= []

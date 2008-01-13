@@ -6,7 +6,7 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      @attributes = Attributes.new(:admin, :attributes => lambda { |u|
+      @attributes = AttributeCollection.new(:admin, :attributes => lambda { |u|
         u.admin_status = true
         u.name = "Scott"
       })
@@ -49,7 +49,7 @@ module FixtureReplacementController
       extend @module
       
       @struct = OpenStruct.new(@hash)
-      @attributes = Attributes.new(:admin, :attributes => lambda { |s|
+      @attributes = AttributeCollection.new(:admin, :attributes => lambda { |s|
         s.admin_status = true
         s.name = "Scott"
       })

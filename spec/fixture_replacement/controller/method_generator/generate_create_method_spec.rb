@@ -58,7 +58,7 @@ module FixtureReplacementController
         u.key = "val"
       }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => @struct)
+      @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
       @generator = MethodGenerator.new(@attributes, @module)
@@ -84,7 +84,7 @@ module FixtureReplacementController
         a.key = "val"
       }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => @struct)
+      @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
       @generator = MethodGenerator.new(@attributes, @module)
@@ -107,7 +107,7 @@ module FixtureReplacementController
       @fixture_name = :user
       @struct = lambda { |u| u.key = nil }
 
-      @attributes = Attributes.new(@fixture_name, :attributes => @struct )
+      @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct )
       @attributes.stub!(:merge!)
 
       @generator = MethodGenerator.new(@attributes, @module)

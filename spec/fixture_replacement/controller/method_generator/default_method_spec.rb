@@ -30,7 +30,7 @@ module FixtureReplacementController
       @module = Module.new
       
       @struct = OpenStruct.new({:key => "val"})
-      @attributes = Attributes.new(:user, :attributes => @struct)
+      @attributes = AttributeCollection.new(:user, :attributes => @struct)
       @generator = MethodGenerator.new(@attributes, @module)
       
       @fixture_name = "user"
@@ -47,7 +47,7 @@ module FixtureReplacementController
       @module = Module.new
       
       @struct = OpenStruct.new({:key => "val"})
-      @attributes = Attributes.new(:admin, :attributes => @struct)
+      @attributes = AttributeCollection.new(:admin, :attributes => @struct)
       @attributes.stub!(:merge!)
       @generator = MethodGenerator.new(@attributes, @module)
       

@@ -36,7 +36,7 @@ end
 module FixtureReplacementController
   
   
-  describe Attributes do
+  describe AttributeCollection do
     include FixtureReplacementControllerHelper
     
     before :each do

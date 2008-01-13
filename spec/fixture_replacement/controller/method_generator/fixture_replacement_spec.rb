@@ -5,8 +5,8 @@ module FixtureReplacementController
     before :each do
       MethodGenerator.reset_module!
       
-      @attributes = mock Attributes
-      Attributes.stub!(:instances).and_return [@attributes]
+      @attributes = mock AttributeCollection
+      AttributeCollection.stub!(:instances).and_return [@attributes]
       @module = mock "A Module"
       @method_generator = mock MethodGenerator
       @method_generator.stub!(:generate_methods)
@@ -27,7 +27,7 @@ module FixtureReplacementController
     end
     
     it "should find each of the attributes" do
-      Attributes.should_receive(:instances).and_return [@attributes]
+      AttributeCollection.should_receive(:instances).and_return [@attributes]
       MethodGenerator.generate_methods(@module)
     end
     
@@ -44,7 +44,7 @@ module FixtureReplacementController
   
   describe MethodGenerator, "generate_methods (the instance method)" do
     before :each do
-      @attributes = mock 'Attributes'
+      @attributes = mock 'AttributeCollection'
       @attributes.stub!(:merge!)
       @module = mock 'A Module'
       
@@ -72,7 +72,7 @@ module FixtureReplacementController
   
   describe MethodGenerator, "new" do
     before :each do
-      @attributes = mock Attributes
+      @attributes = mock AttributeCollection
       @attributes.stub!(:merge!)
       @module = Module.new
     end
