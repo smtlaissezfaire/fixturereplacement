@@ -71,7 +71,7 @@ Spec::Rake::SpecTask.new(:specdoc => :create_doc_directory) do |t|
 end
 
 desc 'Create the specdoc + rdoc'
-task :build_docs => [:rerdoc, :specdoc, :rcov]
+task :build_docs => [:rerdoc, :specdoc, :rcov, :flog_to_disk]
 
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new(:rcov) do |t|
