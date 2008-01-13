@@ -30,9 +30,7 @@ module FixtureReplacement
     attr_writer :excluded_environments
 
     def included(included_mod)
-      if environment_in_excluded_environments?
-        raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
-      end
+      raise_if_environment_is_in_excluded_environments
       FixtureReplacementController::MethodGenerator.generate_methods
       call_after_include_if_exists
     end
@@ -52,15 +50,20 @@ module FixtureReplacement
         @after_include_block.call
       end
     end
+    
+    def raise_if_environment_is_in_excluded_environments
+      if environment_is_in_excluded_environments?
+        raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
+      end
+    end
 
-    def environment_in_excluded_environments?
-      return false unless Object.const_defined?(:RAILS_ENV)
-      rails_env = Object.const_get(:RAILS_ENV)
-      excluded_environments.include?(rails_env) ? true : false
+    def environment_is_in_excluded_environments?
+      return false unless defined?(RAILS_ENV)
+      excluded_environments.include?(RAILS_ENV) ? true : false
     end
 
     def rails_root
-      Object.const_defined?(:RAILS_ROOT) ? Object.const_get(:RAILS_ROOT) : nil      
+      defined?(RAILS_ROOT) ? RAILS_ROOT : nil      
     end
   end
 end

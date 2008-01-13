@@ -72,8 +72,8 @@ describe FixtureReplacement, "including the module" do
     }.should raise_error(FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the staging environment!")
   end
   
-  it "should have the method environment_in_excluded_environments? as private" do
-    FixtureReplacement.private_methods.should include("environment_in_excluded_environments?")
+  it "should have the method environment_is_in_excluded_environments? as private" do
+    FixtureReplacement.private_methods.should include("environment_is_in_excluded_environments?")
   end
 end
 
