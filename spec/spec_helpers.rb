@@ -16,5 +16,55 @@ module SpecHelperFunctions
         end
       end
     end
+  end
+  
+  def setup_database_connection
+    
+    require 'rubygems'
+    require 'sqlite3'
+    require 'active_record'
+    require 'active_support'
+    
+    ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database  => ':memory:'
+    ActiveRecord::Migration.verbose = false
+
+    ActiveRecord::Schema.define do  
+      create_table :users do |t|
+        t.column  :key,       :string
+        t.column  :other_key, :string
+        t.column  :gender_id, :integer
+        t.column  :username,  :string
+      end
+
+      create_table :genders do |t|
+        t.column  :sex, :string
+      end
+
+      create_table :aliens do |t|
+        t.column :gender_id, :string
+      end
+
+      create_table :admins do |t|
+        t.column :admin_status, :boolean
+        t.column :name, :string
+        t.column :username, :string
+        t.column :key, :string
+        t.column :other_key, :string
+      end  
+
+      create_table :items do |t|
+        t.column :category, :integer
+        t.column :type, :string
+        t.column :name, :string
+      end
+
+      create_table :categories do |t|
+        t.column :name, :string
+      end
+    end
   end  
 end
+
+
+
+

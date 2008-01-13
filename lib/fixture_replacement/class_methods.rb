@@ -36,6 +36,10 @@ module FixtureReplacement
       FixtureReplacementController::MethodGenerator.generate_methods
       call_after_include_if_exists
     end
+    
+    def method_added(method)
+      module_function method if method != :method_added
+    end
 
   private
   
