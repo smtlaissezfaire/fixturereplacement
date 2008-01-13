@@ -1,7 +1,6 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-require 'spec'
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
 require 'rake/contrib/rubyforgepublisher'
