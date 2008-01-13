@@ -1,4 +1,12 @@
 module FixtureReplacementController
+  # I am a series of ActiveRecord model Attributes.
+  #
+  # My attributes come from the following places: 
+  #
+  #   * from the class which is specified with :from => :fixture_name
+  #     when I was constructed
+  #   * from the anonymous function which is passed from into my constructor
+  #
   class Attributes
     class << self
       def instances
@@ -14,6 +22,10 @@ module FixtureReplacementController
         @instances = nil
       end
       
+      # Finds the fixture by the given name
+      # If there are duplicate fixtures with the same name,
+      # it will find the first one which was specified.  It will
+      # return nil if no fixture with the name given was found
       def find_by_fixture_name(arg)
         instances.each do |instance|
           if instance.fixture_name == arg
@@ -50,6 +62,9 @@ module FixtureReplacementController
       os.to_hash
     end
     
+    # This merges the :from attributes hash and the attributes from
+    # the anonymous function, overriding any attributes derived from
+    # the :from hash, with the ones given in the closure.
     def merge!
       if @merged_hash.nil? && from = find_by_fixture_name(self.from)
         @merged_hash = from.hash.merge(self.hash)
