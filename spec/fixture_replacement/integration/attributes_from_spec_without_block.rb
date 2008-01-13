@@ -58,11 +58,11 @@ module FixtureReplacementController
         @module.should respond_to("new_#{model}")
       end
       
-      it "should have the new_#{model} method as a private method" do
+      it "should have the new_#{model} method as a private method in the test case" do
         self.private_methods.should include("new_#{model}")
       end 
 
-      it "should have the create_#{model} method as a private method" do
+      it "should have the create_#{model} method as a private method in the test case" do
         self.private_methods.should include("create_#{model}")
       end
       
