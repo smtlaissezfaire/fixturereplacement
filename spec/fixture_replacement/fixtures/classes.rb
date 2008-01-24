@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   validates_presence_of :key
 end
 
+class Player < ActiveRecord::Base
+end
+
 class Alien < ActiveRecord::Base
   belongs_to :gender
 end

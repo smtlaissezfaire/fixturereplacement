@@ -35,6 +35,11 @@ module SpecHelperFunctions
         t.column  :gender_id, :integer
         t.column  :username,  :string
       end
+      
+      create_table :players do |t|
+        t.column :username, :string
+        t.column :key, :string
+      end
 
       create_table :genders do |t|
         t.column  :sex, :string
