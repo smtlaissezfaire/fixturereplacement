@@ -118,14 +118,14 @@ module FixtureReplacementController
       new_gender.sex.should == "unknown"
     end
     
-    it "should call Gender.save! when the default_gender method is evaluated by default_gender" do
+    it "should call Gender.new when the default_gender method is evaluated by new_user" do
       @gender = mock('Gender', :null_object => true)
       Gender.stub!(:new).and_return @gender
       @user = mock('User')
       @user.stub!(:gender=).and_return @gender
       User.stub!(:new).and_return @user
     
-      @gender.should_receive(:save!)
+      Gender.should_receive(:new).and_return @gender
       new_user
     end
     
