@@ -31,6 +31,6 @@ begin
     require file
   end
   require FixtureReplacement.defaults_file
-rescue Exception => e
-  raise "Error in FixtureReplacement Plugin: #{e}"
+rescue LoadError => e
+  raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
