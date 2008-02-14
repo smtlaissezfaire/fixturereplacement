@@ -44,11 +44,9 @@ module FixtureReplacementController
     # I would really like to name this method class, but I'm
     # sure you can see the name conflict
     def of_class
-      begin
-        @class || find_by_fixture_name(@from).of_class
-      rescue
-        constantize(fixture_name)
-      end
+      @class || find_by_fixture_name(@from).of_class
+    rescue
+      constantize(fixture_name)
     end
     
     def hash
@@ -62,8 +60,9 @@ module FixtureReplacementController
     # the anonymous function, overriding any attributes derived from
     # the :from hash, with the ones given in the closure.
     def merge!
-      if hash_has_not_been_merged? && derived_fixture_is_present?
-        @merged_hash = derived_fixtures_hash.merge(self.hash)
+      if derived_fixture_is_present?
+        unmerge_hash
+        @merged_hash = derived_fixtures_hash.merge(hash)
       end
     end
     
@@ -76,6 +75,10 @@ module FixtureReplacementController
     end
     
   private
+  
+    def unmerge_hash
+      @merged_hash = nil
+    end
   
     def derived_fixtures_hash
       derived_fixture.hash
@@ -95,14 +98,6 @@ module FixtureReplacementController
     
     def derived_fixture
       @my_fixture ||= find_derived_fixture
-    end
-  
-    def hash_has_not_been_merged?
-      !hash_has_been_merged?
-    end
-  
-    def hash_has_been_merged?
-      @merged ? true : false
     end
   
     def assign_from_constructor(hash_given)
