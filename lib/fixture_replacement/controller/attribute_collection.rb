@@ -62,8 +62,8 @@ module FixtureReplacementController
     # the anonymous function, overriding any attributes derived from
     # the :from hash, with the ones given in the closure.
     def merge!
-      if hash_has_not_been_merged? && my_derived_fixture_is_present?
-        @merged_hash = my_derived_fixtures_hash.merge(self.hash)
+      if hash_has_not_been_merged? && derived_fixture_is_present?
+        @merged_hash = derived_fixtures_hash.merge(self.hash)
       end
     end
     
@@ -77,24 +77,24 @@ module FixtureReplacementController
     
   private
   
-    def my_derived_fixtures_hash
-      my_derived_fixture.hash
+    def derived_fixtures_hash
+      derived_fixture.hash
     end
   
-    def my_derived_fixture_is_present?
-      !my_derived_fixture.nil?
+    def derived_fixture_is_present?
+      !derived_fixture.nil?
     end
     
     def find_by_fixture_name(symbol)
       self.class.find_by_fixture_name(symbol)
     end
     
-    def find_my_derived_fixture
+    def find_derived_fixture
       find_by_fixture_name(self.from)
     end
     
-    def my_derived_fixture
-      @my_fixture ||= find_my_derived_fixture
+    def derived_fixture
+      @my_fixture ||= find_derived_fixture
     end
   
     def hash_has_not_been_merged?

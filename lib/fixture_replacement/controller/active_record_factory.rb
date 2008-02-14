@@ -6,7 +6,9 @@ module FixtureReplacementController
   class ActiveRecordFactory
     
     def initialize(attributes, hash={}, original_caller=self)
-      @attributes, @hash_given_to_constructor, @caller = attributes, hash, original_caller
+      @attributes = attributes
+      @hash_given_to_constructor = hash
+      @caller = original_caller
     end
 
     def to_created_instance
