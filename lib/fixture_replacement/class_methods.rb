@@ -8,11 +8,6 @@ module FixtureReplacement
       })
     end
     
-    def after_include(&block)
-      @after_include_block = block
-    end
-
-    attr_reader :after_include_block
     attr_writer :defaults_file
 
     def defaults_file
@@ -32,7 +27,6 @@ module FixtureReplacement
     def included(included_mod)
       raise_if_environment_is_in_excluded_environments
       FixtureReplacementController::MethodGenerator.generate_methods
-      call_after_include_if_exists
     end
     
     # Any user defined instance methods (as well as default_*) need the module's class scope to be
@@ -45,12 +39,6 @@ module FixtureReplacement
 
   private
   
-    def call_after_include_if_exists
-      if after_include_block
-        @after_include_block.call
-      end
-    end
-    
     def raise_if_environment_is_in_excluded_environments
       if environment_is_in_excluded_environments?
         raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
