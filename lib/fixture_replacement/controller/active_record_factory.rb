@@ -12,8 +12,6 @@ module FixtureReplacementController
     end
 
     def to_created_instance
-      @create_dependent_objects = true
-      
       created_obj = self.to_new_instance
       created_obj.save!
       created_obj
@@ -24,8 +22,6 @@ module FixtureReplacementController
     end
 
     def to_new_instance
-      @create_dependent_objects = false
-      
       new_object = @attributes.of_class.new
       assign_values_to_instance new_object
       return new_object
@@ -43,16 +39,8 @@ module FixtureReplacementController
     end
 
     def find_value_from_delayed_evaluation_proc(value)
-      default_obj, params = value.call      
-      value = @caller.__send__("#{method_for_dependent_objects}_#{default_obj.fixture_name}", params)
-    end
-    
-    def method_for_dependent_objects
-      create_dependent_objects? ? "create" : "new"
-    end
-    
-    def create_dependent_objects?
-      @create_dependent_objects ? true : false
+      default_obj, params = value.call
+      value = @caller.__send__("create_#{default_obj.fixture_name}", params)
     end
 
     def assign_values_to_instance instance_object
