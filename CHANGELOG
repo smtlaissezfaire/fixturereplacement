@@ -1,4 +1,9 @@
 
+== 02/13/07
+Better error support
+Bug Fix: [#17249] String.random in a STI base class works, but doesn't work with inherited classes
+Removed after_include hook
+
 == 01/12/07
 Adding this CHANGELOG
 Added test/unit tests for integration with test/unit
