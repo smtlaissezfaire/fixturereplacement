@@ -27,3 +27,10 @@ class Category < ActiveRecord::Base
   has_many :items
 end
 
+class Subscriber < ActiveRecord::Base
+  has_and_belongs_to_many :subscriptions
+end
+
+class Subscription < ActiveRecord::Base
+  has_and_belongs_to_many :subscribers
+end
