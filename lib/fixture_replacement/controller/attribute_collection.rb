@@ -32,9 +32,12 @@ module FixtureReplacementController
       end
     end
     
-    def initialize(fixture_name, h={})
+    def initialize(fixture_name, options={})
       @fixture_name = fixture_name
-      assign_from_constructor(h)
+      @attributes_proc = options[:attributes] || lambda { Hash.new }
+      @from = options[:from]
+      @class = options[:class]
+
       self.class.add_instance(self)
     end
     
@@ -96,12 +99,6 @@ module FixtureReplacementController
     
     def derived_fixture
       @my_fixture ||= find_derived_fixture
-    end
-  
-    def assign_from_constructor(hash_given)
-      @attributes_proc = hash_given[:attributes] || lambda { Hash.new }
-      @from = hash_given[:from]
-      @class = hash_given[:class]
     end
   
     attr_reader :hash_given
