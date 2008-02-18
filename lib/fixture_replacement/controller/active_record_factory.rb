@@ -45,19 +45,19 @@ module FixtureReplacementController
 
     def assign_values_to_instance instance_object
       all_attributes.each do |key, value|
-        if value.is_a? Array
-          value.map! do |element|
-            if element.is_a?(DelayedEvaluationProc)
-              find_value_from_delayed_evaluation_proc(element)
-            else
-              element
-            end
-          end
-        elsif value.is_a? DelayedEvaluationProc
-          value = find_value_from_delayed_evaluation_proc(value)
-        end
-
+        value = evaluate_possible_delayed_proc(value)
         instance_object.__send__("#{key}=", value)             
+      end
+    end
+    
+    def evaluate_possible_delayed_proc(value)
+      case value
+      when Array
+        value.map! { |element| evaluate_possible_delayed_proc element }
+      when DelayedEvaluationProc
+        find_value_from_delayed_evaluation_proc(value)
+      else
+        value
       end
     end
   end
