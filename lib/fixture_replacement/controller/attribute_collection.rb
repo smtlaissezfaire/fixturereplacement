@@ -59,7 +59,7 @@ module FixtureReplacementController
     # the :from hash, with the ones given in the anonymous function.
     def merge!
       if derived_fixture_is_present?
-        unmerge_hash
+        unmerge_hash!
         @merged_hash = derived_fixtures_hash.merge(hash)
       end
     end
@@ -74,7 +74,7 @@ module FixtureReplacementController
     
   private
   
-    def unmerge_hash
+    def unmerge_hash!
       @merged_hash = nil
     end
   
