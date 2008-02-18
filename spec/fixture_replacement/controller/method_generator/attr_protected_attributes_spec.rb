@@ -11,7 +11,8 @@ module FixtureReplacementController
         u.name = "Scott"
       })
 
-      @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
+      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      @generator = FixtureReplacementController::MethodGenerator.new(@attributes)
       @generator.generate_new_method
       @generator.generate_create_method
     end
@@ -54,7 +55,8 @@ module FixtureReplacementController
         s.name = "Scott"
       })
 
-      @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
+      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      @generator = FixtureReplacementController::MethodGenerator.new(@attributes)
       @generator.generate_new_method
     end
     

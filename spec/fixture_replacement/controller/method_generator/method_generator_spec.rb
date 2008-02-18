@@ -6,7 +6,8 @@ module FixtureReplacementController
       @user_attributes = mock("UserAttributeCollection")
       @user_attributes.stub!(:merge!)
       @module = mock("FixtureReplacement")
-      @generator = MethodGenerator.new(@user_attributes, @module)
+      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      @generator = MethodGenerator.new(@user_attributes)
     end
     
     it "should have the class method generate_methods" do

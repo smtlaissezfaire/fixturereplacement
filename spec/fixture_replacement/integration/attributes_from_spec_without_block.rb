@@ -27,7 +27,8 @@ module FixtureReplacementControllerHelper
       end
     end
 
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
+    FixtureReplacementController::ClassFactory.stub!(:fixture_replacement_module).and_return @module
+    FixtureReplacementController::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
 end

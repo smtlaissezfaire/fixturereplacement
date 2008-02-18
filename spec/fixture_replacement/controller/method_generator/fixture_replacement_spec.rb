@@ -3,42 +3,28 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 module FixtureReplacementController
   describe "MethodGenerator.generate_methods" do
     before :each do
-      MethodGenerator.reset_module!
-      
       @attributes = mock AttributeCollection
       AttributeCollection.stub!(:instances).and_return [@attributes]
       @module = mock "A Module"
+      ClassFactory.stub!(:fixture_replacement_controller).and_return @module
       @method_generator = mock MethodGenerator
       @method_generator.stub!(:generate_methods)
       MethodGenerator.stub!(:new).and_return @method_generator
     end    
     
-    it "should use the FixtureReplacement module if none provided" do
-      MethodGenerator.module.should == FixtureReplacement
-    end
-    
-    it "should take an optional module name" do
-      MethodGenerator.generate_methods(@module)
-    end  
-    
-    it "should use the module if given one specifically" do
-      MethodGenerator.generate_methods(@module)
-      MethodGenerator.module.should == @module
-    end
-    
     it "should find each of the attributes" do
       AttributeCollection.should_receive(:instances).and_return [@attributes]
-      MethodGenerator.generate_methods(@module)
+      MethodGenerator.generate_methods
     end
     
     it "should create a new MethodGenerator for each attribute" do
-      MethodGenerator.should_receive(:new).with(@attributes, @module).and_return @method_generator
-      MethodGenerator.generate_methods(@module)
+      MethodGenerator.should_receive(:new).with(@attributes).and_return @method_generator
+      MethodGenerator.generate_methods
     end
     
     it "should generate the methods for each new MethodGenerator created" do
       @method_generator.should_receive(:generate_methods)
-      MethodGenerator.generate_methods(@module)
+      MethodGenerator.generate_methods
     end
   end  
   
@@ -47,8 +33,9 @@ module FixtureReplacementController
       @attributes = mock 'AttributeCollection'
       @attributes.stub!(:merge!)
       @module = mock 'A Module'
+      ClassFactory.stub!(:fixture_replacement_controller).and_return @module
       
-      @generator = MethodGenerator.new(@attributes, @module)
+      @generator = MethodGenerator.new(@attributes)
       @generator.stub!(:generate_default_method)
       @generator.stub!(:generate_new_method)
       @generator.stub!(:generate_create_method)
@@ -68,21 +55,5 @@ module FixtureReplacementController
       @generator.should_receive(:generate_create_method)
       @generator.generate_methods
     end
-  end
-  
-  describe MethodGenerator, "new" do
-    before :each do
-      @attributes = mock AttributeCollection
-      @attributes.stub!(:merge!)
-      @module = Module.new
-    end
-    
-    it "should use the module given" do
-      MethodGenerator.new(@attributes, @module).module.should == @module
-    end
-    
-    it "should use the module FixtureReplacement by default" do
-      MethodGenerator.new(@attributes).module.should == FixtureReplacement
-    end
-  end
+  end  
 end

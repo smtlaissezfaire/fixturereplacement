@@ -32,8 +32,6 @@ module FixtureReplacementController
       end
     end
     
-    include ClassFactory
-    
     def initialize(fixture_name, options={})
       @fixture_name = fixture_name
       @attributes_proc = options[:attributes] || lambda { Hash.new }
@@ -54,7 +52,7 @@ module FixtureReplacementController
     
     def hash
       return @merged_hash if @merged_hash
-      os = fake_active_record_instance.new
+      os = ClassFactory.fake_active_record_instance.new
       @attributes_proc.call(os)
       os.to_hash
     end
@@ -70,11 +68,11 @@ module FixtureReplacementController
     end
     
     def to_new_class_instance(hash={}, caller=self)
-      active_record_factory.new(self, hash, caller).to_new_instance
+      ClassFactory.active_record_factory.new(self, hash, caller).to_new_instance
     end
     
     def to_created_class_instance(hash={}, caller=self)
-      active_record_factory.new(self, hash, caller).to_created_instance
+      ClassFactory.active_record_factory.new(self, hash, caller).to_created_instance
     end
   
   private

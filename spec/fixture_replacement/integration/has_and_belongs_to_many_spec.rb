@@ -27,7 +27,9 @@ module HasAndBelongsToManyHelper
       attributes_for :ny_times_subscription, :from => :subscription, :class => Subscription
     end
     
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
+    
+    FixtureReplacementController::ClassFactory.stub!(:fixture_replacement_module).and_return @module
+    FixtureReplacementController::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
 end

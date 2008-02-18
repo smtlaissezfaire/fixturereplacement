@@ -4,6 +4,7 @@ module FixtureReplacementController
   module MethodGeneratorHelper
     def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new
+      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       extend @module
 
       @fixture_name = fixture_name
@@ -15,7 +16,7 @@ module FixtureReplacementController
         end
       })
       
-      @generator = MethodGenerator.new(@attributes, @module)
+      @generator = MethodGenerator.new(@attributes)
       @generator.generate_new_method
     end
   end
@@ -72,28 +73,27 @@ module FixtureReplacementController
     before :each do
       setup_for_generate_new_method(:admin, Admin)
     end
-
+  
     it_should_behave_like "MethodGenerator#generate_new_method"
   end
-
+  
   describe MethodGenerator, "generate_new_method with associations" do
-
-    def create_generator(fixture_name, attributes, mod)
-
-      gender_generator = MethodGenerator.new(attributes, mod)
-      gender_generator.generate_default_method
-      gender_generator.generate_new_method
-      gender_generator.generate_create_method
+  
+    def create_generator(fixture_name, attributes)
+      generator = MethodGenerator.new(attributes)
+      generator.generate_default_method
+      generator.generate_new_method
+      generator.generate_create_method
     end
-
+  
     before :each do
       @module = Module.new
+      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       extend @module
-
+      
       gender_attributes = AttributeCollection.new(:gender, :attributes => lambda do |gender| 
         gender.sex = "Male"
-      end
-      )
+      end)
       
       user_attributes = AttributeCollection.new(:user, :attributes => lambda do |user|
         user.gender = default_gender
@@ -103,9 +103,9 @@ module FixtureReplacementController
         alien.gender = default_gender(:sex => "unknown")
       end)
       
-      create_generator(:gender, gender_attributes, @module)
-      create_generator(:user, user_attributes, @module)
-      create_generator(:alien, alien_attributes, @module)
+      create_generator(:gender, gender_attributes)
+      create_generator(:user, user_attributes)
+      create_generator(:alien, alien_attributes)
     end
     
     it "should evaluate any of the default_* methods before returning (if no over-writing key is given)" do
