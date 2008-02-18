@@ -74,8 +74,10 @@ module FixtureReplacementController
     def to_created_class_instance(hash={}, caller=self)
       ActiveRecordFactory.new(self, hash, caller).to_created_instance
     end
-    
+  
   private
+  
+    attr_reader :hash_given
   
     def unmerge_hash!
       @merged_hash = nil
@@ -100,8 +102,6 @@ module FixtureReplacementController
     def derived_fixture
       @my_fixture ||= find_derived_fixture
     end
-  
-    attr_reader :hash_given
   
     def constantize(symbol)
       symbol.to_s.camelize.constantize
