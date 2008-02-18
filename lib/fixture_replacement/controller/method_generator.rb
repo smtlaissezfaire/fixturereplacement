@@ -1,5 +1,8 @@
 module FixtureReplacementController
   class MethodGenerator
+    
+    include ClassFactory
+    
     class << self
       def generate_methods(mod=FixtureReplacement)
         @module = mod

@@ -5,6 +5,8 @@ module FixtureReplacementController
   # instance with ActiveRecord::Base#new, or a created one ActiveRecord::Base#create!).
   class ActiveRecordFactory
     
+    include ClassFactory
+    
     def initialize(attributes, hash={}, original_caller=self)
       @attributes = attributes
       @hash_given_to_constructor = hash
@@ -47,7 +49,7 @@ module FixtureReplacementController
       case value
       when Array
         value.map! { |element| evaluate_possible_delayed_proc element }
-      when DelayedEvaluationProc
+      when delayed_evaluation_proc
         find_value_from_delayed_evaluation_proc(value)
       else
         value
