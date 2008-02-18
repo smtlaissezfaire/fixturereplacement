@@ -358,7 +358,6 @@ Thanks to the following for making this software better:
 
 - Greg Bluvshteyn (http://www.m001.net), for bugging me about the naming, and making the 
   wonderful suggestion to use the plugin in the console.
-- LinoJ, for a bug report (fixed in rev. 6)
 - Simon Peter Nicholls
   - default_* methods can take a hash (applied in rev. 11)
 - Wincent Colaiuta (http://wincent.com/) - Huge Thanks
@@ -369,7 +368,7 @@ Thanks to the following for making this software better:
   - patch: silencing sqlite3 in memory creation of table output (applied in revision 72)
 - Carl Porth
   - patch: classify should be camelize (applied in revision 74)
-- JW, Matthew Bass, Andy Watts, Dave Spurr
+- LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
   - bug reports
 - Brian Helmkamp: Our mutual hate of ActiveRecord
   
