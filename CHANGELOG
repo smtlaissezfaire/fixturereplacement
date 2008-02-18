@@ -1,3 +1,6 @@
+== 02/18/07
+* Bug Fix, closes [#18042] example_data doesn't accept default_x for HABTM relationships
+* Refactoring: Now classes are specified in FixtureReplacementController::ClassFactory
 
 == 02/13/07
 Better error support
