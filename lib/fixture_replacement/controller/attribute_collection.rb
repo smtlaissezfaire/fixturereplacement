@@ -41,10 +41,8 @@ module FixtureReplacementController
     attr_reader :fixture_name
     attr_reader :from
 
-    # I would really like to name this method class, but I'm
-    # sure you can see the name conflict
-    def of_class
-      @class || find_by_fixture_name(@from).of_class
+    def active_record_class
+      @class || find_by_fixture_name(@from).active_record_class
     rescue
       constantize(fixture_name)
     end

@@ -12,7 +12,7 @@ module FixtureReplacementController
     end
     
     def to_new_instance
-      new_object = @attributes.of_class.new
+      new_object = @attributes.active_record_class.new
       assign_values_to_instance new_object
       return new_object
     end

@@ -47,20 +47,20 @@ module FixtureReplacementController
     end
     
     it "should have the class name if specified" do
-      AttributeCollection.new(:foo, :class => Object).of_class.should == Object
+      AttributeCollection.new(:foo, :class => Object).active_record_class.should == Object
     end
     
     it "should use the class name of the fixture_name, camel-cased, if the class is unspecified, and the fixture uninherited" do
-      AttributeCollection.new(:object).of_class.should == Object
+      AttributeCollection.new(:object).active_record_class.should == Object
     end
     
     it "should use the class name of the inherited attribute, if specified" do
       AttributeCollection.new(:foo, :class => Object)
-      AttributeCollection.new(:bar, :from => :foo).of_class.should == Object      
+      AttributeCollection.new(:bar, :from => :foo).active_record_class.should == Object      
     end    
     
     it "should not raise an error if the model ends with 's'" do
-      AttributeCollection.new(:actress).of_class.should == Actress
+      AttributeCollection.new(:actress).active_record_class.should == Actress
     end
   end  
   

@@ -11,7 +11,7 @@ module FixtureReplacementController
       @instance.stub!(:foo=)
       
       @attributes = AttributeCollection.new(:foo, {})
-      @attributes.stub!(:of_class).and_return @class
+      @attributes.stub!(:active_record_class).and_return @class
       @attributes.stub!(:hash).and_return({:foo => :bar})
     end
     
@@ -32,7 +32,7 @@ module FixtureReplacementController
       @instance.stub!(:foo=)
       
       @attributes = AttributeCollection.new(:foo, {})
-      @attributes.stub!(:of_class).and_return @class
+      @attributes.stub!(:active_record_class).and_return @class
 
       @mock_who_cares = mock 'who cares'
       @mock_who_cares.stub!(:fixture_name)
