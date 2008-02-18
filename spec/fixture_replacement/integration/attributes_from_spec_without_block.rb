@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-
 module FixtureReplacementControllerHelper
   def setup_fixtures
     @module = Module.new do
@@ -34,8 +33,6 @@ module FixtureReplacementControllerHelper
 end
 
 module FixtureReplacementController
-  
-  
   describe AttributeCollection do
     include FixtureReplacementControllerHelper
     
@@ -78,6 +75,5 @@ module FixtureReplacementController
     it "should have the username as a string (for User) for create_user" do
       create_user.username.class.should == String
     end
-    
   end
 end

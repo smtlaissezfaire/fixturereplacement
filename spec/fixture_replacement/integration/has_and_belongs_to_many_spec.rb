@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-
 module HasAndBelongsToManyHelper
   def setup_fixtures
     @module = Module.new do
