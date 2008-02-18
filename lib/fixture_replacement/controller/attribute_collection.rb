@@ -56,7 +56,7 @@ module FixtureReplacementController
     
     # This merges the :from attributes hash and the attributes from
     # the anonymous function, overriding any attributes derived from
-    # the :from hash, with the ones given in the closure.
+    # the :from hash, with the ones given in the anonymous function.
     def merge!
       if derived_fixture_is_present?
         unmerge_hash
