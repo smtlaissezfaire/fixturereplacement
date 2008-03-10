@@ -18,7 +18,7 @@ module FixtureReplacementController
       end
     
       def delayed_evaluation_proc
-        ::DelayedEvaluationProc
+        FixtureReplacementController::DelayedEvaluationProc
       end
     
       def fake_active_record_instance
