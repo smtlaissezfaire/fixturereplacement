@@ -38,17 +38,12 @@ module FixtureReplacementController
       end
     end
 
-    def find_value_from_delayed_evaluation_proc(value)
-      default_obj, params = value.call
-      value = @caller.__send__("create_#{default_obj.fixture_name}", params)
-    end
-    
     def evaluate_possible_delayed_proc(value)
       case value
       when Array
         value.map! { |element| evaluate_possible_delayed_proc element }
       when ClassFactory.delayed_evaluation_proc
-        find_value_from_delayed_evaluation_proc(value)
+        value.evaluate(@caller)
       else
         value
       end
