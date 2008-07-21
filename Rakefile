@@ -4,9 +4,16 @@ require 'rake/rdoctask'
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
 require 'rake/contrib/rubyforgepublisher'
+require 'rake/testtask'
 
 desc 'Default: run unit tests.'
-task :default => :spec
+task :default => [:spec, :test]
+
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
+end
 
 # Create specs + Rake Task
 
@@ -33,7 +40,6 @@ task :rdoc => [:rdoc_without_analytics] do
   File.open(rdoc_index, "r+") do |file|
     file.write(contents)
   end
-
 end
 
 task :rerdoc => [:clobber_rdoc, :rdoc]
@@ -90,3 +96,4 @@ task :flog_to_disk => :create_doc_directory do
   %x(find lib | grep ".rb$" | xargs flog > doc/flog.txt)
   puts "Done Flogging...\n"
 end
+
