@@ -33,7 +33,7 @@ begin
     require file
   end
   
-  require FixtureReplacementController.defaults_file
+  autoload :FixtureReplacement, FixtureReplacementController.defaults_file
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
