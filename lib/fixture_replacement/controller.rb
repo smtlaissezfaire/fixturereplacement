@@ -6,20 +6,4 @@ module FixtureReplacementController
   autoload :ClassFactory,          "#{dir}/class_factory"
   autoload :DelayedEvaluationProc, "#{dir}/delayed_evaluation_proc"
   autoload :MethodGenerator,       "#{dir}/method_generator"
-  
-  class <<  self
-    def defaults_file
-      @defaults_file ||= "#{rails_root}/db/example_data"
-    end
-    
-    def defaults_file=(file)
-      @defaults_file = file
-    end
-    
-  private
-    
-    def rails_root
-      defined?(RAILS_ROOT) ? RAILS_ROOT : nil
-    end
-  end
 end
