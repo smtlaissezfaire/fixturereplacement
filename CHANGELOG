@@ -2,6 +2,9 @@
 === Version 3 ===
 =================
 
+- Use autoloading of constants.  Should now work in script/console and with the spec_server.
+  Closes Rubyforge [#17068]
+- Remove the ability to use a custom exmaple_data file.  It must now be in db/example_data.rb.
 
 =================
 === Version 2 ===
