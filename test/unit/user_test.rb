@@ -19,18 +19,42 @@ class UserTest < Test::Unit::TestCase
       end
       
     private
+      
       def scott
         "Scott Taylor"
       end
     end
+    
+    my_mod = @module
 
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
+    FixtureReplacementController::ClassFactory.module_eval do
+      (class << self; self; end).instance_eval do
+        define_method :fixture_replacement_module do
+          my_mod
+        end
+      end
+    end
+    
+    FixtureReplacementController::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
   
-  def test_true_should_be_true
+  
+  # Test the preconditions of the test running, at all
+  def test_setup_true_should_be_true
     assert_equal true, true
   end
+  
+  def test_setup_should_have_fake_fixture_replacement_module_included_in_test_case
+    assert self.class.included_modules.include?(@module)
+  end
+  
+  def test_setup_fr_should_have_generated_methods
+    assert @module.methods.include?("create_user")
+  end
+  
+  
+  # The real tests
   
   def test_be_able_to_create_with_create_user
     assert_equal create_user.class, User
