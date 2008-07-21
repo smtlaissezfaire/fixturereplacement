@@ -31,7 +31,6 @@ begin
   
   autoload :FixtureReplacementController,  "#{dir}/controller"
   autoload :FixtureReplacement,            "#{dir}/fixture_replacement"
-  autoload :FixtureReplacement,            "#{RAILS_ROOT}/db/example_data"
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end

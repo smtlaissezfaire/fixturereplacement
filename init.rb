@@ -1,1 +1,2 @@
-# Do nothing here...Just a placeholder for rails
+
+autoload :FixtureReplacement,            "#{RAILS_ROOT}/db/example_data"
