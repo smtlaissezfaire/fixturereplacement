@@ -27,7 +27,6 @@ begin
   require 'ostruct'
   
   dir = File.dirname(__FILE__) + "/fixture_replacement"
-  
   require "#{dir}/extensions"
   
   autoload :FixtureReplacementController,  "#{dir}/controller"
