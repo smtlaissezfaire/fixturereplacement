@@ -17,7 +17,7 @@ describe "FixtureReplacementController.defaults_file" do
   end  
   
   it "should be RAILS_ROOT/db/example_data.rb by default" do
-    FixtureReplacementController.defaults_file.should == "#{@rails_root}/db/example_data.rb"
+    FixtureReplacementController.defaults_file.should == "#{@rails_root}/db/example_data"
   end
   
   it "should be foo.rb if set" do
