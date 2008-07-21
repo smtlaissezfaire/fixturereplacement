@@ -9,7 +9,7 @@ module FixtureReplacementController
   
   class <<  self
     def defaults_file
-      @defaults_file ||= "#{rails_root}/db/example_data.rb"
+      @defaults_file ||= "#{rails_root}/db/example_data"
     end
     
     def defaults_file=(file)
