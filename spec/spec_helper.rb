@@ -3,7 +3,7 @@ include SpecHelperFunctions
 
 setup_database_connection
 
-swap_out_require!
+swap_out_autoload!
 
 require File.dirname(__FILE__) + "/../lib/fixture_replacement"
 require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"
