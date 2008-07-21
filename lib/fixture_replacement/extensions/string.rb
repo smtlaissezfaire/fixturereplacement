@@ -1,4 +1,3 @@
-
 class String
   def self.random(length=10)
     chars = ("a".."z").to_a
