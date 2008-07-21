@@ -2,11 +2,6 @@ require File.dirname(__FILE__) + "/spec_helpers"
 include SpecHelperFunctions
 
 setup_database_connection
-swap_out_autoload!
-
-unless defined?(RAILS_ROOT)
-  RAILS_ROOT = ""
-end
 
 require File.dirname(__FILE__) + "/../lib/fixture_replacement"
 require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"

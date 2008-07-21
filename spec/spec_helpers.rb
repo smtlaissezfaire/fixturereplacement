@@ -1,25 +1,5 @@
 module SpecHelperFunctions
-  # We need this just so that the tests don't fail
-  # when we are running the tests outside of a real rails project.
-  # Otherwise, the tests would fail with a file not found error,
-  # since db/example_data.rb is no where to be found
-  def swap_out_autoload!
-    Kernel.module_eval do
-      
-      # Thanks, Jay Fields:
-      # http://blog.jayfields.com/2006/12/ruby-alias-method-alternative.html
-      autoload_method = instance_method(:autoload)
-
-      define_method(:autoload) do |mod, string|
-        unless string == "/db/example_data"
-          autoload_method.bind(self).call(mod, string)
-        end
-      end
-    end
-  end
-  
   def setup_database_connection
-    
     require 'rubygems'
     require 'sqlite3'
     require 'active_record'
