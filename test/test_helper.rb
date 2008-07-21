@@ -5,7 +5,4 @@ require File.dirname(__FILE__) + "/../spec/spec_helpers"
 
 include SpecHelperFunctions
 
-setup_database_connection
-
-require File.dirname(__FILE__) + "/../lib/fixture_replacement"
-require File.dirname(__FILE__) + "/../spec/fixture_replacement/fixtures/classes"
+setup_tests

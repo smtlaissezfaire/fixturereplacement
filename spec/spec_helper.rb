@@ -1,12 +1,9 @@
-require File.dirname(__FILE__) + "/spec_helpers"
-include SpecHelperFunctions
-
-setup_database_connection
-
-require File.dirname(__FILE__) + "/../lib/fixture_replacement"
-require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"
-
 Spec::Runner.configure do |config|
+  require File.dirname(__FILE__) + "/spec_helpers"
+  
+  include SpecHelperFunctions
+  setup_tests
+  
   config.prepend_before(:each) do
     FixtureReplacementController::AttributeCollection.clear_out_instances!
   end

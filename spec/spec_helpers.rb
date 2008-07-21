@@ -1,4 +1,12 @@
 module SpecHelperFunctions
+  
+  def setup_tests
+    setup_database_connection
+    setup_project_requires
+  end
+  
+private
+  
   def setup_database_connection
     require 'rubygems'
     require 'sqlite3'
@@ -60,5 +68,10 @@ module SpecHelperFunctions
         t.column :subscription_id, :integer
       end
     end
-  end  
+  end
+  
+  def setup_project_requires
+    require File.dirname(__FILE__) + "/../lib/fixture_replacement"
+    require File.dirname(__FILE__) + "/fixture_replacement/fixtures/classes"
+  end
 end
