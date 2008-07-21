@@ -26,14 +26,13 @@ begin
   require 'active_support' 
   require 'ostruct'
   
-  require File.dirname(__FILE__) + "/fixture_replacement/controller/class_factory"
+  dir = File.dirname(__FILE__) + "/fixture_replacement"
   
-  files = Dir.glob(File.dirname(__FILE__) + "/fixture_replacement/**/*.rb")
-  files.each do |file|
-    require file
-  end
+  require "#{dir}/extensions"
   
-  autoload :FixtureReplacement, FixtureReplacementController.defaults_file
+  autoload :FixtureReplacementController,  "#{dir}/controller"
+  autoload :FixtureReplacement,            "#{dir}/fixture_replacement"
+  autoload :FixtureReplacement,            FixtureReplacementController.defaults_file
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
