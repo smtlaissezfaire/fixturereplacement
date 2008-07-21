@@ -62,7 +62,3 @@ module SpecHelperFunctions
     end
   end  
 end
-
-
-
-
