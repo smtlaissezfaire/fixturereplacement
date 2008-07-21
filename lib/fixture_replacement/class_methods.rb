@@ -8,12 +8,6 @@ module FixtureReplacement
       })
     end
     
-    attr_writer :defaults_file
-
-    def defaults_file
-      @defaults_file ||= "#{rails_root}/db/example_data.rb"
-    end
-
     def reset_excluded_environments!
       @excluded_environments = ["production"]
     end

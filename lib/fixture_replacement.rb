@@ -32,7 +32,8 @@ begin
   files.each do |file|
     require file
   end
-  require FixtureReplacement.defaults_file
+  
+  require FixtureReplacementController.defaults_file
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
