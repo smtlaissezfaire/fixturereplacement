@@ -1,3 +1,6 @@
+# Copyright 2007-2008 Scott Taylor <scott@railsnewbie.com>
+# See the file LICENSE in the root of this project for the conditions
+# of the copyright.
 module FixtureReplacement
   class InclusionError < StandardError; end
   
@@ -6,5 +9,3 @@ module FixtureReplacement
   
   extend ClassMethods
 end
-
-
