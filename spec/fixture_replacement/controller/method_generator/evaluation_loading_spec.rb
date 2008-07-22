@@ -12,6 +12,7 @@ module FixtureReplacementController
       
       writing_attributes = lambda do |w|
         w.name = "foo"
+        w.cache_latest_activity_time = Time.now
       end
 
       FixtureReplacementController.fr = @module
