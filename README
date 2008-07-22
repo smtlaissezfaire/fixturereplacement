@@ -380,5 +380,4 @@ http://rubyforge.org/tracker/?group_id=4556
 
 == License
 
-This software is released under the MIT License.  See the license agreement 
-in <tt>lib/fixture_replacement.rb</tt>
+See LICENSE
