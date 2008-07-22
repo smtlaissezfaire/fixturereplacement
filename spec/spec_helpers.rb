@@ -49,8 +49,9 @@ private
         t.column :category, :integer
         t.column :type, :string
         t.column :name, :string
+        t.column :cache_latest_activity_time, :datetime, :null => false
       end
-
+      
       create_table :categories, :force => true do |t|
         t.column :name, :string
       end
