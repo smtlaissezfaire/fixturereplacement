@@ -73,9 +73,7 @@ Since all of this is in one file, editing it shouldn't be a big task.  Also,
 the create_*, new_* and default_* methods are still in place and function in the same
 manner as they did before, so none of your tests should need to change.
 
-Another note: If you are running FixtureReplacement on externals, you'll want to remove
-the old repository link (http://thmadb.com/public_svn/plugins/fixture_replacement/), and
-switch to the new one (http://thmadb.com/public_svn/plugins/fixture_replacement2/).
+=== Version 1
 
 Version 1 still works, and you are welcome to use it, but no new development will occur
 with it.  The old docs are still around[http://fixture_replacement.rubyforge.org/version_one/]
