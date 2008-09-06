@@ -97,3 +97,22 @@ task :flog_to_disk => :create_doc_directory do
   puts "Done Flogging...\n"
 end
 
+namespace :git do
+  def have_git?
+    `which git`.any?
+  rescue
+    false
+  end
+  
+  def get_git_revision
+    if have_git?
+      `git rev-list HEAD`.split("\n").first
+    else
+      "NOT FOUND"
+    end
+  end
+  
+  task :revision do
+    puts get_git_revision
+  end
+end
