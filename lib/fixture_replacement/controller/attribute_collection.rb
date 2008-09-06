@@ -52,7 +52,7 @@ module FixtureReplacementController
     
     def hash
       return @merged_hash if @merged_hash
-      os = ClassFactory.fake_active_record_instance.new
+      os = OpenStruct.new
       @attributes_proc.call(os)
       os.to_hash
     end
