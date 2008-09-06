@@ -6,4 +6,12 @@ module FixtureReplacementController
   autoload :ClassFactory,          "#{dir}/class_factory"
   autoload :DelayedEvaluationProc, "#{dir}/delayed_evaluation_proc"
   autoload :MethodGenerator,       "#{dir}/method_generator"
+  
+  class << self
+    attr_writer :fr
+    
+    def fr
+      @fr ||= ::FixtureReplacement
+    end
+  end
 end

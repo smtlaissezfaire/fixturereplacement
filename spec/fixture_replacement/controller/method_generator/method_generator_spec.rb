@@ -6,7 +6,7 @@ module FixtureReplacementController
       @user_attributes = mock("UserAttributeCollection")
       @user_attributes.stub!(:merge!)
       @module = mock("FixtureReplacement")
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       @generator = MethodGenerator.new(@user_attributes)
     end
     

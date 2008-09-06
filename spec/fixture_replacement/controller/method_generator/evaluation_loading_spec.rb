@@ -14,7 +14,7 @@ module FixtureReplacementController
         w.name = "foo"
       end
 
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       @item_attributes = AttributeCollection.new(:item, :attributes => item_attributes)
       @writing_attributes = AttributeCollection.new(:writing, :from => :item, :attributes => writing_attributes, :class => Writing)
       AttributeCollection.new(:category)

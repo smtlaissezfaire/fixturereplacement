@@ -4,7 +4,7 @@ module FixtureReplacementController
   module MethodGeneratorHelper
     def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       extend @module
 
       @fixture_name = fixture_name
@@ -88,7 +88,7 @@ module FixtureReplacementController
   
     before :each do
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       extend @module
       
       gender_attributes = AttributeCollection.new(:gender, :attributes => lambda do |gender| 

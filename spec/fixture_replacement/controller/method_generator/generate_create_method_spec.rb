@@ -61,7 +61,7 @@ module FixtureReplacementController
       @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       @generator = MethodGenerator.new(@attributes)
       @generator.generate_new_method
       @generator.generate_create_method
@@ -88,7 +88,7 @@ module FixtureReplacementController
       @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct)
       @attributes.stub!(:merge!)
       
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       @generator = MethodGenerator.new(@attributes)
       @generator.generate_new_method
       @generator.generate_create_method
@@ -112,7 +112,7 @@ module FixtureReplacementController
       @attributes = AttributeCollection.new(@fixture_name, :attributes => @struct )
       @attributes.stub!(:merge!)
 
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       @generator = MethodGenerator.new(@attributes)
       @generator.generate_new_method
       @generator.generate_create_method
