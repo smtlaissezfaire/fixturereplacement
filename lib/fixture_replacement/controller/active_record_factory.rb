@@ -24,7 +24,7 @@ module FixtureReplacementController
     end
     
     
-    class ObjectValueAssigner
+    class ActiveRecordValueAssigner
       def self.assign(object, key, value)
         new(object).assign(key, value)
       end
@@ -49,7 +49,7 @@ module FixtureReplacementController
     def assign_values_to_instance(instance_object)
       all_attributes.each do |key, value|
         value = evaluate_possible_delayed_proc(value)
-        ObjectValueAssigner.assign(instance_object, key, value)
+        ActiveRecordValueAssigner.assign(instance_object, key, value)
       end
     end
 
