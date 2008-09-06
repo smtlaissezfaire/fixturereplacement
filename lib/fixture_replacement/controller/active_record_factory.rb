@@ -39,18 +39,18 @@ module FixtureReplacementController
     private
       
       class Evaluator
-        def self.evaluate(value, context)
-          new(value).evaluate(context)
+        def self.eval(value, context)
+          new(value).eval(context)
         end
         
         def initialize(value)
           @value = value
         end
         
-        def evaluate(context)
+        def eval(context)
           case @value
           when Array
-            @value.map! { |element| self.class.evaluate(element, context) }
+            @value.map! { |element| self.class.eval(element, context) }
           when DelayedEvaluationProc
             @value.evaluate(context)
           else
@@ -60,7 +60,7 @@ module FixtureReplacementController
       end
       
       def eval(value, context)
-        Evaluator.evaluate(value, context)
+        Evaluator.eval(value, context)
       end
     end
 
