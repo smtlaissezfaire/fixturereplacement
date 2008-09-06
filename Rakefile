@@ -127,6 +127,7 @@ namespace :git do
         lines = file.readlines.map do |line|
           line.gsub(s) { r }
         end
+        file.rewind
         file.write(lines)
       end
     end
