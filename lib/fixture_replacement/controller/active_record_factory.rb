@@ -54,13 +54,27 @@ module FixtureReplacementController
     end
 
     def evaluate_possible_delayed_proc(value)
-      case value
-      when Array
-        value.map! { |element| evaluate_possible_delayed_proc(element) }
-      when DelayedEvaluationProc
-        value.evaluate(@caller)
-      else
-        value
+      Evaluator.evaluate(value, @caller)
+    end
+    
+    class Evaluator
+      def self.evaluate(value, context)
+        new(value).evaluate(context)
+      end
+      
+      def initialize(value)
+        @value = value
+      end
+      
+      def evaluate(context)
+        case @value
+        when Array
+          @value.map! { |element| self.class.evaluate(element, context) }
+        when DelayedEvaluationProc
+          @value.evaluate(context)
+        else
+          @value
+        end
       end
     end
     
