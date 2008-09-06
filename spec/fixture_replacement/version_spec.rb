@@ -13,10 +13,5 @@ module FixtureReplacement
     it "should be at tiny version 0" do
       Version::TINY.should equal(0)
     end
-    
-    it "should have the git revision" do
-      git_revision = `git-rev-list HEAD`.split("\n").first
-      Version::REVISION.should == git_revision
-    end
   end
 end
