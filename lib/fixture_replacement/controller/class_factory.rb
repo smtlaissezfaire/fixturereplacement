@@ -9,10 +9,6 @@ module FixtureReplacementController
         @method_generator ||= MethodGenerator
       end
     
-      def attribute_collection
-        @attribute_collection ||= AttributeCollection
-      end
-    
       def fixture_replacement_module
         @fixture_replacement ||= ::FixtureReplacement
       end
