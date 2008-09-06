@@ -108,11 +108,28 @@ namespace :git do
     if have_git?
       `git rev-list HEAD`.split("\n").first
     else
-      "NOT FOUND"
+      "UNKNOWN"
     end
   end
   
   task :revision do
     puts get_git_revision
+  end
+  
+  task :substitute_revision do
+    def version_file
+      "#{File.dirname(__FILE__)}/lib/fixture_replacement/version.rb"
+    end
+    
+    def replace_in_file(filename, s, r)
+      File.open(filename, "r+") do |file|
+        lines = file.readlines.map do |line|
+          line.gsub(s) { r }
+        end
+        file.write(lines)
+      end
+    end
+    
+    replace_in_file(version_file, /REVISION\s+\=.*/, "REVISION = #{get_git_revision}")
   end
 end
