@@ -51,10 +51,13 @@ module FixtureReplacementController
     end
     
     def hash
-      return @merged_hash if @merged_hash
-      os = OpenStruct.new
-      @attributes_proc.call(os)
-      os.to_hash
+      if @merged_hash
+        @merged_hash
+      else
+        os = OpenStruct.new
+        @attributes_proc.call(os)
+        os.to_hash
+      end
     end
     
     # This merges the :from attributes hash and the attributes from

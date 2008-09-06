@@ -14,13 +14,13 @@ module FixtureReplacementController
     def to_new_instance
       new_object = @attributes.active_record_class.new
       assign_values_to_instance new_object
-      return new_object
+      new_object
     end
     
     def to_created_instance
       created_obj = self.to_new_instance
       created_obj.save!
-      return created_obj
+      created_obj
     end
 
   protected

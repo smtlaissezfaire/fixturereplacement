@@ -40,8 +40,11 @@ module FixtureReplacement
     end
 
     def environment_is_in_excluded_environments?
-      return false unless defined?(RAILS_ENV)
-      excluded_environments.include?(RAILS_ENV) ? true : false
+      if defined?(RAILS_ENV)
+        excluded_environments.include?(RAILS_ENV) ? true : false
+      else
+        false
+      end
     end
 
     def rails_root
