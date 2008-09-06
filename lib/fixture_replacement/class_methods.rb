@@ -41,7 +41,7 @@ module FixtureReplacement
 
     def environment_is_in_excluded_environments?
       if defined?(RAILS_ENV)
-        excluded_environments.include?(RAILS_ENV) ? true : false
+        excluded_environments.include?(RAILS_ENV)
       else
         false
       end
