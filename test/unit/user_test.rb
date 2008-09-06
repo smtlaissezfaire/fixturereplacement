@@ -25,16 +25,7 @@ class UserTest < Test::Unit::TestCase
       end
     end
     
-    my_mod = @module
-
-    FixtureReplacementController::ClassFactory.module_eval do
-      (class << self; self; end).instance_eval do
-        define_method :fixture_replacement_module do
-          my_mod
-        end
-      end
-    end
-    
+    FixtureReplacementController.fr = @module
     FixtureReplacementController::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
