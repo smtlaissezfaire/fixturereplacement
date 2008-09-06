@@ -16,10 +16,6 @@ module FixtureReplacementController
       def fixture_replacement_module
         @fixture_replacement ||= ::FixtureReplacement
       end
-    
-      def delayed_evaluation_proc
-        @delayed_evaluation_proc ||= FixtureReplacementController::DelayedEvaluationProc
-      end
     end
   end
 end
