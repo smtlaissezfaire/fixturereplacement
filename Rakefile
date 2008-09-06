@@ -131,7 +131,7 @@ namespace :git do
       end
     end
     
-    replace_in_file(version_file, /REVISION\s+\=.*/, "REVISION = #{get_git_revision}")
+    replace_in_file(version_file, /REVISION\s+\=.*/, "REVISION = '#{get_git_revision}'")
   end
 end
 
