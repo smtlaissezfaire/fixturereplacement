@@ -22,6 +22,21 @@ module FixtureReplacementController
       created_obj.save!
       created_obj
     end
+    
+    
+    class ObjectValueAssigner
+      def self.assign(object, key, value)
+        new(object).assign(key, value)
+      end
+      
+      def initialize(object)
+        @object = object
+      end
+      
+      def assign(key, value)
+        @object.__send__("#{key}=", value)
+      end
+    end
 
   protected
   
@@ -34,7 +49,7 @@ module FixtureReplacementController
     def assign_values_to_instance(instance_object)
       all_attributes.each do |key, value|
         value = evaluate_possible_delayed_proc(value)
-        instance_object.__send__("#{key}=", value)             
+        ObjectValueAssigner.assign(instance_object, key, value)
       end
     end
 
