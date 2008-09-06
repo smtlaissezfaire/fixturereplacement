@@ -9,7 +9,7 @@ module FixtureReplacement
     end
     
     def reset_excluded_environments!
-      @excluded_environments = ["production"]
+      @excluded_environments = nil
     end
 
     def excluded_environments
