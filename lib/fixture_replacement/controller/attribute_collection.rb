@@ -78,7 +78,7 @@ module FixtureReplacementController
   private
     
     def construct_new_active_record_factory(hash, caller)
-      ClassFactory.active_record_factory.new(self, hash, caller)
+      ActiveRecordFactory.new(self, hash, caller)
     end
   
     attr_reader :hash_given
