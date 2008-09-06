@@ -56,7 +56,7 @@ module FixtureReplacementController
     def evaluate_possible_delayed_proc(value)
       case value
       when Array
-        value.map! { |element| evaluate_possible_delayed_proc element }
+        value.map! { |element| evaluate_possible_delayed_proc(element) }
       when DelayedEvaluationProc
         value.evaluate(@caller)
       else
@@ -72,6 +72,5 @@ module FixtureReplacementController
     def attributes_hash
       @attributes.hash
     end
-    
   end
 end
