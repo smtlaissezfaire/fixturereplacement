@@ -371,7 +371,6 @@ Thanks to the following for making this software better:
   - patch: classify should be camelize (applied in revision 74)
 - LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
   - bug reports
-- Brian Helmkamp: Our mutual hate of ActiveRecord
   
 If you would like to change how this software works, please submit a patch with specs via our rubyforge
 project page:
