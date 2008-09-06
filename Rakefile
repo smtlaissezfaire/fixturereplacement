@@ -112,6 +112,7 @@ namespace :git do
     end
   end
   
+  desc "Print the current git revision"
   task :revision do
     puts get_git_revision
   end
