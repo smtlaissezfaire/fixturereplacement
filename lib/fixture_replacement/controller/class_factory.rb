@@ -5,10 +5,6 @@ module FixtureReplacementController
         @active_record_factory ||= ActiveRecordFactory
       end
 
-      def method_generator
-        @method_generator ||= MethodGenerator
-      end
-    
       def fixture_replacement_module
         @fixture_replacement ||= ::FixtureReplacement
       end
