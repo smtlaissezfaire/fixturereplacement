@@ -5,8 +5,6 @@ module FixtureReplacementController
     before :each do
       @attributes = mock AttributeCollection
       AttributeCollection.stub!(:instances).and_return [@attributes]
-      @module = mock "A Module"
-      ClassFactory.stub!(:fixture_replacement_controller).and_return @module
       @method_generator = mock MethodGenerator
       @method_generator.stub!(:generate_methods)
       MethodGenerator.stub!(:new).and_return @method_generator
@@ -32,8 +30,6 @@ module FixtureReplacementController
     before :each do
       @attributes = mock 'AttributeCollection'
       @attributes.stub!(:merge!)
-      @module = mock 'A Module'
-      ClassFactory.stub!(:fixture_replacement_controller).and_return @module
       
       @generator = MethodGenerator.new(@attributes)
       @generator.stub!(:generate_default_method)
