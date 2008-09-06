@@ -39,13 +39,19 @@ module FixtureReplacementController
     private
       
       class Evaluator
-        def self.eval(value, context)
-          new(value).eval(context)
+        class << self
+          alias_method :ruby_eval, :eval
+          
+          def eval(value, context)
+            new(value).eval(context)
+          end
         end
         
         def initialize(value)
           @value = value
         end
+        
+        alias_method :ruby_eval, :eval
         
         def eval(context)
           case @value
@@ -58,6 +64,8 @@ module FixtureReplacementController
           end
         end
       end
+      
+      alias_method :ruby_eval, :eval
       
       def eval(value, context)
         Evaluator.eval(value, context)
