@@ -54,7 +54,7 @@ module FixtureReplacementController
   private
     
     def fixture_replacement_module
-      ::FixtureReplacementController.fr
+      @fixture_replacement_module ||= ::FixtureReplacementController.fr
     end
   end
 end
