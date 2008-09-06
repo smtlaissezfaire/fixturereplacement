@@ -85,12 +85,14 @@ with it.  The old docs are still around[http://fixture_replacement.rubyforge.org
 
 === Installation
 
-  ruby script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
-  
-Or use externals:
+  git clone git://github.com/smtlaissezfaire/fixturereplacement.git vendor/plugins/fixture_replacement
+  cd vendor/plugins/fixture_replacement; rm -rf .git; cd -
 
-  ruby script/plugin install -x http://thmadb.com/public_svn/plugins/fixture_replacement2/
-  
+Or use a submodule:
+
+  git submodule add git://github.com/smtlaissezfaire/fixturereplacement.git vendor/plugins/fixture_replacement
+  git commit -m "* Add FixtureReplacement on externals"
+
 Run the generator if you don't have the file <tt>db/example_data.rb</tt>:
 
   ruby script/generate fixture_replacement
