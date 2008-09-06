@@ -99,7 +99,7 @@ end
 
 namespace :git do
   def have_git?
-    `which git`.any? && File.exists?(".git")
+    File.exists?(".git") && `which git`.any?
   rescue
     false
   end
