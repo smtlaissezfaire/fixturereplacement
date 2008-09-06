@@ -7,7 +7,7 @@ require 'rake/contrib/rubyforgepublisher'
 require 'rake/testtask'
 
 desc 'Default: run unit tests.'
-task :default => [:spec, :test]
+task :default => [:spec, :test, :set_revision_number]
 
 Rake::TestTask.new do |t|
   t.libs << "test"
@@ -134,3 +134,6 @@ namespace :git do
     replace_in_file(version_file, /REVISION\s+\=.*/, "REVISION = #{get_git_revision}")
   end
 end
+
+desc "Set the build revision number for versioning"
+task :set_revision_number => ["git:substitute_revision"]
