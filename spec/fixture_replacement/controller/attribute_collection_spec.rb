@@ -62,6 +62,22 @@ module FixtureReplacementController
     it "should not raise an error if the model ends with 's'" do
       AttributeCollection.new(:actress).active_record_class.should == Actress
     end
+    
+    it "should allow instances to created with strings, and still found" do
+      obj = AttributeCollection.new("foo")
+      AttributeCollection.find_by_fixture_name(:foo).should == obj
+    end
+    
+    it "should allow instances to be found with a string" do
+      obj = AttributeCollection.new(:foo)
+      AttributeCollection.find_by_fixture_name("foo").should == obj
+    end
+    
+    it "should use a symbol for the fixture name" do
+      AttributeCollection.new(:bar)
+      obj = AttributeCollection.new(:foo, :from => "bar")
+      obj.from.should == :bar
+    end
   end  
   
   describe AttributeCollection, "hash, with simple arguments (only attributes and fixture name)" do

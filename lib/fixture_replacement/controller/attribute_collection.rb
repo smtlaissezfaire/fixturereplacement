@@ -27,16 +27,23 @@ module FixtureReplacementController
       # it will find the first one which was specified.  It will
       # return nil if no fixture with the name given was found
       def find_by_fixture_name(arg)
-        instances.detect { |instance| instance.fixture_name == arg }
+        if arg.respond_to?(:to_sym)
+          instances.detect { |instance| instance.fixture_name == arg.to_sym }
+        else
+          nil
+        end
       end
     end
     
     def initialize(fixture_name, options={})
-      @fixture_name    = fixture_name
+      @fixture_name    = fixture_name.to_sym
       @attributes_proc = options[:attributes] || lambda { Hash.new }
-      @from            = options[:from]
       @class           = options[:class]
       
+      if from = options[:from]
+        @from = options[:from].to_sym
+      end
+
       register(self)
     end
     
