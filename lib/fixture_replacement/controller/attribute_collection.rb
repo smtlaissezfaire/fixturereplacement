@@ -36,8 +36,8 @@ module FixtureReplacementController
       @attributes_proc = options[:attributes] || lambda { Hash.new }
       @from            = options[:from]
       @class           = options[:class]
-
-      self.class.add_instance(self)
+      
+      register(self)
     end
     
     attr_reader :fixture_name
@@ -82,6 +82,10 @@ module FixtureReplacementController
   
     def constantize(symbol)
       symbol.to_s.camelize.constantize
+    end
+    
+    def register(object)
+      self.class.add_instance(self)
     end
   end
 end
