@@ -134,4 +134,49 @@ module FixtureReplacementController
       attributes.hash.should == {:foo => :bar, :first_name => :scott}      
     end
   end  
+  
+  describe "to_hash" do
+    it "should be an empty hash when not derived" do
+      AttributeCollection.new(:foo).to_hash.should == { }
+    end
+    
+    it "should be the set of attributes" do
+      ac = AttributeCollection.new(:foo, :attributes => lambda { |obj| obj.baz = :quxx })
+      ac.to_hash.should == { :baz => :quxx }
+    end
+    
+    it "should be the hash of the derived fixture" do
+      AttributeCollection.new(:foo, :attributes => lambda { |obj| obj.bar = :quxx })
+      obj = AttributeCollection.new(:bar, :from => :foo)
+      obj.to_hash.should == { :bar => :quxx }
+    end
+    
+    it "should use attributes from both fixtures" do
+      first_attribute_set = lambda { |obj| obj.foo = :bar }
+      second_attribute_set = lambda { |obj| obj.bar = :baz }
+      
+      AttributeCollection.new(:foo, :attributes => first_attribute_set)
+      obj = AttributeCollection.new(:bar, :from => :foo, :attributes => second_attribute_set)
+      obj.to_hash.should == { :foo => :bar, :bar => :baz }
+    end
+    
+    it "should prefer merge the attributes, prefering newer attributes" do
+      first_attribute_set = lambda { |obj| obj.foo = :one }
+      second_attribute_set = lambda { |obj| obj.foo = :two }
+      
+      AttributeCollection.new(:foo, :attributes => first_attribute_set)
+      obj = AttributeCollection.new(:bar, :from => :foo, :attributes => second_attribute_set)
+      obj.to_hash.should == { :foo => :two }
+    end
+    
+    it "should derive two fixtures down" do
+      first_attribute_set = lambda { |obj| obj.foo = :one }
+      
+      AttributeCollection.new(:foo, :attributes => first_attribute_set)
+      AttributeCollection.new(:bar, :from => :foo)
+      obj = AttributeCollection.new(:baz, :from => :bar)
+      
+      obj.to_hash.should == { :foo => :one }
+    end
+  end
 end

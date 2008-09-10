@@ -34,6 +34,7 @@ module FixtureReplacementController
     def initialize(fixture_name, options={})
       @fixture_name = fixture_name
       @attributes_proc = options[:attributes] || lambda { Hash.new }
+      @attributes = options[:attributes] || lambda { Hash.new }
       @from = options[:from]
       @class = options[:class]
 
@@ -75,6 +76,13 @@ module FixtureReplacementController
     
     def to_created_class_instance(hash={}, caller=self)
       construct_new_active_record_factory(hash, caller).to_created_instance
+    end
+    
+    def to_hash
+      hash = derived_fixture ? derived_fixture.to_hash : { }
+      os = OpenStruct.new(hash)
+      @attributes_proc.call(os)
+      os.to_hash
     end
   
   private
