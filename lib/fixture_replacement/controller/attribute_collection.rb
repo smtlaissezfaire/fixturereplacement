@@ -47,7 +47,7 @@ module FixtureReplacementController
       if @class
         @class
       elsif @from
-        find_by_fixture_name(@from).active_record_class
+        derived_fixture.active_record_class
       else
         constantize(fixture_name)        
       end
