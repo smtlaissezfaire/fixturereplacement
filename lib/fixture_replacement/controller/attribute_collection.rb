@@ -41,7 +41,7 @@ module FixtureReplacementController
       @class           = options[:class]
       
       if from = options[:from]
-        @from = options[:from].to_sym
+        @from = from.to_sym
       end
 
       register(self)
