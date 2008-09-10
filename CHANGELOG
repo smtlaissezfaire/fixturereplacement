@@ -6,6 +6,7 @@
   Closes Rubyforge [#17068]
 - Remove the ability to use a custom exmaple_data file.  It must now be in db/example_data.rb.
 - Fix [#17083] :from => :fixture_name only works one level down
+- Better errors for superclass fixtures (:from => :fixture_name) is not found
 
 =================
 === Version 2 ===
