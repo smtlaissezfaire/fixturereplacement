@@ -84,7 +84,12 @@ module FixtureReplacementController
     end
   
     def find_by_fixture_name(symbol)
-      self.class.find_by_fixture_name(symbol)
+      return nil if symbol.nil?
+      if symbol && result = self.class.find_by_fixture_name(symbol)
+        result
+      else
+        raise FixtureReplacement::UnknownFixture, "The fixture definition for `#{symbol}` cannot be found"
+      end
     end
     
     def derived_fixture

@@ -78,6 +78,20 @@ module FixtureReplacementController
       obj = AttributeCollection.new(:foo, :from => "bar")
       obj.from.should == :bar
     end
+    
+    it "should raise an UnknownFixture error if deriving from a fixture which is not around" do
+      obj = AttributeCollection.new(:foo, :from => :baz)
+      lambda {
+        obj.to_hash
+      }.should raise_error(FixtureReplacement::UnknownFixture, "The fixture definition for `baz` cannot be found")
+    end
+    
+    it "should raise an UnknownFixture error if deriving from a fixture which is not around with the correct name" do
+      obj = AttributeCollection.new(:foo, :from => :bar)
+      lambda {
+        obj.to_hash
+      }.should raise_error(FixtureReplacement::UnknownFixture, "The fixture definition for `bar` cannot be found")
+    end
   end  
   
   describe AttributeCollection, "hash, with simple arguments (only attributes and fixture name)" do
