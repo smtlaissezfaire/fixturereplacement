@@ -34,7 +34,6 @@ module FixtureReplacementController
     def initialize(fixture_name, options={})
       @fixture_name = fixture_name
       @attributes_proc = options[:attributes] || lambda { Hash.new }
-      @attributes = options[:attributes] || lambda { Hash.new }
       @from = options[:from]
       @class = options[:class]
 
