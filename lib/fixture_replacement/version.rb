@@ -7,7 +7,7 @@ module FixtureReplacement
     MAJOR    = 2
     MINOR    = 8
     TINY     = 0
-    REVISION = '099bd07792e5dddaf82aac0b54be7ab7a7553766'
+    REVISION = '3d5ca60294e6f3a8587b486b188d77d48b6cc777'
     
     VERSION  = "#{MAJOR}.#{MINOR}.#{TINY} (git #{REVISION})"
   end
