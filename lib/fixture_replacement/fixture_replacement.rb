@@ -2,8 +2,9 @@
 # See the file LICENSE in the root of this project for the conditions
 # of the copyright.
 module FixtureReplacement
-  class InclusionError < StandardError; end
-  class UnknownFixture < StandardError; end
+  class BaseError      < StandardError; end
+  class InclusionError < BaseError;     end
+  class UnknownFixture < BaseError;     end
   
   autoload :ClassMethods, File.dirname(__FILE__) + "/class_methods"
   autoload :Version,      File.dirname(__FILE__) + "/version"
