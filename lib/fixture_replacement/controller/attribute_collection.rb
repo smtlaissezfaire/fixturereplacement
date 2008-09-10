@@ -94,7 +94,7 @@ module FixtureReplacementController
     end
     
     def derived_fixture
-      @my_fixture ||= find_by_fixture_name(self.from)
+      @my_fixture ||= find_by_fixture_name(@from)
     end
   
     def constantize(symbol)
