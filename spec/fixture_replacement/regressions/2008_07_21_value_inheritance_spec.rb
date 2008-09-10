@@ -76,12 +76,10 @@ module FixtureReplacementController
     end
     
     it "should be able to create a new long_writing with the proper time" do
-      pending 'regression: FIXME'
       create_long_writing.cache_latest_activity_time.should == @now
     end
     
     it "should be able to instantiate a new long_writing with the proper time" do
-      pending 'regresssion: FIXME'
       new_long_writing.cache_latest_activity_time.should == @now
     end
   end
