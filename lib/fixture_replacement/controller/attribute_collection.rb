@@ -50,16 +50,6 @@ module FixtureReplacementController
       constantize(fixture_name)
     end
     
-    def hash
-      if @merged_hash
-        @merged_hash
-      else
-        os = OpenStruct.new
-        @attributes_proc.call(os)
-        os.to_hash
-      end
-    end
-    
     # This merges the :from attributes hash and the attributes from
     # the anonymous function, overriding any attributes derived from
     # the :from hash, with the ones given in the anonymous function.
@@ -84,6 +74,8 @@ module FixtureReplacementController
       @attributes_proc.call(os)
       os.to_hash
     end
+    
+    alias_method :hash, :to_hash
   
   private
     

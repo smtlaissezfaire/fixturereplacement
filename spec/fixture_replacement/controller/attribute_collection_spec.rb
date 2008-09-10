@@ -178,5 +178,11 @@ module FixtureReplacementController
       
       obj.to_hash.should == { :foo => :one }
     end
+    
+    it "should have the hash method as an alias to the to_hash method" do
+      obj = AttributeCollection.new(:bar)
+      obj.method(:hash).should == obj.method(:to_hash)
+      obj.method(:to_hash).should == obj.method(:hash)
+    end
   end
 end
