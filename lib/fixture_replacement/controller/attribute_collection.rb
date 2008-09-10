@@ -50,16 +50,6 @@ module FixtureReplacementController
       constantize(fixture_name)
     end
     
-    # This merges the :from attributes hash and the attributes from
-    # the anonymous function, overriding any attributes derived from
-    # the :from hash, with the ones given in the anonymous function.
-    def merge!
-      if derived_fixture_is_present?
-        unmerge_hash!
-        @merged_hash = derived_fixtures_hash.merge(hash)
-      end
-    end
-    
     def to_new_class_instance(hash={}, caller=self)
       construct_new_active_record_factory(hash, caller).to_new_instance
     end

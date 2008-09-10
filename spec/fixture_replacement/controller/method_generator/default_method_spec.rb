@@ -50,7 +50,6 @@ module FixtureReplacementController
       
       @struct = OpenStruct.new({:key => "val"})
       @attributes = AttributeCollection.new(:admin, :attributes => @struct)
-      @attributes.stub!(:merge!)
       @generator = MethodGenerator.new(@attributes)
       
       @fixture_name = "admin"

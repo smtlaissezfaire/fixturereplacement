@@ -86,55 +86,6 @@ module FixtureReplacementController
     end
   end
   
-  module AttributeFromHelper
-    def setup_attributes
-      @from_attributes_as_struct = lambda { |u| u.first_name = :scott }
-      @from_attributes = AttributeCollection.new(:foo, :attributes => @from_attributes_as_struct)
-    end
-  end
-  
-  describe AttributeCollection, "with an empty hash, after merge with another inherited attribute" do    
-    include AttributeFromHelper
-    
-    before :each do
-      setup_attributes
-      @attributes = AttributeCollection.new(:bar, :from => :foo)
-    end
-    
-    it "should contain the keys from the inherited hash only" do
-      @attributes.merge!
-      @attributes.hash.should == {
-        :first_name => :scott
-      }
-    end
-  end
-  
-  describe AttributeCollection, "with a hash, after merge with another inherited attributes" do
-    include AttributeFromHelper
-    
-    before :each do
-      setup_attributes      
-    end
-    
-    it "should overwrite an attribute" do
-      open_struct = lambda { |os| os.first_name = :scott }
-      
-      attributes = AttributeCollection.new :bar, :from => :foo, :attributes => open_struct
-      
-      attributes.merge!
-      attributes.hash.should == {:first_name => :scott}
-    end
-    
-    it "should keep any new attributes, as well as any attributes which weren't overwritten" do
-      open_struct = lambda { |os| os.foo = :bar }
-      
-      attributes = AttributeCollection.new(:bar, :from => :foo, :attributes => open_struct)
-      
-      attributes.merge!
-      attributes.hash.should == {:foo => :bar, :first_name => :scott}      
-    end
-  end  
-  
   describe "to_hash" do
     it "should be an empty hash when not derived" do
       AttributeCollection.new(:foo).to_hash.should == { }

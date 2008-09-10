@@ -4,7 +4,6 @@ module FixtureReplacementController
   describe MethodGenerator do
     before :each do
       @user_attributes = mock("UserAttributeCollection")
-      @user_attributes.stub!(:merge!)
       @module = mock("FixtureReplacement")
       FixtureReplacementController.fr = @module
       @generator = MethodGenerator.new(@user_attributes)

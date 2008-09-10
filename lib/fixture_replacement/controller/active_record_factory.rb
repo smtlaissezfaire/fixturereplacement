@@ -87,7 +87,6 @@ module FixtureReplacementController
     end
 
     def all_attributes
-      @attributes.merge!
       @all_merged_attributes ||= attributes_hash.merge(self.hash_given_to_constructor)
     end
     

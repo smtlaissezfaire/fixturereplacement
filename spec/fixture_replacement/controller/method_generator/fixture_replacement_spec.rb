@@ -29,7 +29,6 @@ module FixtureReplacementController
   describe MethodGenerator, "generate_methods (the instance method)" do
     before :each do
       @attributes = mock 'AttributeCollection'
-      @attributes.stub!(:merge!)
       
       @generator = MethodGenerator.new(@attributes)
       @generator.stub!(:generate_default_method)
