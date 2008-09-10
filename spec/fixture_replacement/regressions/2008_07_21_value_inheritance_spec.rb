@@ -62,7 +62,7 @@ module FixtureReplacementController
         attributes_for :long_writing, :from => :writing, :class => Writing
       end
       
-      FixtureReplacementController::ClassFactory.stub!(:fixture_replacement_module).and_return @module
+      FixtureReplacementController.fr = @module
       FixtureReplacementController::MethodGenerator.generate_methods
       self.class.send :include, @module
     end
