@@ -73,20 +73,6 @@ module FixtureReplacementController
       ActiveRecordFactory.new(self, hash, caller)
     end
   
-    attr_reader :hash_given
-  
-    def unmerge_hash!
-      @merged_hash = nil
-    end
-  
-    def derived_fixtures_hash
-      derived_fixture.hash
-    end
-  
-    def derived_fixture_is_present?
-      !derived_fixture.nil?
-    end
-    
     def find_by_fixture_name(symbol)
       self.class.find_by_fixture_name(symbol)
     end
