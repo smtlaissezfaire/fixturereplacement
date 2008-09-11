@@ -1,9 +1,5 @@
 module FixtureReplacement
   module Version
-    def self.revision
-      `git-rev-list HEAD`.split("\n").first
-    end
-    
     MAJOR    = 2
     MINOR    = 8
     TINY     = 0
