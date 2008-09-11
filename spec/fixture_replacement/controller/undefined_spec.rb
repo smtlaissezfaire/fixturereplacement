@@ -7,3 +7,17 @@ module FixtureReplacementController
     end
   end
 end
+
+describe "FixtureReplacement" do
+  it "should have the UNDEFINED constant" do
+    lambda { 
+      FixtureReplacement::UNDEFINED    
+    }.should_not raise_error
+  end
+  
+  it "should have FR::UNDEFINED" do
+    lambda { 
+      FR::UNDEFINED
+    }.should_not raise_error
+  end
+end
