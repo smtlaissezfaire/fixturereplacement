@@ -8,7 +8,7 @@ module FixtureReplacementController
   end
 end
 
-describe "FixtureReplacement" do
+describe FixtureReplacement do
   it "should have the UNDEFINED constant" do
     lambda { 
       FixtureReplacement::UNDEFINED    
