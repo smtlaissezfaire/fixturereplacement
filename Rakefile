@@ -82,7 +82,7 @@ task :build_docs => [:rerdoc, :specdoc, :rcov, :flog_to_disk]
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new(:rcov) do |t|
   t.rcov = true
-  t.rcov_opts = ['--exclude', 'spec']
+  t.rcov_opts = ['--exclude', 'spec', "--exclude", "gems"]
   t.rcov_dir = "doc/rcov"
 end
 
