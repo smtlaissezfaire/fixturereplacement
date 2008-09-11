@@ -12,4 +12,8 @@ describe FixtureReplacement, "errors" do
   it "should have UnknownFixture which derives from the BaseError" do
     FixtureReplacement::UnknownFixture.superclass.should == FixtureReplacement::BaseError
   end
+  
+  it "should have rails_root as nil in testing" do
+    FixtureReplacement.rails_root.should be_nil
+  end
 end

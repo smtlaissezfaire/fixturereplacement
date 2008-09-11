@@ -30,6 +30,10 @@ module FixtureReplacement
     def method_added(method)
       module_function method if method != :method_added
     end
+    
+    def rails_root
+      defined?(RAILS_ROOT) ? RAILS_ROOT : nil      
+    end
 
   private
   
@@ -45,10 +49,6 @@ module FixtureReplacement
       else
         false
       end
-    end
-
-    def rails_root
-      defined?(RAILS_ROOT) ? RAILS_ROOT : nil      
     end
   end
 end
