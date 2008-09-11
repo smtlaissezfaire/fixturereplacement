@@ -165,5 +165,16 @@ module FixtureReplacementController
       obj.method(:hash).should == obj.method(:to_hash)
       obj.method(:to_hash).should == obj.method(:hash)
     end
+    
+    describe "finding a fixture by name" do
+      it "should return nil if it cannot find the fixture" do
+        AttributeCollection.find_by_fixture_name(:foo_bar).should be_nil
+      end
+      
+      it "should return nil if the object passed is a PORL" do
+        object = Object.new
+        AttributeCollection.find_by_fixture_name(object).should be_nil
+      end
+    end
   end
 end
