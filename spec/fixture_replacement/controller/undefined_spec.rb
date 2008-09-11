@@ -20,4 +20,8 @@ describe "FixtureReplacement" do
       FR::UNDEFINED
     }.should_not raise_error
   end
+  
+  it "should have FR::UNDEFINED as a kind of UndefinedValue" do
+    FR::UNDEFINED.should be_a_kind_of(FixtureReplacementController::UndefinedValue)
+  end
 end
