@@ -7,6 +7,9 @@
 - Remove the ability to use a custom exmaple_data file.  It must now be in db/example_data.rb.
 - Fix [#17083] :from => :fixture_name only works one level down
 - Better errors for superclass fixtures (:from => :fixture_name) is not found
+- Fix [#21837] nil objects in deployed environment.  An integration issue
+  with ruby2ruby, which stupidly redefines NilClass#method_missing to return nil, and 
+  while doing so made it public.
 
 =================
 === Version 2 ===
