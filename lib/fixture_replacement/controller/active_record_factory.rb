@@ -32,7 +32,7 @@ module FixtureReplacementController
         @object = object
       end
       
-      def assign(key, value, context)
+      def assign(key, value, context=nil)
         @object.__send__("#{key}=", eval(value, context))
       end
       
