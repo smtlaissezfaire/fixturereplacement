@@ -33,7 +33,9 @@ module FixtureReplacementController
       end
       
       def assign(key, value, context=nil)
-        @object.__send__("#{key}=", eval(value, context))
+        unless value.kind_of?(UndefinedValue)
+          @object.__send__("#{key}=", eval(value, context))
+        end
       end
       
     private

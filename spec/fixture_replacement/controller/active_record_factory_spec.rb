@@ -31,5 +31,17 @@ module FixtureReplacementController
       assigner.assign(:foo, array)
       @object.foo.should == array
     end
+    
+    it "should keep the attribute as nil if passed FR::UNDEFINED" do
+      @assigner.assign(:foo, FR::UNDEFINED)
+      @object.foo.should be_nil
+    end
+    
+    it "should keep any old attribute, and not write over it" do
+      a_string = String.random(100)
+      @object.foo = a_string
+      @assigner.assign(:foo, FR::UNDEFINED)
+      @object.foo.should == a_string
+    end
   end
 end
