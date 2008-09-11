@@ -51,9 +51,13 @@ module FixtureReplacementController
     attr_reader :from
 
     def active_record_class
-      @class || find_by_fixture_name(@from).active_record_class
-    rescue
-      constantize(fixture_name)
+      if @class
+        @class
+      elsif @from
+        derived_fixture.active_record_class
+      else
+        constantize(fixture_name)        
+      end
     end
     
     def to_new_class_instance(hash={}, caller=self)
