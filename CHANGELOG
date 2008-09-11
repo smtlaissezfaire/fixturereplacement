@@ -10,6 +10,8 @@
 - Fix [#21837] nil objects in deployed environment.  An integration issue
   with ruby2ruby, which stupidly redefines NilClass#method_missing to return nil, and 
   while doing so made it public.
+- Close [#21834] Allow undefining attributes defined in example_data.rb.  Now
+  FR::UNDEFINED can be used to "unset" values set in example_data.rb
 
 =================
 === Version 2 ===
