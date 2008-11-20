@@ -1,4 +1,8 @@
 module FixtureReplacementController
+  #
+  # "Fixture" definitions are defined in db/example_data.rb.
+  # See the README for more info
+  #
   class MethodGenerator
     class << self
       def generate_methods
