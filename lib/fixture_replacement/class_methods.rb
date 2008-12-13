@@ -1,6 +1,6 @@
 module FixtureReplacement
   module ClassMethods
-    def attributes_for(fixture_name, options={}, fixture_attributes_class=FixtureReplacementController::AttributeCollection, &blk)
+    def attributes_for(fixture_name, options={}, fixture_attributes_class=Controller::AttributeCollection, &blk)
       fixture_attributes_class.new(fixture_name, {
         :class => options[:class],
         :from => options[:from],
@@ -20,7 +20,7 @@ module FixtureReplacement
 
     def included(included_mod)
       raise_if_environment_is_in_excluded_environments
-      FixtureReplacementController::MethodGenerator.generate_methods
+      FixtureReplacement::Controller::MethodGenerator.generate_methods
     end
     
     # Any user defined instance methods (as well as default_*) need the module's class scope to be

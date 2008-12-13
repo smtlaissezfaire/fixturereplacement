@@ -25,8 +25,8 @@ class UserTest < Test::Unit::TestCase
       end
     end
     
-    FixtureReplacementController.fr = @module
-    FixtureReplacementController::MethodGenerator.generate_methods
+    FixtureReplacement::Controller.fr = @module
+    FixtureReplacement::Controller::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
   

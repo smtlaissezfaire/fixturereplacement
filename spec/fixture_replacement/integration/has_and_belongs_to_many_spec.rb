@@ -28,54 +28,56 @@ module HasAndBelongsToManyHelper
     end
     
     
-    FixtureReplacementController.fr = @module
-    FixtureReplacementController::MethodGenerator.generate_methods
+    FixtureReplacement::Controller.fr = @module
+    FixtureReplacement::Controller::MethodGenerator.generate_methods
     self.class.send :include, @module
   end
 end
 
-module FixtureReplacementController
-  describe "HasAndBelongsToMany Associations" do
-    include HasAndBelongsToManyHelper
+module FixtureReplacement
+  module Controller
+    describe "HasAndBelongsToMany Associations" do
+      include HasAndBelongsToManyHelper
     
-    before :each do
-      setup_fixtures
-    end
+      before :each do
+        setup_fixtures
+      end
 
-    it "should have the fixture create_subscriber" do
-      @module.should respond_to(:create_subscriber)
-    end
+      it "should have the fixture create_subscriber" do
+        @module.should respond_to(:create_subscriber)
+      end
     
-    it "should have the fixture create_subscription" do
-      @module.should respond_to(:create_subscription)
-    end
+      it "should have the fixture create_subscription" do
+        @module.should respond_to(:create_subscription)
+      end
     
-    it "should be able to create a new subscriber" do
-      lambda {
-        @module.create_subscriber
-      }.should_not raise_error
-    end
+      it "should be able to create a new subscriber" do
+        lambda {
+          @module.create_subscriber
+        }.should_not raise_error
+      end
     
-    it "should have the subscriber with the default subscription" do
-      subscriber = @module.create_subscriber
-      subscriber.should have(1).subscription
-      subscriber.subscriptions.first.name.should == "The New York Times"
-    end
+      it "should have the subscriber with the default subscription" do
+        subscriber = @module.create_subscriber
+        subscriber.should have(1).subscription
+        subscriber.subscriptions.first.name.should == "The New York Times"
+      end
     
-    it "should be able to create a subscriber with two subscriptions (inline)" do
-      subscription_one = create_harpers_subscription
-      subscription_two = create_ny_times_subscription
+      it "should be able to create a subscriber with two subscriptions (inline)" do
+        subscription_one = create_harpers_subscription
+        subscription_two = create_ny_times_subscription
       
-      subscriptions = [subscription_one, subscription_two]
+        subscriptions = [subscription_one, subscription_two]
       
-      subscriber = @module.create_subscriber(:subscriptions => subscriptions)
+        subscriber = @module.create_subscriber(:subscriptions => subscriptions)
       
-      subscriber.subscriptions.should == subscriptions
-    end
+        subscriber.subscriptions.should == subscriptions
+      end
     
-    it "should be able to create a subscriber with two subscriptions, from the fixtures" do
-      subscriber = @module.create_subscriber_with_two_subscriptions
-      subscriber.should have(2).subscriptions
+      it "should be able to create a subscriber with two subscriptions, from the fixtures" do
+        subscriber = @module.create_subscriber_with_two_subscriptions
+        subscriber.should have(2).subscriptions
+      end
     end
   end
 end

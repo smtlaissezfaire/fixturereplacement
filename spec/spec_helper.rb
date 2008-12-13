@@ -8,10 +8,10 @@ Spec::Runner.configure do |config|
   setup_tests
   
   config.prepend_before(:each) do
-    FixtureReplacementController::AttributeCollection.clear_out_instances!
+    FixtureReplacement::Controller::AttributeCollection.clear_out_instances!
   end
   
   config.prepend_after(:each) do
-    FixtureReplacementController::AttributeCollection.clear_out_instances!
+    FixtureReplacement::Controller::AttributeCollection.clear_out_instances!
   end
 end

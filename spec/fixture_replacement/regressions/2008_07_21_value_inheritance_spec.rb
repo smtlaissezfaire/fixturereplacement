@@ -44,43 +44,45 @@
 
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
-  describe AttributeCollection do
-    before :each do
-      @now = Time.now
-      Time.stub!(:now).and_return @now
+module FixtureReplacement
+  module Controller
+    describe AttributeCollection do
+      before :each do
+        @now = Time.now
+        Time.stub!(:now).and_return @now
       
-      @module = Module.new do
-        extend FixtureReplacement::ClassMethods
+        @module = Module.new do
+          extend FixtureReplacement::ClassMethods
 
-        attributes_for :item do |i|    
-          i.cache_latest_activity_time = Time.now
+          attributes_for :item do |i|    
+            i.cache_latest_activity_time = Time.now
+          end
+
+          attributes_for :writing, :from => :item, :class => Writing
+
+          attributes_for :long_writing, :from => :writing, :class => Writing
         end
-
-        attributes_for :writing, :from => :item, :class => Writing
-
-        attributes_for :long_writing, :from => :writing, :class => Writing
-      end
       
-      FixtureReplacementController.fr = @module
-      FixtureReplacementController::MethodGenerator.generate_methods
-      self.class.send :include, @module
-    end
+        FixtureReplacement::Controller.fr = @module
+        FixtureReplacement::Controller::MethodGenerator.generate_methods
+        self.class.send :include, @module
+      end
     
-    it "should be able to create a new item with the proper time" do
-      create_item.cache_latest_activity_time.should == @now
-    end
+      it "should be able to create a new item with the proper time" do
+        create_item.cache_latest_activity_time.should == @now
+      end
     
-    it "should be able to create a new writing with the proper time" do
-      create_writing.cache_latest_activity_time.should == @now
-    end
+      it "should be able to create a new writing with the proper time" do
+        create_writing.cache_latest_activity_time.should == @now
+      end
     
-    it "should be able to create a new long_writing with the proper time" do
-      create_long_writing.cache_latest_activity_time.should == @now
-    end
+      it "should be able to create a new long_writing with the proper time" do
+        create_long_writing.cache_latest_activity_time.should == @now
+      end
     
-    it "should be able to instantiate a new long_writing with the proper time" do
-      new_long_writing.cache_latest_activity_time.should == @now
+      it "should be able to instantiate a new long_writing with the proper time" do
+        new_long_writing.cache_latest_activity_time.should == @now
+      end
     end
   end
 end

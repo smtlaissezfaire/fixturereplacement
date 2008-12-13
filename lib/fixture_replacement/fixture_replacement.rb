@@ -6,12 +6,16 @@ module FixtureReplacement
   class InclusionError < BaseError;     end
   class UnknownFixture < BaseError;     end
   
+  dir = File.dirname(__FILE__)
+  
+  autoload :ClassMethods,   "#{dir}/class_methods"
+  autoload :Version,        "#{dir}/version"
+  autoload :UndefinedValue, "#{dir}/class_methods"
+  autoload :Controller,     "#{dir}/controller"
+  
   # Pass FR::UNDEFINED as a value to prevent FixtureReplacement
   # from assigning the value from example_data.rb
-  UNDEFINED = FixtureReplacementController::UndefinedValue.new
-  
-  autoload :ClassMethods, File.dirname(__FILE__) + "/class_methods"
-  autoload :Version,      File.dirname(__FILE__) + "/version"
+  UNDEFINED = FixtureReplacement::Controller::UndefinedValue.new
   
   extend ClassMethods
 end

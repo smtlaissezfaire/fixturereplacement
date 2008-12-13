@@ -1,9 +1,11 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
-  describe UndefinedValue do
-    it "should be a kind of class" do
-      UndefinedValue.should be_a_kind_of(Class)
+module FixtureReplacement
+  module Controller
+    describe UndefinedValue do
+      it "should be a kind of class" do
+        UndefinedValue.should be_a_kind_of(Class)
+      end
     end
   end
 end
@@ -22,6 +24,6 @@ describe FixtureReplacement do
   end
   
   it "should have FR::UNDEFINED as a kind of UndefinedValue" do
-    FR::UNDEFINED.should be_a_kind_of(FixtureReplacementController::UndefinedValue)
+    FR::UNDEFINED.should be_a_kind_of(FixtureReplacement::Controller::UndefinedValue)
   end
 end

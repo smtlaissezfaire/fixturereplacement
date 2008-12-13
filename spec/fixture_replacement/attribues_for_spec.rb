@@ -60,8 +60,8 @@ describe "FixtureReplacement.attributes_for" do
   it "should create a new Attribute with the class, attributes_from, and the attributes as a lambda" do
     @proc = lambda { |os| }
     Kernel.stub!(:lambda).and_return @proc
-    FixtureReplacementController::AttributeCollection.stub!(:new)
-    FixtureReplacementController::AttributeCollection.should_receive(:new).with(:scott, {
+    FixtureReplacement::Controller::AttributeCollection.stub!(:new)
+    FixtureReplacement::Controller::AttributeCollection.should_receive(:new).with(:scott, {
       :class => User,
       :from => :user,
       :attributes => @proc

@@ -43,52 +43,53 @@
 # 	
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementControllerHelper2
-  def setup_fixtures
-    @module = Module.new do
-      class << self
-        include FixtureReplacement::ClassMethods
-      end
+module FixtureReplacement
+  module ControllerHelper2
+    def setup_fixtures
+      @module = Module.new do
+        class << self
+          include FixtureReplacement::ClassMethods
+        end
       
-      attributes_for :user do |u|
-        u.key = "foo"
-        u.username = random_string
-      end
+        attributes_for :user do |u|
+          u.key = "foo"
+          u.username = random_string
+        end
       
-      attributes_for :player, :class => Player, :from => :user
+        attributes_for :player, :class => Player, :from => :user
 
-    private
+      private
     
-      def random_string
-        String.random(55)
+        def random_string
+          String.random(55)
+        end
       end
-    end
 
-    FixtureReplacementController.fr = @module
-    FixtureReplacementController::MethodGenerator.generate_methods
-    self.class.send :include, @module
+      FixtureReplacement::Controller.fr = @module
+      FixtureReplacement::Controller::MethodGenerator.generate_methods
+      self.class.send :include, @module
+    end
   end
-end
 
-module FixtureReplacementController
-  
-  describe "String.random" do
-    include FixtureReplacementControllerHelper2
+  module Controller
+    describe "String.random" do
+      include ControllerHelper2
     
-    before :each do
-      setup_fixtures
-    end
+      before :each do
+        setup_fixtures
+      end
     
-    it "should have a different string for each instance in the base class" do
-      user1 = create_user
-      user2 = create_user
-      user1.username.should_not == user2.username
-    end
+      it "should have a different string for each instance in the base class" do
+        user1 = create_user
+        user2 = create_user
+        user1.username.should_not == user2.username
+      end
     
-    it "should have a different string for each instance in the inherited class (with STI)" do
-      player1 = create_player
-      player2 = create_player
-      player1.username.should_not == player2.username
+      it "should have a different string for each instance in the inherited class (with STI)" do
+        player1 = create_player
+        player2 = create_player
+        player1.username.should_not == player2.username
+      end
     end
   end
 end
