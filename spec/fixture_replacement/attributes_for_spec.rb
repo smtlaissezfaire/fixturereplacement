@@ -18,22 +18,22 @@ describe FixtureReplacement, "attributes_for" do
   end
   
   it "should create a new FixtureAttribute with the name given" do
-    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => @attributes_proc})
+    @fixture_attribute.should_receive(:new).with(:foo, hash_including)
     FixtureReplacement.attributes_for(:foo, {}, &@attributes_proc) 
   end
   
   it "should create a new FixtureAttribute with the name given and class given" do
-    @fixture_attribute.should_receive(:new).with(:foo, {:class => Object, :from => nil, :attributes => @attributes_proc})
+    @fixture_attribute.should_receive(:new).with(:foo, hash_including(:class => Object))
     FixtureReplacement.attributes_for(:foo, {:class => Object}, &@attributes_proc)
   end
   
-  it "should create a new FixtureAttribute with the name given and the attributes from" do
-    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => :bar, :attributes => @attributes_proc})
+  it "should create a new FixtureAttribute with the name given and the attributes from the block" do
+    @fixture_attribute.should_receive(:new).with(:foo, hash_including(:from => :bar))
     FixtureReplacement.attributes_for(:foo, {:from => :bar}, &@attributes_proc)
   end
   
   it "should create a new FixtureAttribute with the name and block given" do
-    @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => @attributes_proc})
+    @fixture_attribute.should_receive(:new).with(:foo, hash_including(:attributes => @attributes_proc))
     FixtureReplacement.attributes_for(:foo, {}, &@attributes_proc)
   end
 end

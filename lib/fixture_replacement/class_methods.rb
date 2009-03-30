@@ -1,11 +1,7 @@
 module FixtureReplacement
   module ClassMethods
     def attributes_for(fixture_name, options={}, &blk)
-      FixtureReplacementController::AttributeCollection.new(fixture_name, {
-        :class      => options[:class],
-        :from       => options[:from],
-        :attributes => blk
-      })
+      FixtureReplacementController::AttributeCollection.new(fixture_name, options.merge(:attributes => blk))
     end
     
     def included(included_mod)
