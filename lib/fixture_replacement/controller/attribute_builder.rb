@@ -78,8 +78,6 @@ module FixtureReplacementController
   
   private
   
-    attr_reader :hash_given
-  
     def derived_fixtures_hash
       derived_fixture.to_hash
     end
