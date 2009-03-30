@@ -28,7 +28,7 @@ module FixtureReplacementController
       # return nil if no fixture with the name given was found
       def find_by_fixture_name(arg)
         instances.each { |instance| return instance if instance.fixture_name == arg }
-        return nil
+        nil
       end
     end
     
@@ -51,10 +51,13 @@ module FixtureReplacementController
     end
     
     def hash
-      return @merged_hash if @merged_hash
-      os = ClassFactory.fake_active_record_instance.new
-      @attributes_proc.call(os)
-      os.marshal_dump
+      if @merged_hash
+        @merged_hash
+      else
+        os = ClassFactory.fake_active_record_instance.new
+        @attributes_proc.call(os)
+        os.marshal_dump
+      end
     end
     
     # This merges the :from attributes hash and the attributes from

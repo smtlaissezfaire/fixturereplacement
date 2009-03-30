@@ -5,7 +5,7 @@ module FixtureReplacementController
   class DelayedEvaluationProc < Proc
     def evaluate(caller)
       default_obj, params = self.call
-      return caller.__send__("create_#{default_obj.fixture_name}", params)
+      caller.__send__("create_#{default_obj.fixture_name}", params)
     end
   end
 end
