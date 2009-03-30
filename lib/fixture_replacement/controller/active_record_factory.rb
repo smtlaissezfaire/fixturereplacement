@@ -5,10 +5,9 @@ module FixtureReplacementController
   # instance with ActiveRecord::Base#new, or a created one ActiveRecord::Base#create!).
   class ActiveRecordFactory
     
-    def initialize(klass, attributes, original_caller=self)
+    def initialize(klass, attributes)
       @class      = klass
       @attributes = attributes
-      @caller     = original_caller
     end
     
     def to_new_instance
