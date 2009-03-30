@@ -71,9 +71,6 @@ module FixtureReplacementController
     end
     
     it "should return the attributes hash given" do
-      @struct = OpenStruct.new
-      @struct.foo = :bar
-      @struct.scott = :taylor
       attributes = AttributeCollection.new(:foo) do |f|
         f.foo = :bar
         f.scott = :taylor
@@ -118,9 +115,9 @@ module FixtureReplacementController
     end
     
     it "should overwrite an attribute" do
-      open_struct = lambda { |os| os.first_name = :scott }
-      
-      attributes = AttributeCollection.new :bar, :from => :foo, :attributes => open_struct
+      attributes = AttributeCollection.new :bar, :from => :foo do |u|
+        u.first_name = :scott
+      end
       
       attributes.merge!
       attributes.hash.should == {:first_name => :scott}
