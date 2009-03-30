@@ -54,7 +54,7 @@ module FixtureReplacementController
       return @merged_hash if @merged_hash
       os = ClassFactory.fake_active_record_instance.new
       @attributes_proc.call(os)
-      os.to_hash
+      os.marshal_dump
     end
     
     # This merges the :from attributes hash and the attributes from
