@@ -1,9 +1,6 @@
 module FixtureReplacement  
   class InclusionError < StandardError; end
-  
-  class << self
-    include FixtureReplacement::ClassMethods
-  end
+  extend FixtureReplacement::ClassMethods
 end
 
 
