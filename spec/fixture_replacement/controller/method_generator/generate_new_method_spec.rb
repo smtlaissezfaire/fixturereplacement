@@ -9,11 +9,9 @@ module FixtureReplacementController
       @fixture_name = fixture_name
       @class = classname
       
-      @attributes = AttributeCollection.new(@fixture_name, {
-        :attributes => lambda do |f|
-          f.key = "val"
-        end
-      })
+      @attributes = AttributeCollection.new(@fixture_name) do |f|
+        f.key = "val"
+      end
       
       @generator = MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
@@ -89,17 +87,17 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      gender_attributes = AttributeCollection.new(:gender, :attributes => lambda do |gender| 
+      gender_attributes = AttributeCollection.new(:gender) do |gender| 
         gender.sex = "Male"
-      end)
+      end
       
-      user_attributes = AttributeCollection.new(:user, :attributes => lambda do |user|
+      user_attributes = AttributeCollection.new(:user) do |user|
         user.gender = default_gender
-      end)
+      end
       
-      alien_attributes = AttributeCollection.new(:alien, :attributes => lambda do |alien|
+      alien_attributes = AttributeCollection.new(:alien) do |alien|
         alien.gender = default_gender(:sex => "unknown")
-      end)
+      end
       
       create_generator(:gender, gender_attributes, @module)
       create_generator(:user,   user_attributes,   @module)

@@ -32,29 +32,9 @@ describe FixtureReplacement, "attributes_for" do
     FixtureReplacement.attributes_for(:foo, {:from => :bar}, &@attributes_proc)
   end
   
-  it "should create a new FixtureAttribute with the name and block given" do
-    @fixture_attribute.should_receive(:new).with(:foo, hash_including(:attributes => @attributes_proc))
-    FixtureReplacement.attributes_for(:foo, {}, &@attributes_proc)
-  end
-end
-
-describe "FixtureReplacement.attributes_for" do
   it "should not raise an error if no block is given" do
     lambda {
       FixtureReplacement.attributes_for :scott, :from => :user  
     }.should_not raise_error
   end
-  
-  it "should create a new Attribute with the class, attributes_from, and the attributes as a lambda" do
-    @proc = lambda { |os| }
-    Kernel.stub!(:lambda).and_return @proc
-    FixtureReplacementController::AttributeCollection.stub!(:new)
-    FixtureReplacementController::AttributeCollection.should_receive(:new).with(:scott, {
-      :class => User,
-      :from => :user,
-      :attributes => @proc
-    })
-
-    FixtureReplacement.attributes_for(:scott, :from => :user, :class => User, &@proc)
-  end  
 end

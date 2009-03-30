@@ -74,10 +74,10 @@ module FixtureReplacementController
       @struct = OpenStruct.new
       @struct.foo = :bar
       @struct.scott = :taylor
-      attributes = AttributeCollection.new(:foo, :attributes => lambda do |f|
+      attributes = AttributeCollection.new(:foo) do |f|
         f.foo = :bar
         f.scott = :taylor
-      end)
+      end
       
       attributes.hash.should == {
         :foo => :bar,
@@ -88,8 +88,9 @@ module FixtureReplacementController
   
   module AttributeFromHelper
     def setup_attributes
-      @from_attributes_as_struct = lambda { |u| u.first_name = :scott }
-      @from_attributes = AttributeCollection.new(:foo, :attributes => @from_attributes_as_struct)
+      @from_attributes = AttributeCollection.new(:foo) do |u|
+        u.first_name = :scott
+      end
     end
   end
   
@@ -126,9 +127,9 @@ module FixtureReplacementController
     end
     
     it "should keep any new attributes, as well as any attributes which weren't overwritten" do
-      open_struct = lambda { |os| os.foo = :bar }
-      
-      attributes = AttributeCollection.new(:bar, :from => :foo, :attributes => open_struct)
+      attributes = AttributeCollection.new(:bar, :from => :foo) do |os|
+        os.foo = :bar
+      end
       
       attributes.merge!
       attributes.hash.should == {:foo => :bar, :first_name => :scott}      

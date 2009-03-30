@@ -22,7 +22,7 @@ module FixtureReplacementController
         end
       end
 
-      @attributes = AttributeCollection.new(:foo, :attributes => lambda_expression)
+      @attributes = AttributeCollection.new(:foo, &lambda_expression)
     end
     
     it "should evaluate the proc in the binding of the caller which is passed" do

@@ -32,9 +32,9 @@ module FixtureReplacementController
       end
     end
     
-    def initialize(fixture_name, options={})
+    def initialize(fixture_name, options={}, &block)
       @fixture_name    = fixture_name
-      @attributes_proc = options[:attributes] || lambda { Hash.new }
+      @attributes_proc = block || lambda { Hash.new }
       @from            = options[:from]
       @class           = options[:class]
 
