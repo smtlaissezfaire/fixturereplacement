@@ -28,6 +28,12 @@ begin
   files.each do |file|
     require file
   end
+  
+  module FixtureReplacement
+    class InclusionError < StandardError; end
+    extend FixtureReplacement::ClassMethods
+  end
+  
   require "#{RAILS_ROOT}/db/example_data.rb"
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
