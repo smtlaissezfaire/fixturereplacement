@@ -7,8 +7,8 @@ module FixtureReplacementController
     
     def initialize(attributes, hash={}, original_caller=self)
       @attributes = attributes
-      @hash_given_to_constructor = hash || Hash.new
-      @caller = original_caller
+      @hash       = hash
+      @caller     = original_caller
     end
     
     def to_new_instance
@@ -45,7 +45,11 @@ module FixtureReplacementController
     
     def attributes
       @attributes.merge!
-      @attributes.hash.merge(@hash_given_to_constructor)
+      if @hash
+        @attributes.hash.merge(@hash)
+      else
+        @attributes.hash
+      end
     end
   end
 end
