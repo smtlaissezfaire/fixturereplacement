@@ -11,6 +11,7 @@
 - Alias FR to FixtureReplacement for convenience
 - Call new_* for dependent records.
 - Back associations with new_* ?
+- Support SEQUEL & Datamapper.  Make it ORM independent
 
 == Code Cleanup
 
