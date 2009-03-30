@@ -1,3 +1,9 @@
+== HEAD
+
+- Removed generator
+- Removed db/example_data
+- Added GPL as well as MIT License
+
 == 02/18/07
 * Bug Fix, closes [#18042] example_data doesn't accept default_x for HABTM relationships
 * Refactoring: Now classes are specified in FixtureReplacementController::ClassFactory
