@@ -11,7 +11,6 @@ RAILS_ROOT = "."
 require File.dirname(__FILE__) + "/../spec/spec_helpers"
 include SpecHelperFunctions
 
-swap_out_require!
 setup_database_connection
 
 require File.dirname(__FILE__) + "/../lib/fixture_replacement"

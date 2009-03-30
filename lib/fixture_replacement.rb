@@ -32,8 +32,6 @@ begin
   module FixtureReplacement
     extend FixtureReplacement::ClassMethods
   end
-  
-  require "#{RAILS_ROOT}/db/example_data.rb"
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
