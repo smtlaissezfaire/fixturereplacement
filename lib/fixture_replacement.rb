@@ -22,7 +22,6 @@
  
 
 begin
-  require 'rubygems'
   require 'active_support' 
   require 'ostruct'
   
