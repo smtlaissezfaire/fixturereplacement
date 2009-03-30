@@ -14,8 +14,6 @@ module FixtureReplacementController
       @evaluation_module = evaluation_module
     end
     
-    attr_reader :evaluation_module
-    
     def generate_methods
       generate_default_method
       generate_new_method
@@ -25,7 +23,7 @@ module FixtureReplacementController
     def generate_default_method
       obj = @object_attributes
       
-      evaluation_module.module_eval do
+      @evaluation_module.module_eval do
         define_method("default_#{obj.fixture_name}") do |*args|
           hash = args[0] || Hash.new
           DelayedEvaluationProc.new { [obj, hash] }
@@ -36,7 +34,7 @@ module FixtureReplacementController
     def generate_create_method
       obj = @object_attributes
       
-      evaluation_module.module_eval do
+      @evaluation_module.module_eval do
         define_method("create_#{obj.fixture_name}") do |*args|
           obj.to_created_class_instance(args[0], self)
         end
@@ -46,7 +44,7 @@ module FixtureReplacementController
     def generate_new_method
       obj = @object_attributes
       
-      evaluation_module.module_eval do
+      @evaluation_module.module_eval do
         define_method("new_#{obj.fixture_name}") do |*args|
           obj.to_new_class_instance(args[0], self)
         end
