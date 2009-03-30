@@ -26,11 +26,11 @@ module FixtureReplacementController
     end
     
     it "should evaluate the proc in the binding of the caller which is passed" do
-      @attributes.hash[:bar].should == :bar
+      @attributes.to_hash[:bar].should == :bar
     end
     
     it "should get the correct value for the method called" do
-      @attributes.hash[:baz].should == :baz
+      @attributes.to_hash[:baz].should == :baz
     end
   end
 end

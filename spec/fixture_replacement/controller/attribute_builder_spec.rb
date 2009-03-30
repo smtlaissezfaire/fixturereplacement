@@ -67,7 +67,7 @@ module FixtureReplacementController
   describe AttributeBuilder, "hash, with simple arguments (only attributes and fixture name)" do
     
     it "should return a hash" do
-      AttributeBuilder.new(:foo).hash.should == {}
+      AttributeBuilder.new(:foo).to_hash.should == {}
     end
     
     it "should return the attributes hash given" do
@@ -76,7 +76,7 @@ module FixtureReplacementController
         f.scott = :taylor
       end
       
-      attributes.hash.should == {
+      attributes.to_hash.should == {
         :foo => :bar,
         :scott => :taylor
       }

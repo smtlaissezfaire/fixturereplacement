@@ -10,9 +10,9 @@ module FixtureReplacementController
       
       @instance.stub!(:foo=)
       
-      @attributes = AttributeBuilder.new(:foo, {})
+      @attributes = AttributeBuilder.new(:foo)
       @attributes.stub!(:active_record_class).and_return @class
-      @attributes.stub!(:hash).and_return({:foo => :bar})
+      @attributes.stub!(:to_hash).and_return({:foo => :bar})
     end
     
     it "should be able to send the message (to_new_class_instance), even if the send method has been redefined" do

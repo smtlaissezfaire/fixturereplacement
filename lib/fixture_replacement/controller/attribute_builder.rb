@@ -50,23 +50,18 @@ module FixtureReplacementController
       constantize(fixture_name)
     end
     
-    def hash
-      if @merged_hash
-        @merged_hash
-      else
-        os = OpenStruct.new
-        @attributes_proc.call(os)
-        os.marshal_dump
-      end
+    def procedure_hash
+      os = OpenStruct.new
+      @attributes_proc.call(os)
+      os.marshal_dump
     end
     
     def to_hash
       if derived_fixture_is_present?
-        unmerge_hash!
-        @merged_hash = derived_fixtures_hash.merge(hash)
+        derived_fixtures_hash.merge(procedure_hash)
+      else
+        procedure_hash
       end
-      
-      self.hash
     end
     
     def to_new_class_instance(hash={}, caller=self)
@@ -78,23 +73,15 @@ module FixtureReplacementController
     end
     
     def merge_all_attributes(hash)
-      if hash
-        to_hash.merge(hash)
-      else
-        to_hash
-      end
+      hash ? to_hash.merge(hash) : to_hash
     end
   
   private
   
     attr_reader :hash_given
   
-    def unmerge_hash!
-      @merged_hash = nil
-    end
-  
     def derived_fixtures_hash
-      derived_fixture.hash
+      derived_fixture.to_hash
     end
   
     def derived_fixture_is_present?
@@ -110,7 +97,7 @@ module FixtureReplacementController
     end
     
     def derived_fixture
-      @my_fixture ||= find_derived_fixture
+      @derived_fixture ||= find_derived_fixture
     end
   
     def constantize(symbol)
