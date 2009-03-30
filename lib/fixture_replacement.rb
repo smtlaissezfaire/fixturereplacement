@@ -9,6 +9,12 @@ require_dependency "#{dir}/controller/method_generator"
 require_dependency "#{dir}/extensions/string"
 
 module FixtureReplacement
+  MAJOR = 2
+  MINOR = 0
+  TINY  = 1
+  
+  VERSION = "#{MAJOR}.#{MINOR}.#{TINY}"
+  
   extend FixtureReplacement::ClassMethods
 end
 
