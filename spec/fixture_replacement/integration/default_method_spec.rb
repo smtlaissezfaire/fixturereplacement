@@ -26,7 +26,7 @@ module FixtureReplacementController
         end
       end
       
-      default_user.evaluate(self).should be_a_kind_of(User)
+      default_user.call.should be_a_kind_of(User)
     end
     
     it "should create the object" do
@@ -36,7 +36,7 @@ module FixtureReplacementController
         end
       end
       
-      obj = default_user.evaluate(self)
+      obj = default_user.call
       obj.should_not be_a_new_record
     end
   end

@@ -25,8 +25,11 @@ module FixtureReplacementController
       
       @evaluation_module.module_eval do
         define_method("default_#{obj.fixture_name}") do |*args|
+          
           hash = args[0] || Hash.new
-          DelayedEvaluationProc.new { [obj, hash] }
+          DelayedEvaluationProc.new do
+            __send__("create_#{obj.fixture_name}", hash)
+          end
         end
       end
     end

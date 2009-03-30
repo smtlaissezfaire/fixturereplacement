@@ -37,7 +37,7 @@ module FixtureReplacementController
       when Array
         value.map! { |element| evaluate_possible_delayed_proc element }
       when DelayedEvaluationProc
-        value.evaluate(@caller)
+        value.call
       else
         value
       end
