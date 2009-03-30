@@ -7,11 +7,8 @@ unless defined?(RAILS_ROOT)
 end
 
 require File.dirname(__FILE__) + "/spec_helpers"
-
 include SpecHelperFunctions
-
 setup_database_connection
-
 swap_out_require!
 
 require File.dirname(__FILE__) + "/../lib/fixture_replacement"
