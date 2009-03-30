@@ -99,7 +99,7 @@ module FixtureReplacementController
     end
     
     def find_derived_fixture
-      find_by_fixture_name(self.from)
+      find_by_fixture_name(from)
     end
     
     def derived_fixture

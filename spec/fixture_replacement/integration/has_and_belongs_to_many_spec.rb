@@ -26,7 +26,7 @@ module HasAndBelongsToManyHelper
     end
     
     FixtureReplacementController::MethodGenerator.generate_methods(@module)
-    self.class.send :include, @module
+    extend @module
   end
 end
 

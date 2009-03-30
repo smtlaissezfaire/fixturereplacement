@@ -18,7 +18,7 @@ module FixtureReplacementController
     end
     
     def to_created_instance
-      created_obj = self.to_new_instance
+      created_obj = to_new_instance
       created_obj.save!
       created_obj
     end
@@ -51,7 +51,7 @@ module FixtureReplacementController
     
     def all_attributes
       @attributes.merge!
-      @all_merged_attributes ||= attributes_hash.merge(self.hash_given_to_constructor)
+      @all_merged_attributes ||= attributes_hash.merge(hash_given_to_constructor)
     end
     
     def attributes_hash
