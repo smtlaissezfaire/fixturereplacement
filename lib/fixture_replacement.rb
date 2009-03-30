@@ -11,3 +11,7 @@ require_dependency "#{dir}/extensions/string"
 module FixtureReplacement
   extend FixtureReplacement::ClassMethods
 end
+
+unless defined?(FR)
+  FR = FixtureReplacement
+end
