@@ -24,8 +24,6 @@
 begin
   require 'ostruct'
   
-  require File.dirname(__FILE__) + "/fixture_replacement/controller/class_factory"
-  
   files = Dir.glob(File.dirname(__FILE__) + "/fixture_replacement/**/*.rb")
   files.each do |file|
     require file
