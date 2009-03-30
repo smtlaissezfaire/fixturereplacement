@@ -1,11 +1,5 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
-describe FixtureReplacement do
-  it "should have the method attributes_for" do
-    FixtureReplacement.should respond_to(:attributes_for)
-  end
-end
-
 describe FixtureReplacement, "attributes_for" do
   before :each do
     @fixture_attribute = mock "FixtureAttribute"
