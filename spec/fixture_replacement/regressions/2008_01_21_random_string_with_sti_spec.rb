@@ -46,10 +46,8 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module FixtureReplacementControllerHelper2
   def setup_fixtures
     @module = Module.new do
-      class << self
-        include FixtureReplacement::ClassMethods
-      end
-      
+      extend FixtureReplacement::ClassMethods
+
       attributes_for :user do |u|
         u.key = "foo"
         u.username = random_string
