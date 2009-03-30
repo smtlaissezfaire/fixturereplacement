@@ -27,15 +27,14 @@ module FixtureReplacementController
 
     def assign_values_to_instance(instance_object)
       @attributes.each do |key, value|
-        value = evaluate_possible_proc(value)
-        instance_object.__send__("#{key}=", value)             
+        instance_object.__send__("#{key}=", evaluate_default_procs(value))
       end
     end
 
-    def evaluate_possible_proc(value)
+    def evaluate_default_procs(value)
       case value
       when Array
-        value.map! { |element| evaluate_possible_proc element }
+        value.map! { |element| evaluate_default_procs(element) }
       when Proc
         value.call
       else
