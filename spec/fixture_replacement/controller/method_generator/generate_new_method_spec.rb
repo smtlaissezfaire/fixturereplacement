@@ -9,7 +9,7 @@ module FixtureReplacementController
       @fixture_name = fixture_name
       @class = classname
       
-      @attributes = AttributeCollection.new(@fixture_name) do |f|
+      @attributes = AttributeBuilder.new(@fixture_name) do |f|
         f.key = "val"
       end
       
@@ -87,15 +87,15 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      gender_attributes = AttributeCollection.new(:gender) do |gender| 
+      gender_attributes = AttributeBuilder.new(:gender) do |gender| 
         gender.sex = "Male"
       end
       
-      user_attributes = AttributeCollection.new(:user) do |user|
+      user_attributes = AttributeBuilder.new(:user) do |user|
         user.gender = default_gender
       end
       
-      alien_attributes = AttributeCollection.new(:alien) do |alien|
+      alien_attributes = AttributeBuilder.new(:alien) do |alien|
         alien.gender = default_gender(:sex => "unknown")
       end
       

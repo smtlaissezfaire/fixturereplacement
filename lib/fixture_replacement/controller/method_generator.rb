@@ -3,7 +3,7 @@ module FixtureReplacementController
     
     class << self
       def generate_methods(evaluation_module = FixtureReplacement)
-        AttributeCollection.instances.each do |attributes_instance|
+        AttributeBuilder.instances.each do |attributes_instance|
           new(attributes_instance, evaluation_module).generate_methods
         end
       end

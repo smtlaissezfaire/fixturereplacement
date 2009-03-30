@@ -7,7 +7,7 @@ module FixtureReplacementController
   #     when I was constructed
   #   * from the anonymous function which is passed from into my constructor
   #
-  class AttributeCollection
+  class AttributeBuilder
     class << self
       def instances
         @instances ||= []

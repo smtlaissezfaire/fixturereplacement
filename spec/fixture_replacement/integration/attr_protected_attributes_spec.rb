@@ -6,7 +6,7 @@ module FixtureReplacementController
       @module = Module.new
       extend @module
       
-      @attributes = AttributeCollection.new(:admin) do |u|
+      @attributes = AttributeBuilder.new(:admin) do |u|
         u.admin_status = true
         u.name = "Scott"
       end
@@ -49,7 +49,7 @@ module FixtureReplacementController
       extend @module
       
       @struct = OpenStruct.new(@hash)
-      @attributes = AttributeCollection.new(:admin) do |s|
+      @attributes = AttributeBuilder.new(:admin) do |s|
         s.admin_status = true
         s.name         = "Scott"
       end

@@ -1,77 +1,77 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
-  describe AttributeCollection do  
+  describe AttributeBuilder do  
     it "should add the instance to the global attributes" do
-      a = AttributeCollection.new(:foo)
-      AttributeCollection.instances.should == [a]
+      a = AttributeBuilder.new(:foo)
+      AttributeBuilder.instances.should == [a]
     end
     
     it "should have no instances when none have been created" do
-      AttributeCollection.instances.should == []
+      AttributeBuilder.instances.should == []
     end
     
     it "should have two instances when two have been created" do
-      a1 = AttributeCollection.new(:foo)
-      a2 = AttributeCollection.new(:foo)
-      AttributeCollection.instances.should == [a1, a2]
+      a1 = AttributeBuilder.new(:foo)
+      a2 = AttributeBuilder.new(:foo)
+      AttributeBuilder.instances.should == [a1, a2]
     end
     
     it "should have the fixture name as accessible" do
-      a1 = AttributeCollection.new(:foo)
+      a1 = AttributeBuilder.new(:foo)
       a1.fixture_name.should == :foo
     end
     
     it "should have the from attribute as nil, if none provided" do
-      a1 = AttributeCollection.new(:foo)
+      a1 = AttributeBuilder.new(:foo)
       a1.from.should be_nil
     end
     
     it "should have the from attribute as the symbol of the attribute from which it derives" do
-      a1 = AttributeCollection.new(:foo, :from => :bar)
+      a1 = AttributeBuilder.new(:foo, :from => :bar)
       a1.from.should == :bar
     end
     
     it "should be able to find the Attribute by fixture name" do
-      a = AttributeCollection.new(:baz)
-      AttributeCollection.find_by_fixture_name(:baz).should == a
+      a = AttributeBuilder.new(:baz)
+      AttributeBuilder.find_by_fixture_name(:baz).should == a
     end
     
     it "should find no attributes for fixture_name :baz, if it was never created" do
-      a = AttributeCollection.new(:bar)
-      AttributeCollection.find_by_fixture_name(:baz).should be_nil
+      a = AttributeBuilder.new(:bar)
+      AttributeBuilder.find_by_fixture_name(:baz).should be_nil
     end
     
     it "should find no attributes for fixture_name :baz, if no fixture at all was ever created" do
-      AttributeCollection.find_by_fixture_name(:baz).should be_nil
+      AttributeBuilder.find_by_fixture_name(:baz).should be_nil
     end
     
     it "should have the class name if specified" do
-      AttributeCollection.new(:foo, :class => Object).active_record_class.should == Object
+      AttributeBuilder.new(:foo, :class => Object).active_record_class.should == Object
     end
     
     it "should use the class name of the fixture_name, camel-cased, if the class is unspecified, and the fixture uninherited" do
-      AttributeCollection.new(:object).active_record_class.should == Object
+      AttributeBuilder.new(:object).active_record_class.should == Object
     end
     
     it "should use the class name of the inherited attribute, if specified" do
-      AttributeCollection.new(:foo, :class => Object)
-      AttributeCollection.new(:bar, :from => :foo).active_record_class.should == Object      
+      AttributeBuilder.new(:foo, :class => Object)
+      AttributeBuilder.new(:bar, :from => :foo).active_record_class.should == Object      
     end    
     
     it "should not raise an error if the model ends with 's'" do
-      AttributeCollection.new(:actress).active_record_class.should == Actress
+      AttributeBuilder.new(:actress).active_record_class.should == Actress
     end
   end  
   
-  describe AttributeCollection, "hash, with simple arguments (only attributes and fixture name)" do
+  describe AttributeBuilder, "hash, with simple arguments (only attributes and fixture name)" do
     
     it "should return a hash" do
-      AttributeCollection.new(:foo).hash.should == {}
+      AttributeBuilder.new(:foo).hash.should == {}
     end
     
     it "should return the attributes hash given" do
-      attributes = AttributeCollection.new(:foo) do |f|
+      attributes = AttributeBuilder.new(:foo) do |f|
         f.foo = :bar
         f.scott = :taylor
       end
@@ -85,18 +85,18 @@ module FixtureReplacementController
   
   module AttributeFromHelper
     def setup_attributes
-      @from_attributes = AttributeCollection.new(:foo) do |u|
+      @from_attributes = AttributeBuilder.new(:foo) do |u|
         u.first_name = :scott
       end
     end
   end
   
-  describe AttributeCollection, "with an empty hash, after merge with another inherited attribute" do    
+  describe AttributeBuilder, "with an empty hash, after merge with another inherited attribute" do    
     include AttributeFromHelper
     
     before :each do
       setup_attributes
-      @attributes = AttributeCollection.new(:bar, :from => :foo)
+      @attributes = AttributeBuilder.new(:bar, :from => :foo)
     end
     
     it "should contain the keys from the inherited hash only" do
@@ -107,7 +107,7 @@ module FixtureReplacementController
     end
   end
   
-  describe AttributeCollection, "with a hash, after merge with another inherited attributes" do
+  describe AttributeBuilder, "with a hash, after merge with another inherited attributes" do
     include AttributeFromHelper
     
     before :each do
@@ -115,7 +115,7 @@ module FixtureReplacementController
     end
     
     it "should overwrite an attribute" do
-      attributes = AttributeCollection.new :bar, :from => :foo do |u|
+      attributes = AttributeBuilder.new :bar, :from => :foo do |u|
         u.first_name = :scott
       end
       
@@ -124,7 +124,7 @@ module FixtureReplacementController
     end
     
     it "should keep any new attributes, as well as any attributes which weren't overwritten" do
-      attributes = AttributeCollection.new(:bar, :from => :foo) do |os|
+      attributes = AttributeBuilder.new(:bar, :from => :foo) do |os|
         os.foo = :bar
       end
       

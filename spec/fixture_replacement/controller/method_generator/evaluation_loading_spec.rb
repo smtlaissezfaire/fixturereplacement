@@ -14,9 +14,9 @@ module FixtureReplacementController
         w.name = "foo"
       end
 
-      @item_attributes = AttributeCollection.new(:item, :attributes => item_attributes)
-      @writing_attributes = AttributeCollection.new(:writing, :from => :item, :attributes => writing_attributes, :class => Writing)
-      AttributeCollection.new(:category)
+      @item_attributes = AttributeBuilder.new(:item, :attributes => item_attributes)
+      @writing_attributes = AttributeBuilder.new(:writing, :from => :item, :attributes => writing_attributes, :class => Writing)
+      AttributeBuilder.new(:category)
     end
 
     it "should not raise an error if the a default_* method is referenced before it is defined" do

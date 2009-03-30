@@ -1,7 +1,7 @@
 module FixtureReplacement
   module ClassMethods
     def attributes_for(fixture_name, options={}, &block)
-      FixtureReplacementController::AttributeCollection.new(fixture_name, options, &block)
+      FixtureReplacementController::AttributeBuilder.new(fixture_name, options, &block)
     end
     
     def included(included_mod)

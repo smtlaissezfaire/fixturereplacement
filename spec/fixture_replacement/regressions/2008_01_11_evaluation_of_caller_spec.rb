@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacementController
-  describe AttributeCollection do
+  describe AttributeBuilder do
     before :each do
       lambda_expression = nil
       
@@ -22,7 +22,7 @@ module FixtureReplacementController
         end
       end
 
-      @attributes = AttributeCollection.new(:foo, &lambda_expression)
+      @attributes = AttributeBuilder.new(:foo, &lambda_expression)
     end
     
     it "should evaluate the proc in the binding of the caller which is passed" do

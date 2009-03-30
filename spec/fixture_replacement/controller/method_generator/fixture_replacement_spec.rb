@@ -3,8 +3,8 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 module FixtureReplacementController
   describe "MethodGenerator.generate_methods" do
     before :each do
-      @attributes = mock AttributeCollection
-      AttributeCollection.stub!(:instances).and_return [@attributes]
+      @attributes = mock AttributeBuilder
+      AttributeBuilder.stub!(:instances).and_return [@attributes]
       @module = mock "A Module"
       @method_generator = mock MethodGenerator
       @method_generator.stub!(:generate_methods)
@@ -12,7 +12,7 @@ module FixtureReplacementController
     end    
     
     it "should find each of the attributes" do
-      AttributeCollection.should_receive(:instances).and_return [@attributes]
+      AttributeBuilder.should_receive(:instances).and_return [@attributes]
       MethodGenerator.generate_methods(@module)
     end
     
