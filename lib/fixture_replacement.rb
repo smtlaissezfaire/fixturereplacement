@@ -20,6 +20,4 @@ module FixtureReplacement
   extend FixtureReplacement::ClassMethods
 end
 
-unless defined?(FR)
-  FR = FixtureReplacement
-end
+FR = FixtureReplacement unless defined?(FR)
