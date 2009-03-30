@@ -5,7 +5,6 @@ module SpecHelperFunctions
   # since db/example_data.rb is no where to be found
   def swap_out_require!
     Kernel.module_eval do
-      
       # Thanks, Jay Fields:
       # http://blog.jayfields.com/2006/12/ruby-alias-method-alternative.html
       require_method = instance_method(:require)
@@ -19,7 +18,6 @@ module SpecHelperFunctions
   end
   
   def setup_database_connection
-    
     require 'rubygems'
     require 'sqlite3'
     require 'active_record'
