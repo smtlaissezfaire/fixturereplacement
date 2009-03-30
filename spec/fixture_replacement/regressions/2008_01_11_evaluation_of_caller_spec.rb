@@ -6,9 +6,7 @@ module FixtureReplacementController
       lambda_expression = nil
       
       @module = Module.new do
-        class << self
-          include FixtureReplacement::ClassMethods
-        end
+        extend FixtureReplacement::ClassMethods
 
         lambda_expression = lambda { |o|
           o.bar = a_method

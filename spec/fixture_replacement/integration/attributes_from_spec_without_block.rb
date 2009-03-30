@@ -3,9 +3,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module FixtureReplacementControllerHelper
   def setup_fixtures
     @module = Module.new do
-      class << self
-        include FixtureReplacement::ClassMethods
-      end
+      extend FixtureReplacement::ClassMethods
       
       attributes_for :user do |u|
         u.username = random_string
