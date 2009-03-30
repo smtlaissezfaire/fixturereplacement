@@ -56,6 +56,14 @@ module FixtureReplacementController
       os.marshal_dump
     end
     
+    # Procedure for building the hash:
+    #
+    # 1. Find the hash for the parent builder (specified by :from)
+    # 2. Merge #1 (or an empty hash) with the hash given in the body
+    # 3. If an extra hash is given to the method, merge that in.
+    #
+    # to_hash always prefers later key/value pairs in this sequence.
+    #
     def to_hash(hash_to_merge=nil)
       if hash_to_merge
         to_hash.merge(hash_to_merge)
