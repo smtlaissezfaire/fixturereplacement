@@ -27,7 +27,7 @@ module FixtureReplacementController
         define_method("default_#{obj.fixture_name}") do |*args|
           
           hash = args[0] || Hash.new
-          DelayedEvaluationProc.new do
+          lambda do
             __send__("create_#{obj.fixture_name}", hash)
           end
         end
