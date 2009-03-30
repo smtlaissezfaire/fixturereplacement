@@ -2,16 +2,19 @@ module FixtureReplacementController
   class MethodGenerator
     
     class << self
-      def generate_methods
+      def generate_methods(evaluation_module = ClassFactory.fixture_replacement_module)
         AttributeCollection.instances.each do |attributes_instance|
-          new(attributes_instance).generate_methods
+          new(attributes_instance, evaluation_module).generate_methods
         end
       end
     end
     
-    def initialize(object_attributes)
+    def initialize(object_attributes, evaluation_module = ClassFactory.fixture_replacement_module)
       @object_attributes = object_attributes
+      @evaluation_module = evaluation_module
     end
+    
+    attr_reader :evaluation_module
     
     def generate_methods
       generate_default_method
@@ -50,10 +53,6 @@ module FixtureReplacementController
           obj.to_new_class_instance(args[0], self)
         end
       end
-    end
-    
-    def evaluation_module
-      ClassFactory.fixture_replacement_module
     end
   end
 end

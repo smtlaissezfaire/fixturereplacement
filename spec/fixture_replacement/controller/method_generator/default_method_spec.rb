@@ -28,11 +28,10 @@ module FixtureReplacementController
   describe MethodGenerator, "default_user" do
     before :each do
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       
       @struct = OpenStruct.new({:key => "val"})
       @attributes = AttributeCollection.new(:user, :attributes => @struct)
-      @generator = MethodGenerator.new(@attributes)
+      @generator = MethodGenerator.new(@attributes, @module)
       
       @fixture_name = "user"
       extend @module
@@ -46,12 +45,11 @@ module FixtureReplacementController
   describe MethodGenerator, "default_admin" do
     before :each do
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       
       @struct = OpenStruct.new({:key => "val"})
       @attributes = AttributeCollection.new(:admin, :attributes => @struct)
       @attributes.stub!(:merge!)
-      @generator = MethodGenerator.new(@attributes)
+      @generator = MethodGenerator.new(@attributes, @module)
       
       @fixture_name = "admin"
       @params_hash = {:username => "scott"}

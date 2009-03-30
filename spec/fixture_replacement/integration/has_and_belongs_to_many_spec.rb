@@ -3,9 +3,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module HasAndBelongsToManyHelper
   def setup_fixtures
     @module = Module.new do
-      class << self
-        include FixtureReplacement::ClassMethods
-      end      
+      extend FixtureReplacement::ClassMethods
 
       attributes_for :subscriber do |s|
         s.first_name = "Scott"
@@ -27,9 +25,7 @@ module HasAndBelongsToManyHelper
       attributes_for :ny_times_subscription, :from => :subscription, :class => Subscription
     end
     
-    
-    FixtureReplacementController::ClassFactory.stub!(:fixture_replacement_module).and_return @module
-    FixtureReplacementController::MethodGenerator.generate_methods
+    FixtureReplacementController::MethodGenerator.generate_methods(@module)
     self.class.send :include, @module
   end
 end

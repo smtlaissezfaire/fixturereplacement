@@ -4,7 +4,6 @@ module FixtureReplacementController
   module MethodGeneratorHelper
     def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       extend @module
 
       @fixture_name = fixture_name
@@ -16,7 +15,7 @@ module FixtureReplacementController
         end
       })
       
-      @generator = MethodGenerator.new(@attributes)
+      @generator = MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
     end
   end
@@ -79,8 +78,8 @@ module FixtureReplacementController
   
   describe MethodGenerator, "generate_new_method with associations" do
   
-    def create_generator(fixture_name, attributes)
-      generator = MethodGenerator.new(attributes)
+    def create_generator(fixture_name, attributes, mod)
+      generator = MethodGenerator.new(attributes, mod)
       generator.generate_default_method
       generator.generate_new_method
       generator.generate_create_method
@@ -88,7 +87,6 @@ module FixtureReplacementController
   
     before :each do
       @module = Module.new
-      ClassFactory.stub!(:fixture_replacement_module).and_return @module
       extend @module
       
       gender_attributes = AttributeCollection.new(:gender, :attributes => lambda do |gender| 
@@ -103,9 +101,9 @@ module FixtureReplacementController
         alien.gender = default_gender(:sex => "unknown")
       end)
       
-      create_generator(:gender, gender_attributes)
-      create_generator(:user, user_attributes)
-      create_generator(:alien, alien_attributes)
+      create_generator(:gender, gender_attributes, @module)
+      create_generator(:user,   user_attributes,   @module)
+      create_generator(:alien,  alien_attributes,  @module)
     end
     
     it "should evaluate any of the default_* methods before returning (if no over-writing key is given)" do
