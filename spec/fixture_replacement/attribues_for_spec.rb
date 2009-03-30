@@ -39,12 +39,6 @@ describe FixtureReplacement, "attributes_for" do
 end
 
 describe "FixtureReplacement.attributes_for" do
-  it "should yield an OpenStruct" do
-    FixtureReplacement.attributes_for :user do |u|      
-      u.should be_a_kind_of(OpenStruct)
-    end
-  end
-  
   it "should not raise an error if no block is given" do
     lambda {
       FixtureReplacement.attributes_for :scott, :from => :user  
