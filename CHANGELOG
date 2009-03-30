@@ -1,5 +1,15 @@
 == HEAD
 
+- Add FR as an alias for FixtureReplacement.  This should make it considerably easier to
+  use FR in the console:
+  
+    smt$ ./script/console
+    Loading development environment (Rails 2.2.2)
+    >> include FR
+    => Object
+    >> create_user
+    => #<User id: 14 ... >
+    
 - Use better loading.  Allow FixtureReplacement to be reloaded if cache_classes = false
 - Removed generator, since db/example_data.rb is no longer required.
 - Removed db/example_data.rb.  Now you are free to add fixture files anywhere.  Add them in-line
