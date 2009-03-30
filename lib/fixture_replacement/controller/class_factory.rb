@@ -12,10 +12,6 @@ module FixtureReplacementController
       def delayed_evaluation_proc
         FixtureReplacementController::DelayedEvaluationProc
       end
-    
-      def fake_active_record_instance
-        OpenStruct
-      end
     end
   end
 end

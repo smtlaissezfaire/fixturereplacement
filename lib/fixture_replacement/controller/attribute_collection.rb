@@ -54,7 +54,7 @@ module FixtureReplacementController
       if @merged_hash
         @merged_hash
       else
-        os = ClassFactory.fake_active_record_instance.new
+        os = OpenStruct.new
         @attributes_proc.call(os)
         os.marshal_dump
       end
