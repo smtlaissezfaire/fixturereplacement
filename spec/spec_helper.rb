@@ -2,6 +2,10 @@
 require "rubygems"
 require "spec"
 
+unless defined?(RAILS_ROOT)
+  RAILS_ROOT = "."
+end
+
 require File.dirname(__FILE__) + "/spec_helpers"
 
 include SpecHelperFunctions

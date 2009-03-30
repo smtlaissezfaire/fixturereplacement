@@ -11,7 +11,7 @@ module FixtureReplacement
     attr_writer :defaults_file
 
     def defaults_file
-      @defaults_file ||= "#{rails_root}/db/example_data.rb"
+      @defaults_file ||= "#{RAILS_ROOT}/db/example_data.rb"
     end
 
     def included(included_mod)
@@ -24,12 +24,6 @@ module FixtureReplacement
     # Addresses bug #16858 (see CHANGELOG)
     def method_added(method)
       module_function method if method != :method_added
-    end
-
-  private
-  
-    def rails_root
-      defined?(RAILS_ROOT) ? RAILS_ROOT : nil      
     end
   end
 end

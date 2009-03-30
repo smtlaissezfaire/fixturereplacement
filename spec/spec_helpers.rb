@@ -10,7 +10,7 @@ module SpecHelperFunctions
       require_method = instance_method(:require)
 
       define_method(:require) do |string|
-        unless string == "/db/example_data.rb"
+        unless string == "./db/example_data.rb"
           require_method.bind(self).call(string)
         end
       end
