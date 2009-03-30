@@ -1,10 +1,6 @@
 module FixtureReplacementController
   module ClassFactory
     class << self
-      def method_generator
-        MethodGenerator
-      end
-    
       def attribute_collection
         AttributeCollection
       end
