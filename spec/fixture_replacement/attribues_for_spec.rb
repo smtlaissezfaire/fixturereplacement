@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + "/../spec_helper"
 
 describe FixtureReplacement, "attributes_for" do
   before :each do
-    @fixture_attribute = mock "FixtureAttribute"
+    @fixture_attribute = FixtureReplacementController::AttributeCollection
     @fixture_attribute.stub!(:new)
     
     @attributes_proc = lambda {}
@@ -19,22 +19,22 @@ describe FixtureReplacement, "attributes_for" do
   
   it "should create a new FixtureAttribute with the name given" do
     @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => @attributes_proc})
-    FixtureReplacement.attributes_for(:foo, {}, @fixture_attribute, &@attributes_proc) 
+    FixtureReplacement.attributes_for(:foo, {}, &@attributes_proc) 
   end
   
   it "should create a new FixtureAttribute with the name given and class given" do
     @fixture_attribute.should_receive(:new).with(:foo, {:class => Object, :from => nil, :attributes => @attributes_proc})
-    FixtureReplacement.attributes_for(:foo, {:class => Object}, @fixture_attribute, &@attributes_proc)
+    FixtureReplacement.attributes_for(:foo, {:class => Object}, &@attributes_proc)
   end
   
   it "should create a new FixtureAttribute with the name given and the attributes from" do
     @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => :bar, :attributes => @attributes_proc})
-    FixtureReplacement.attributes_for(:foo, {:from => :bar}, @fixture_attribute, &@attributes_proc)
+    FixtureReplacement.attributes_for(:foo, {:from => :bar}, &@attributes_proc)
   end
   
   it "should create a new FixtureAttribute with the name and block given" do
     @fixture_attribute.should_receive(:new).with(:foo, {:class => nil, :from => nil, :attributes => @attributes_proc})
-    FixtureReplacement.attributes_for(:foo, {}, @fixture_attribute, &@attributes_proc)
+    FixtureReplacement.attributes_for(:foo, {}, &@attributes_proc)
   end
 end
 
