@@ -71,11 +71,21 @@ module FixtureReplacementController
     end
     
     def to_new_class_instance(hash={}, caller=self)
-      ActiveRecordFactory.new(active_record_class, self, hash, caller).to_new_instance
+      ActiveRecordFactory.new(active_record_class, merge_all_attributes(hash), caller).to_new_instance
     end
     
     def to_created_class_instance(hash={}, caller=self)
-      ActiveRecordFactory.new(active_record_class, self, hash, caller).to_created_instance
+      ActiveRecordFactory.new(active_record_class, merge_all_attributes(hash), caller).to_created_instance
+    end
+    
+    def merge_all_attributes(hash)
+      merge!
+      
+      if hash
+        self.hash.merge(hash)
+      else
+        self.hash
+      end
     end
   
   private

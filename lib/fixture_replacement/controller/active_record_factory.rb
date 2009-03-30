@@ -5,10 +5,9 @@ module FixtureReplacementController
   # instance with ActiveRecord::Base#new, or a created one ActiveRecord::Base#create!).
   class ActiveRecordFactory
     
-    def initialize(klass, attributes, hash={}, original_caller=self)
+    def initialize(klass, attributes, original_caller=self)
       @class      = klass
       @attributes = attributes
-      @hash       = hash
       @caller     = original_caller
     end
     
@@ -27,7 +26,7 @@ module FixtureReplacementController
   private
 
     def assign_values_to_instance(instance_object)
-      attributes.each do |key, value|
+      @attributes.each do |key, value|
         value = evaluate_possible_delayed_proc(value)
         instance_object.__send__("#{key}=", value)             
       end
@@ -41,15 +40,6 @@ module FixtureReplacementController
         value.evaluate(@caller)
       else
         value
-      end
-    end
-    
-    def attributes
-      @attributes.merge!
-      if @hash
-        @attributes.hash.merge(@hash)
-      else
-        @attributes.hash
       end
     end
   end
