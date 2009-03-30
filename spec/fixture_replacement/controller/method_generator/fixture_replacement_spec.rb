@@ -25,33 +25,5 @@ module FixtureReplacementController
       @method_generator.should_receive(:generate_methods)
       MethodGenerator.generate_methods(@module)
     end
-  end  
-  
-  describe MethodGenerator, "generate_methods (the instance method)" do
-    before :each do
-      @attributes = mock 'AttributeCollection'
-      @attributes.stub!(:merge!)
-      @module = mock 'A Module'
-      
-      @generator = MethodGenerator.new(@attributes, @module)
-      @generator.stub!(:generate_default_method)
-      @generator.stub!(:generate_new_method)
-      @generator.stub!(:generate_create_method)
-    end
-    
-    it "should generate the default method" do
-      @generator.should_receive(:generate_default_method)
-      @generator.generate_methods
-    end
-    
-    it "should generate the new method" do
-      @generator.should_receive(:generate_new_method)
-      @generator.generate_methods
-    end
-    
-    it "should generate the create method" do
-      @generator.should_receive(:generate_create_method)
-      @generator.generate_methods
-    end
-  end  
+  end
 end
