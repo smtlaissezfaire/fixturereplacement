@@ -25,7 +25,7 @@ class UserTest < Test::Unit::TestCase
     end
 
     FixtureReplacementController::MethodGenerator.generate_methods(@module)
-    self.class.send :include, @module
+    extend @module
   end
   
   def test_true_should_be_true
