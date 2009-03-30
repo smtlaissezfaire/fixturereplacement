@@ -83,7 +83,7 @@ module FixtureReplacementController
     end
   
     def derived_fixture_is_present?
-      !derived_fixture.nil?
+      derived_fixture ? true : false
     end
     
     def find_by_fixture_name(symbol)
