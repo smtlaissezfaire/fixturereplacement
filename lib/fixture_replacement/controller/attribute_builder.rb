@@ -60,14 +60,13 @@ module FixtureReplacementController
       end
     end
     
-    # This merges the :from attributes hash and the attributes from
-    # the anonymous function, overriding any attributes derived from
-    # the :from hash, with the ones given in the anonymous function.
-    def merge!
+    def to_hash
       if derived_fixture_is_present?
         unmerge_hash!
         @merged_hash = derived_fixtures_hash.merge(hash)
       end
+      
+      self.hash
     end
     
     def to_new_class_instance(hash={}, caller=self)
@@ -79,12 +78,10 @@ module FixtureReplacementController
     end
     
     def merge_all_attributes(hash)
-      merge!
-      
       if hash
-        self.hash.merge(hash)
+        to_hash.merge(hash)
       else
-        self.hash
+        to_hash
       end
     end
   

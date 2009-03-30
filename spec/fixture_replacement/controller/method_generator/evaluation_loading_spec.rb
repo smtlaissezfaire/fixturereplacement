@@ -24,17 +24,5 @@ module FixtureReplacementController
         MethodGenerator.generate_methods(@module)
       }.should_not raise_error
     end 
-    
-    it "should merge the hash with item and writing when new_writing is called" do
-      MethodGenerator.generate_methods(@module)
-      @writing_attributes.should_receive(:merge!)
-      new_writing
-    end   
-    
-    it "should merge the has with item and writing when create_writing is called" do
-      MethodGenerator.generate_methods(@module)
-      @writing_attributes.should_receive(:merge!)
-      create_writing
-    end
   end
 end

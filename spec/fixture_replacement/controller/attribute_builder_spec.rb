@@ -100,8 +100,7 @@ module FixtureReplacementController
     end
     
     it "should contain the keys from the inherited hash only" do
-      @attributes.merge!
-      @attributes.hash.should == {
+      @attributes.to_hash.should == {
         :first_name => :scott
       }
     end
@@ -119,8 +118,7 @@ module FixtureReplacementController
         u.first_name = :scott
       end
       
-      attributes.merge!
-      attributes.hash.should == {:first_name => :scott}
+      attributes.to_hash.should == {:first_name => :scott}
     end
     
     it "should keep any new attributes, as well as any attributes which weren't overwritten" do
@@ -128,8 +126,7 @@ module FixtureReplacementController
         os.foo = :bar
       end
       
-      attributes.merge!
-      attributes.hash.should == {:foo => :bar, :first_name => :scott}      
+      attributes.to_hash.should == {:foo => :bar, :first_name => :scott}      
     end
   end  
 end
