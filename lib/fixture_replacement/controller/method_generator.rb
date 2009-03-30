@@ -2,14 +2,14 @@ module FixtureReplacementController
   class MethodGenerator
     
     class << self
-      def generate_methods(evaluation_module = ClassFactory.fixture_replacement_module)
+      def generate_methods(evaluation_module = FixtureReplacement)
         AttributeCollection.instances.each do |attributes_instance|
           new(attributes_instance, evaluation_module).generate_methods
         end
       end
     end
     
-    def initialize(object_attributes, evaluation_module = ClassFactory.fixture_replacement_module)
+    def initialize(object_attributes, evaluation_module = FixtureReplacement)
       @object_attributes = object_attributes
       @evaluation_module = evaluation_module
     end
