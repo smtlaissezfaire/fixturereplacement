@@ -14,18 +14,7 @@ module FixtureReplacement
       @defaults_file ||= "#{rails_root}/db/example_data.rb"
     end
 
-    def reset_excluded_environments!
-      @excluded_environments = ["production"]
-    end
-
-    def excluded_environments
-      @excluded_environments ||= ["production"]
-    end
-
-    attr_writer :excluded_environments
-
     def included(included_mod)
-      raise_if_environment_is_in_excluded_environments
       FixtureReplacementController::MethodGenerator.generate_methods
     end
     
@@ -39,20 +28,6 @@ module FixtureReplacement
 
   private
   
-    def raise_if_environment_is_in_excluded_environments
-      if environment_is_in_excluded_environments?
-        raise FixtureReplacement::InclusionError, "FixtureReplacement cannot be included in the #{Object.const_get(:RAILS_ENV)} environment!"
-      end
-    end
-
-    def environment_is_in_excluded_environments?
-      if defined?(RAILS_ENV)
-        excluded_environments.include?(RAILS_ENV) ? true : false
-      else
-        false
-      end
-    end
-
     def rails_root
       defined?(RAILS_ROOT) ? RAILS_ROOT : nil      
     end
