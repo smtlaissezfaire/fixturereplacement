@@ -1,10 +1,6 @@
 module FixtureReplacementController
   module ClassFactory
     class << self
-      def active_record_factory
-        ActiveRecordFactory
-      end
-
       def method_generator
         MethodGenerator
       end

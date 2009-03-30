@@ -71,11 +71,11 @@ module FixtureReplacementController
     end
     
     def to_new_class_instance(hash={}, caller=self)
-      ClassFactory.active_record_factory.new(self, hash, caller).to_new_instance
+      ActiveRecordFactory.new(self, hash, caller).to_new_instance
     end
     
     def to_created_class_instance(hash={}, caller=self)
-      ClassFactory.active_record_factory.new(self, hash, caller).to_created_instance
+      ActiveRecordFactory.new(self, hash, caller).to_created_instance
     end
   
   private
