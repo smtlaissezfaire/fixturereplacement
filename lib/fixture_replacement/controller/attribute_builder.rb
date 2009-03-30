@@ -56,26 +56,26 @@ module FixtureReplacementController
       os.marshal_dump
     end
     
-    def to_hash
-      if derived_fixture_is_present?
-        derived_fixtures_hash.merge(procedure_hash)
+    def to_hash(hash_to_merge=nil)
+      if hash_to_merge
+        to_hash.merge(hash_to_merge)
       else
-        procedure_hash
+        if derived_fixture_is_present?
+          derived_fixtures_hash.merge(procedure_hash)
+        else
+          procedure_hash
+        end
       end
     end
     
-    def to_new_class_instance(hash={}, caller=self)
-      ActiveRecordFactory.new(active_record_class, merge_all_attributes(hash)).to_new_instance
+    def to_new_class_instance(custom_attributes={}, caller=self)
+      ActiveRecordFactory.new(active_record_class, to_hash(custom_attributes)).to_new_instance
     end
     
-    def to_created_class_instance(hash={}, caller=self)
-      ActiveRecordFactory.new(active_record_class, merge_all_attributes(hash)).to_created_instance
+    def to_created_class_instance(custom_attributes={}, caller=self)
+      ActiveRecordFactory.new(active_record_class, to_hash(custom_attributes)).to_created_instance
     end
     
-    def merge_all_attributes(hash)
-      hash ? to_hash.merge(hash) : to_hash
-    end
-  
   private
   
     def derived_fixtures_hash
