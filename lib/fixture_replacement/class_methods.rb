@@ -8,12 +8,6 @@ module FixtureReplacement
       })
     end
     
-    attr_writer :defaults_file
-
-    def defaults_file
-      @defaults_file ||= "#{RAILS_ROOT}/db/example_data.rb"
-    end
-
     def included(included_mod)
       FixtureReplacementController::MethodGenerator.generate_methods
     end

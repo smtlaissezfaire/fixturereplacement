@@ -28,7 +28,7 @@ begin
   files.each do |file|
     require file
   end
-  require FixtureReplacement.defaults_file
+  require "#{RAILS_ROOT}/db/example_data.rb"
 rescue LoadError => e
   raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
 end
