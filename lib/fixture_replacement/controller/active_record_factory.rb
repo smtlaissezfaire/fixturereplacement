@@ -26,7 +26,7 @@ module FixtureReplacementController
   private
 
     def assign_values_to_instance(instance_object)
-      all_attributes.each do |key, value|
+      attributes.each do |key, value|
         value = evaluate_possible_delayed_proc(value)
         instance_object.__send__("#{key}=", value)             
       end
@@ -43,13 +43,9 @@ module FixtureReplacementController
       end
     end
     
-    def all_attributes
+    def attributes
       @attributes.merge!
-      @all_merged_attributes ||= attributes_hash.merge(@hash_given_to_constructor)
-    end
-    
-    def attributes_hash
-      @attributes.hash
+      @attributes.hash.merge(@hash_given_to_constructor)
     end
   end
 end
