@@ -22,7 +22,6 @@
  
 
 begin
-  require 'active_support' 
   require 'ostruct'
   
   require File.dirname(__FILE__) + "/fixture_replacement/controller/class_factory"
