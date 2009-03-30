@@ -42,7 +42,7 @@ module FixtureReplacementController
       case value
       when Array
         value.map! { |element| evaluate_possible_delayed_proc element }
-      when ClassFactory.delayed_evaluation_proc
+      when DelayedEvaluationProc
         value.evaluate(@caller)
       else
         value
