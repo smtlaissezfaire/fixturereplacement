@@ -1,4 +1,29 @@
 
-The TODOs have moved to the rubyforge tracker:
+== Bugs
 
-http://rubyforge.org/tracker/?group_id=4556
+- Allow 'extend FixtureReplacement' as well as 'include FixtureReplacement'
+- Two levels down of inherited fixture bug
+
+== Features
+
+- Loading.  Use load or require_dependency
+- Validate fixtures.  Steal any other good ideas from FactoryGirl, Fixjour, Machinist, etc.
+- Alias FR to FixtureReplacement for convenience
+- Call new_* for dependent records.
+- Back associations with new_* ?
+
+== Code Cleanup
+
+- Remove Openstruct.  Make sure to yield real objects
+- Remove ugly method_added hack
+- Cleaner merging of attributes
+- Remove explicit require of db/example_data
+
+== ETC
+
+- cherry-pick commits from "version3" branch
+- Store old version 2 README
+- Update website info
+- Update with github info
+- Register Lighthouse project
+- Remove TODOs from Rubyforge tracker (http://rubyforge.org/tracker/?group_id=4556)
