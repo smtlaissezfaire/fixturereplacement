@@ -1,8 +1,27 @@
 == HEAD
 
-- Removed generator
-- Removed db/example_data
-- Added GPL as well as MIT License
+- Use better loading.  Allow FixtureReplacement to be reloaded if cache_classes = false
+- Removed generator, since db/example_data.rb is no longer required.
+- Removed db/example_data.rb.  Now you are free to add fixture files anywhere.  Add them in-line
+  in your spec or test helper:
+
+    FixutreReplacement.attributes_for :users do |u|
+      ...
+    end
+    
+  Or keep db/example_data.rb:
+  
+    module FixtureReplacement
+      attributes_for :users do |u|
+        ...
+      end
+    end
+    
+  in your spec helper:
+  
+    load "db/example_data.rb"
+    
+- Dual license the project.  You now have your pick between the MIT and GPL licenses.
 
 == 02/18/07
 * Bug Fix, closes [#18042] example_data doesn't accept default_x for HABTM relationships
