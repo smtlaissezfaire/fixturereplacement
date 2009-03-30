@@ -25,10 +25,8 @@ module FixtureReplacementController
       
       @evaluation_module.module_eval do
         define_method("default_#{obj.fixture_name}") do |*args|
-          
-          hash = args[0] || Hash.new
           lambda do
-            __send__("create_#{obj.fixture_name}", hash)
+            __send__("create_#{obj.fixture_name}", args[0] || Hash.new)
           end
         end
       end
