@@ -21,17 +21,13 @@
 # THE SOFTWARE.
  
 
-begin
-  require 'ostruct'
-  
-  files = Dir.glob(File.dirname(__FILE__) + "/fixture_replacement/**/*.rb")
-  files.each do |file|
-    require file
-  end
-  
-  module FixtureReplacement
-    extend FixtureReplacement::ClassMethods
-  end
-rescue LoadError => e
-  raise LoadError, "Error in FixtureReplacement Plugin: #{e}"
+require 'ostruct'
+
+files = Dir.glob(File.dirname(__FILE__) + "/fixture_replacement/**/*.rb")
+files.each do |file|
+  require file
+end
+
+module FixtureReplacement
+  extend FixtureReplacement::ClassMethods
 end
