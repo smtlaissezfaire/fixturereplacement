@@ -3,14 +3,14 @@ module FixtureReplacementController
     
     class << self
       def generate_methods(evaluation_module = FixtureReplacement)
-        AttributeBuilder.instances.each do |attributes_instance|
-          new(attributes_instance, evaluation_module).generate_methods
+        AttributeBuilder.instances.each do |builder|
+          new(builder, evaluation_module).generate_methods
         end
       end
     end
     
-    def initialize(object_attributes, evaluation_module = FixtureReplacement)
-      @object_attributes = object_attributes
+    def initialize(builder, evaluation_module = FixtureReplacement)
+      @builder           = builder
       @evaluation_module = evaluation_module
     end
     
@@ -21,33 +21,33 @@ module FixtureReplacementController
     end
     
     def generate_default_method
-      obj = @object_attributes
+      builder = @builder
       
       @evaluation_module.module_eval do
-        define_method("default_#{obj.fixture_name}") do |*args|
+        define_method("default_#{builder.fixture_name}") do |*args|
           lambda do
-            __send__("create_#{obj.fixture_name}", args[0] || Hash.new)
+            __send__("create_#{builder.fixture_name}", args[0] || Hash.new)
           end
         end
       end
     end
     
     def generate_create_method
-      obj = @object_attributes
+      builder = @builder
       
       @evaluation_module.module_eval do
-        define_method("create_#{obj.fixture_name}") do |*args|
-          obj.to_created_class_instance(args[0], self)
+        define_method("create_#{builder.fixture_name}") do |*args|
+          builder.to_created_class_instance(args[0], self)
         end
       end
     end
     
     def generate_new_method
-      obj = @object_attributes
+      builder = @builder
       
       @evaluation_module.module_eval do
-        define_method("new_#{obj.fixture_name}") do |*args|
-          obj.to_new_class_instance(args[0], self)
+        define_method("new_#{builder.fixture_name}") do |*args|
+          builder.to_new_class_instance(args[0], self)
         end
       end
     end
