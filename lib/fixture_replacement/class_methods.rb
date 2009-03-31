@@ -8,6 +8,10 @@ module FixtureReplacement
       MethodGenerator.generate_methods
     end
     
+    def extended(obj)
+      MethodGenerator.generate_methods
+    end
+    
     # Any user defined instance methods (as well as default_*) need the module's class scope to be
     # accessible inside the block given to attributes_for
     #

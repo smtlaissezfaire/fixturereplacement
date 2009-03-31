@@ -35,4 +35,11 @@ describe FixtureReplacement do
     @klass.instance_methods.should_not include("new_user")
     @klass.instance_methods.should_not include("default_user")
   end
+  
+  it "should generate the methods when extending" do
+    FixtureReplacement::MethodGenerator.should_receive(:generate_methods).with(no_args)
+
+    obj = Object.new
+    obj.extend FixtureReplacement
+  end
 end
