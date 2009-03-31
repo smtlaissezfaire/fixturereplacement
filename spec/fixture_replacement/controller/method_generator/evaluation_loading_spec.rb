@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe MethodGenerator, "Evaluation loading" do
     before :each do
       @module = Module.new

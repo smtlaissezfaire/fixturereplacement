@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe AttributeBuilder do
     before :each do
       lambda_expression = nil

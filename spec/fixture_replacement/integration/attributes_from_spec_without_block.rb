@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementControllerHelper
+module FixtureReplacementHelper
   def setup_fixtures
     @module = Module.new do
       extend FixtureReplacement::ClassMethods
@@ -25,12 +25,12 @@ module FixtureReplacementControllerHelper
       end
     end
 
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
+    MethodGenerator.generate_methods(@module)
     extend @module
   end
 end
 
-module FixtureReplacementController
+module FixtureReplacement
   describe AttributeBuilder do
     include FixtureReplacementControllerHelper
     

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe AttributeBuilder do  
     it "should add the instance to the global attributes" do
       a = AttributeBuilder.new(:foo)

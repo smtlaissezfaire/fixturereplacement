@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + "/../spec_helper"
 
 describe FixtureReplacement, "attributes_for" do
   before :each do
-    @fixture_attribute = FixtureReplacementController::AttributeBuilder
+    @fixture_attribute = FixtureReplacement::AttributeBuilder
     @fixture_attribute.stub!(:new)
   end
   

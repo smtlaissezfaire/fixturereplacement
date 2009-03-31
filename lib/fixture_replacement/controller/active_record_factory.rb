@@ -1,4 +1,4 @@
-module FixtureReplacementController
+module FixtureReplacement
   # I am a Factory which creates ActiveRecord Class instances.
   # Give me a collection of attributes, and an additional hash,
   # and I will merge them into a new ActiveRecord Instance (either a new

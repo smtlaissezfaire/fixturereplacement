@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe "default_method" do
     def use_module(&block)
       mod = Module.new
       mod.extend(FixtureReplacement::ClassMethods)
       mod.instance_eval(&block)
       
-      FixtureReplacementController::MethodGenerator.generate_methods(mod)
+      MethodGenerator.generate_methods(mod)
       extend mod
     end
     

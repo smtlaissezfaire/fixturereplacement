@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   # These specs are ugly.  It probably means that I need to refactor AttributeBuilder#to_new_class_instance
   describe AttributeBuilder, "Send Regresssion" do
     before :each do

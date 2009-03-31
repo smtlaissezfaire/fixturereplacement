@@ -24,7 +24,7 @@ class UserTest < Test::Unit::TestCase
       end
     end
 
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
+    FixtureReplacement::MethodGenerator.generate_methods(@module)
     extend @module
   end
   

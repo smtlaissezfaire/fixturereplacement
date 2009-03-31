@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
-module FixtureReplacementController  
+module FixtureReplacement
   module MethodGeneratorHelper
     def setup_for_generate_new_method(fixture_name, classname)
       @module = Module.new

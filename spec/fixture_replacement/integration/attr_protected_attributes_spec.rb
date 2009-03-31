@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe "create_user with attr_protected attributes" do
     before :each do
       @module = Module.new
@@ -11,7 +11,7 @@ module FixtureReplacementController
         u.name = "Scott"
       end
 
-      @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
+      @generator = MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
       @generator.generate_create_method
     end
@@ -54,7 +54,7 @@ module FixtureReplacementController
         s.name         = "Scott"
       end
 
-      @generator = FixtureReplacementController::MethodGenerator.new(@attributes, @module)
+      @generator = MethodGenerator.new(@attributes, @module)
       @generator.generate_new_method
     end
     

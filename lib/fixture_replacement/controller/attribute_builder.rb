@@ -1,4 +1,4 @@
-module FixtureReplacementController
+module FixtureReplacement
   # I am a series of ActiveRecord model attributes.
   #
   # My attributes come from the following places: 

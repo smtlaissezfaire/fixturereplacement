@@ -1,4 +1,4 @@
-module FixtureReplacementController
+module FixtureReplacement
   class MethodGenerator
     
     class << self

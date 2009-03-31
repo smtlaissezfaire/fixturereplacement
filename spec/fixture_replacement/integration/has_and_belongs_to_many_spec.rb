@@ -1,41 +1,33 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module HasAndBelongsToManyHelper
-  def setup_fixtures
-    @module = Module.new do
-      extend FixtureReplacement::ClassMethods
-
-      attributes_for :subscriber do |s|
-        s.first_name = "Scott"
-        s.subscriptions = [default_subscription]
-      end
-      
-      attributes_for :subscription do |s|
-        s.name = "The New York Times"
-      end
-      
-      attributes_for :subscriber_with_two_subscriptions, :from => :subscriber, :class => Subscriber do |s|
-        s.subscriptions = [default_harpers_subscription, default_ny_times_subscription]
-      end
-      
-      attributes_for :harpers_subscription, :class => Subscription do |s|
-        s.name = "Harper's Magazine"
-      end
-      
-      attributes_for :ny_times_subscription, :from => :subscription, :class => Subscription
-    end
-    
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
-    extend @module
-  end
-end
-
-module FixtureReplacementController
+module FixtureReplacement
   describe "HasAndBelongsToMany Associations" do
-    include HasAndBelongsToManyHelper
-    
     before :each do
-      setup_fixtures
+      @module = Module.new do
+        extend FixtureReplacement::ClassMethods
+
+        attributes_for :subscriber do |s|
+          s.first_name = "Scott"
+          s.subscriptions = [default_subscription]
+        end
+
+        attributes_for :subscription do |s|
+          s.name = "The New York Times"
+        end
+
+        attributes_for :subscriber_with_two_subscriptions, :from => :subscriber, :class => Subscriber do |s|
+          s.subscriptions = [default_harpers_subscription, default_ny_times_subscription]
+        end
+
+        attributes_for :harpers_subscription, :class => Subscription do |s|
+          s.name = "Harper's Magazine"
+        end
+
+        attributes_for :ny_times_subscription, :from => :subscription, :class => Subscription
+      end
+
+      MethodGenerator.generate_methods(@module)
+      extend @module
     end
 
     it "should have the fixture create_subscriber" do

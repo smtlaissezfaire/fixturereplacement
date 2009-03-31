@@ -43,34 +43,30 @@
 # 	
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module FixtureReplacementControllerHelper2
-  def setup_fixtures
-    @module = Module.new do
-      extend FixtureReplacement::ClassMethods
-
-      attributes_for :user do |u|
-        u.key = "foo"
-        u.username = random_string
-      end
-      
-      attributes_for :player, :class => Player, :from => :user
-
-    private
-    
-      def random_string
-        String.random(55)
-      end
-    end
-
-    FixtureReplacementController::MethodGenerator.generate_methods(@module)
-    extend @module
-  end
-end
-
-module FixtureReplacementController
+module FixtureReplacement
   
   describe "String.random" do
-    include FixtureReplacementControllerHelper2
+    def setup_fixtures
+      @module = Module.new do
+        extend FixtureReplacement::ClassMethods
+
+        attributes_for :user do |u|
+          u.key = "foo"
+          u.username = random_string
+        end
+
+        attributes_for :player, :class => Player, :from => :user
+
+      private
+
+        def random_string
+          String.random(55)
+        end
+      end
+
+      MethodGenerator.generate_methods(@module)
+      extend @module
+    end
     
     before :each do
       setup_fixtures

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../../spec_helper"
 
-module FixtureReplacementController
+module FixtureReplacement
   describe "MethodGenerator.generate_methods" do
     before :each do
       @attributes = mock AttributeBuilder
