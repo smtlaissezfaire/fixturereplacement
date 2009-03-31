@@ -1,11 +1,11 @@
-require_dependency 'ostruct'
+require 'ostruct'
 
 dir = File.dirname(__FILE__) + "/fixture_replacement"
-require_dependency "#{dir}/class_methods"
-require_dependency "#{dir}/controller/active_record_factory"
-require_dependency "#{dir}/controller/attribute_builder"
-require_dependency "#{dir}/controller/method_generator"
-require_dependency "#{dir}/extensions/string"
+load "#{dir}/class_methods.rb"
+load "#{dir}/controller/active_record_factory.rb"
+load "#{dir}/controller/attribute_builder.rb"
+load "#{dir}/controller/method_generator.rb"
+load "#{dir}/extensions/string.rb"
 
 module FixtureReplacement
   unless defined?(FixtureReplacement::VERSION)
