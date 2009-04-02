@@ -93,5 +93,21 @@ module FixtureReplacement
         obj.new_user.save!
       }.should_not raise_error
     end
+    
+    it "should have saved dependent objects with the default_* method" do
+      obj = use_module do
+        attributes_for :gender do |g|
+          g.sex = "Male"
+        end
+        
+        attributes_for :user do |u|
+          u.key = "val"
+          u.gender = default_gender
+        end
+      end
+      
+      user = obj.new_user
+      user.gender.should_not be_a_new_record
+    end
   end
 end
