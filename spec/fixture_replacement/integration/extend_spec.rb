@@ -2,9 +2,6 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacement
   describe "extending an object" do
-    it "should have the create_* method" do
-    end
-    
     it "should not create the create_* method in every instance of the class" do
       mod = Module.new do
         extend FixtureReplacement::ClassMethods
