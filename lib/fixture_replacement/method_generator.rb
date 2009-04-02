@@ -37,7 +37,7 @@ module FixtureReplacement
       @evaluation_module.module_eval do
         define_method("default_#{builder.fixture_name}") do |*args|
           lambda do
-            __send__("create_#{builder.fixture_name}", args[0] || Hash.new)
+            __send__("create_#{builder.fixture_name}", *args)
           end
         end
       end
@@ -60,7 +60,7 @@ module FixtureReplacement
       
       @evaluation_module.module_eval do
         define_method("new_#{builder.fixture_name}") do |*args|
-          ActiveRecordFactory.new(builder.active_record_class, builder.to_hash(args[0])).to_new_instance
+          ActiveRecordFactory.new(builder.active_record_class, builder.to_hash(*args)).to_new_instance
         end
       end
     end
