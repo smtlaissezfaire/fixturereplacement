@@ -1,8 +1,8 @@
 module FixtureReplacement
   module ClassMethods
     def attributes_for(fixture_name, options={}, &block)
-      AttributeBuilder.new(fixture_name, options, &block)
-      MethodGenerator.generate_methods(self)
+      builder = AttributeBuilder.new(fixture_name, options, &block)
+      MethodGenerator.new(builder, self).generate_methods
     end
     
     # Any user defined instance methods (as well as default_*) need the module's class scope to be
