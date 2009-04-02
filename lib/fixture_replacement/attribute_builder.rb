@@ -56,6 +56,10 @@ module FixtureReplacement
       os.marshal_dump
     end
     
+    def to_hash(hash_to_merge=nil)
+      evaluate_attributes(to_hash_with_procs(hash_to_merge))
+    end
+
     # Procedure for building the hash:
     #
     # 1. Find the hash for the parent builder (specified by :from)
@@ -64,9 +68,9 @@ module FixtureReplacement
     #
     # to_hash always prefers later key/value pairs in this sequence.
     #
-    def to_hash(hash_to_merge=nil)
+    def to_hash_with_procs(hash_to_merge = nil)
       if hash_to_merge
-        to_hash.merge(hash_to_merge)
+        to_hash_with_procs.merge(hash_to_merge)
       else
         if derived_fixture_is_present?
           derived_fixtures_hash.merge(procedure_hash)
@@ -100,6 +104,27 @@ module FixtureReplacement
   
     def constantize(symbol)
       symbol.to_s.camelize.constantize
+    end
+    
+    def evaluate_attribute(value)
+      case value
+      when Array
+        value.map! { |element| evaluate_attribute(element) }
+      when Proc
+        value.call
+      else
+        value
+      end
+    end
+    
+    def evaluate_attributes(hash)
+      new_hash = {}
+      
+      hash.each do |key, value|
+        new_hash[key] = evaluate_attribute(value)
+      end
+      
+      new_hash
     end
   end
 end
