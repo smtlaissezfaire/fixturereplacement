@@ -1,28 +1,13 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
 describe FixtureReplacement do
-  before :each do
+  before do
     @klass = Class.new
-    undefine_methods :create_user, :new_user, :default_user, :user_attributes
-        
-    FixtureReplacement.module_eval do
-      def user_attributes
-        {
-          
-        }
-      end
-    end
-  end
-  
-  def undefine_methods(*methods)
-    methods.each do |method_name|
-      if FixtureReplacement.instance_methods.include?(method_name.to_s)
-        FixtureReplacement.send(:undef_method, method_name)
-      end
-    end
+    FixtureReplacement::MethodGenerator.stub!(:generate_methods)
   end
   
   it "should generate the methods when included inside the FixtureReplacement module" do
+    FixtureReplacement::MethodGenerator.stub!(:generate_methods)
     FixtureReplacement::MethodGenerator.should_receive(:generate_methods).with(FixtureReplacement)
     
     @klass.class_eval do
@@ -31,6 +16,8 @@ describe FixtureReplacement do
   end
   
   it "should not generate the methods before being included" do
+    FixtureReplacement::MethodGenerator.should_not_receive(:generate_methods)
+    
     @klass.instance_methods.should_not include("create_user")
     @klass.instance_methods.should_not include("new_user")
     @klass.instance_methods.should_not include("default_user")
