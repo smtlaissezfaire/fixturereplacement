@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   belongs_to :gender  
-  validates_presence_of :key
 end
 
 class Player < ActiveRecord::Base
