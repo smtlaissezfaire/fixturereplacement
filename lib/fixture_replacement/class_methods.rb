@@ -8,7 +8,7 @@ module FixtureReplacement
       MethodGenerator.generate_methods(self)
     end
     
-    def extended(obj)
+    def extended(_)
       MethodGenerator.generate_methods(self)
     end
     
