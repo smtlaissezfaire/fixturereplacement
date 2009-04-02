@@ -2,7 +2,7 @@ module FixtureReplacement
   class MethodGenerator
     
     class << self
-      def generate_methods(evaluation_module = FixtureReplacement)
+      def generate_methods(evaluation_module)
         AttributeBuilder.instances.each do |builder|
           new(builder, evaluation_module).generate_methods
         end
