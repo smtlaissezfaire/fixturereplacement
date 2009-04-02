@@ -5,7 +5,7 @@ module FixtureReplacement
     end
     
     def included(included_mod)
-      MethodGenerator.generate_methods
+      MethodGenerator.generate_methods(self)
     end
     
     def extended(obj)

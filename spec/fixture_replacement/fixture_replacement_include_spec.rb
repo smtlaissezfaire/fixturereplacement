@@ -22,8 +22,8 @@ describe FixtureReplacement do
     end
   end
   
-  it "should generate the methods when included" do
-    FixtureReplacement::MethodGenerator.should_receive(:generate_methods).with(no_args)
+  it "should generate the methods when included inside the FixtureReplacement module" do
+    FixtureReplacement::MethodGenerator.should_receive(:generate_methods).with(FixtureReplacement)
     
     @klass.class_eval do
       include FixtureReplacement
