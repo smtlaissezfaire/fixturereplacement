@@ -76,7 +76,7 @@ module FixtureReplacement
       if hash_to_merge
         to_hash_with_procs.merge(hash_to_merge)
       else
-        if derived_fixture_is_present?
+        if derived_fixture?
           derived_fixtures_hash.merge(procedure_hash)
         else
           procedure_hash
@@ -90,12 +90,6 @@ module FixtureReplacement
       derived_fixture.to_hash
     end
   
-    def derived_fixture_is_present?
-      derived_fixture ? true : false
-    end
-    
-    alias_method :derived_fixture?, :derived_fixture_is_present?
-    
     def find_by_fixture_name(symbol)
       self.class.find_by_fixture_name(symbol)
     end
@@ -106,6 +100,10 @@ module FixtureReplacement
     
     def derived_fixture
       @derived_fixture ||= find_derived_fixture
+    end
+    
+    def derived_fixture?
+      derived_fixture ? true : false
     end
   
     def constantize(symbol)
