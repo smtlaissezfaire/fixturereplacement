@@ -47,8 +47,8 @@ module FixtureReplacement
     def active_record_class
       if @class
         @class
-      elsif @from && fixture = find_by_fixture_name(@from)
-        fixture.active_record_class
+      elsif derived_fixture?
+        derived_fixture.active_record_class
       else
         constantize(fixture_name)
       end
@@ -93,6 +93,8 @@ module FixtureReplacement
     def derived_fixture_is_present?
       derived_fixture ? true : false
     end
+    
+    alias_method :derived_fixture?, :derived_fixture_is_present?
     
     def find_by_fixture_name(symbol)
       self.class.find_by_fixture_name(symbol)
