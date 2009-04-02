@@ -60,9 +60,15 @@ module SpecHelperFunctions
         t.column :subscription_id, :integer
       end
     end
-  end  
+    
+    def use_module(&block)
+      mod = Module.new
+      mod.extend(FixtureReplacement::ClassMethods)
+      mod.instance_eval(&block)
+
+      obj = Object.new
+      obj.extend mod
+      obj
+    end
+  end
 end
-
-
-
-
