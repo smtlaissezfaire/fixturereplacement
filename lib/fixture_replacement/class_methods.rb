@@ -9,7 +9,7 @@ module FixtureReplacement
     end
     
     def extended(obj)
-      MethodGenerator.generate_methods
+      MethodGenerator.generate_methods(obj.class)
     end
     
     # Any user defined instance methods (as well as default_*) need the module's class scope to be

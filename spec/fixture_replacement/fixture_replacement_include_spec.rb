@@ -37,9 +37,8 @@ describe FixtureReplacement do
   end
   
   it "should generate the methods when extending" do
-    FixtureReplacement::MethodGenerator.should_receive(:generate_methods).with(no_args)
-
     obj = Object.new
+    FixtureReplacement::MethodGenerator.should_receive(:generate_methods)
     obj.extend FixtureReplacement
   end
 end
