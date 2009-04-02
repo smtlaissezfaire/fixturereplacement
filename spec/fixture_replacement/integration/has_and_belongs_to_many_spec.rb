@@ -27,7 +27,6 @@ module FixtureReplacement
       end
 
       MethodGenerator.generate_methods(@module)
-      extend @module
     end
 
     it "should have the fixture create_subscriber" do
@@ -51,8 +50,8 @@ module FixtureReplacement
     end
     
     it "should be able to create a subscriber with two subscriptions (inline)" do
-      subscription_one = create_harpers_subscription
-      subscription_two = create_ny_times_subscription
+      subscription_one = @module.create_harpers_subscription
+      subscription_two = @module.create_ny_times_subscription
       
       subscriptions = [subscription_one, subscription_two]
       

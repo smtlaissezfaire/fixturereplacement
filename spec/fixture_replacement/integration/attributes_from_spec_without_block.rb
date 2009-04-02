@@ -26,7 +26,6 @@ module FixtureReplacementHelper
     end
 
     MethodGenerator.generate_methods(@module)
-    extend @module
   end
 end
 
