@@ -9,7 +9,7 @@ module FixtureReplacement
       end
     end
     
-    def initialize(builder, evaluation_module = FixtureReplacement)
+    def initialize(builder, evaluation_module)
       @builder           = builder
       @evaluation_module = evaluation_module
     end
