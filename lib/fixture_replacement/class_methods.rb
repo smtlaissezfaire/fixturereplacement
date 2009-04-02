@@ -18,6 +18,7 @@ module FixtureReplacement
     # Addresses bug #16858 (see CHANGELOG)
     def method_added(method)
       module_function method if method != :method_added
+      public method
     end
   end
 end
