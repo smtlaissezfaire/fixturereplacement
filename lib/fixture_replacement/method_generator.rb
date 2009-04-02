@@ -48,7 +48,7 @@ module FixtureReplacement
       
       @evaluation_module.module_eval do
         define_method("create_#{builder.fixture_name}") do |*args|
-          obj = send("new_#{builder.fixture_name}", *args)
+          obj = __send__("new_#{builder.fixture_name}", *args)
           obj.save!
           obj
         end
