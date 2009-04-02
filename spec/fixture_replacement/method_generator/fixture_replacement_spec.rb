@@ -5,9 +5,10 @@ module FixtureReplacement
     before :each do
       @attributes = mock AttributeBuilder
       AttributeBuilder.stub!(:instances).and_return [@attributes]
-      @module = mock "A Module"
+
       @method_generator = mock MethodGenerator
       @method_generator.stub!(:generate_methods)
+      
       MethodGenerator.stub!(:new).and_return @method_generator
     end    
     
@@ -17,6 +18,8 @@ module FixtureReplacement
     end
     
     it "should create a new MethodGenerator for each attribute" do
+      @module = Module.new
+      
       MethodGenerator.should_receive(:new).with(@attributes, @module).and_return @method_generator
       MethodGenerator.generate_methods(@module)
     end
