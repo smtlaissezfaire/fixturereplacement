@@ -16,12 +16,6 @@ module FixtureReplacement
       new_object
     end
     
-    def to_created_instance
-      created_obj = to_new_instance
-      created_obj.save!
-      created_obj
-    end
-
   private
 
     def assign_values_to_instance(instance_object)

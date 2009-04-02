@@ -48,7 +48,9 @@ module FixtureReplacement
       
       @evaluation_module.module_eval do
         define_method("create_#{builder.fixture_name}") do |*args|
-          builder.to_created_class_instance(args[0], self)
+          obj = send("new_#{builder.fixture_name}", *args)
+          obj.save!
+          obj
         end
       end
     end

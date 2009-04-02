@@ -80,10 +80,6 @@ module FixtureReplacement
       ActiveRecordFactory.new(active_record_class, to_hash(custom_attributes)).to_new_instance
     end
     
-    def to_created_class_instance(custom_attributes={}, caller=self)
-      ActiveRecordFactory.new(active_record_class, to_hash(custom_attributes)).to_created_instance
-    end
-    
   private
   
     def derived_fixtures_hash
