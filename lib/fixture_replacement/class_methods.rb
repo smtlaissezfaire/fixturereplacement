@@ -2,13 +2,6 @@ module FixtureReplacement
   module ClassMethods
     def attributes_for(fixture_name, options={}, &block)
       AttributeBuilder.new(fixture_name, options, &block)
-    end
-    
-    def included(included_mod)
-      MethodGenerator.generate_methods(self)
-    end
-    
-    def extended(_)
       MethodGenerator.generate_methods(self)
     end
     
