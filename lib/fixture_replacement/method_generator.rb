@@ -60,7 +60,14 @@ module FixtureReplacement
       
       @evaluation_module.module_eval do
         define_method("new_#{builder.fixture_name}") do |*args|
-          ActiveRecordFactory.new(builder.active_record_class, builder.to_hash(*args)).to_new_instance
+          new_object = builder.active_record_class.new
+          
+          attributes = builder.to_hash(*args)
+          attributes.each do |key, value|
+            new_object.__send__("#{key}=", value)
+          end
+          
+          new_object
         end
       end
     end
