@@ -45,9 +45,13 @@ module FixtureReplacement
     attr_reader :from
 
     def active_record_class
-      @class || find_by_fixture_name(@from).active_record_class
-    rescue
-      constantize(fixture_name)
+      if @class
+        @class
+      elsif @from && fixture = find_by_fixture_name(@from)
+        fixture.active_record_class
+      else
+        constantize(fixture_name)
+      end
     end
     
     def procedure_hash
