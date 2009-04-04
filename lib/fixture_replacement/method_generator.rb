@@ -16,8 +16,8 @@ module FixtureReplacement
       builder = @builder
       
       @evaluation_module.module_eval do
-        define_method("valid_#{builder.fixture_name}_attributes") do
-          builder.to_hash
+        define_method("valid_#{builder.fixture_name}_attributes") do |*args|
+          builder.to_hash(*args)
         end
       end
     end
@@ -53,11 +53,8 @@ module FixtureReplacement
         define_method("new_#{builder.fixture_name}") do |*args|
           new_object = builder.active_record_class.new
           
-          attributes = builder.to_hash(*args)
-          attributes.each do |attr, value|
-            new_object.__send__("#{attr}=", value)
-          end
-          
+          attributes = __send__("valid_#{builder.fixture_name}_attributes", *args)
+          attributes.each { |attr, value| new_object.__send__("#{attr}=", value) }
           new_object
         end
       end
