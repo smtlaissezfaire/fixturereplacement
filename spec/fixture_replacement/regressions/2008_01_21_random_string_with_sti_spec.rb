@@ -46,10 +46,8 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module FixtureReplacement
   
   describe "String.random" do
-    def setup_fixtures
-      @module = Module.new do
-        extend FixtureReplacement::ClassMethods
-
+    before :each do
+      @obj = use_module do
         attributes_for :user do |u|
           u.key = "foo"
           u.username = random_string
@@ -63,24 +61,17 @@ module FixtureReplacement
           String.random(55)
         end
       end
-
-      MethodGenerator.generate_methods(@module)
-      extend @module
-    end
-    
-    before :each do
-      setup_fixtures
     end
     
     it "should have a different string for each instance in the base class" do
-      user1 = create_user
-      user2 = create_user
+      user1 = @obj.create_user
+      user2 = @obj.create_user
       user1.username.should_not == user2.username
     end
     
     it "should have a different string for each instance in the inherited class (with STI)" do
-      player1 = create_player
-      player2 = create_player
+      player1 = @obj.create_player
+      player2 = @obj.create_player
       player1.username.should_not == player2.username
     end
   end
