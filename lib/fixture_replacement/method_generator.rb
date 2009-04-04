@@ -9,6 +9,7 @@ module FixtureReplacement
       builder       = @builder
       builder_name  = builder.fixture_name
       builder_class = builder.active_record_class
+      default_method = @evaluation_module.default_method
       
       @evaluation_module.module_eval do
         define_method("valid_#{builder_name}_attributes") do |*args|
@@ -17,7 +18,7 @@ module FixtureReplacement
 
         define_method("default_#{builder_name}") do |*args|
           lambda do
-            __send__("create_#{builder_name}", *args)
+            __send__("#{default_method}_#{builder_name}", *args)
           end
         end
 

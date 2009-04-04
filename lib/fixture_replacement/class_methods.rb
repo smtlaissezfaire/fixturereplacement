@@ -13,5 +13,23 @@ module FixtureReplacement
       module_function method if method != :method_added
       public method
     end
+    
+    def reset!
+      @create_dependent_objects = true
+    end
+    
+    attr_writer :create_dependent_objects
+    
+    def create_dependent_objects?
+      if defined? @create_dependent_objects
+        @create_dependent_objects
+      else
+        @create_dependent_objects = true
+      end
+    end
+    
+    def default_method
+      create_dependent_objects? ? :create : :new
+    end
   end
 end
