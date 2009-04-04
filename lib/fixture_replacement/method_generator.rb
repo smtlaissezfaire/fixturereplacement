@@ -54,8 +54,8 @@ module FixtureReplacement
           new_object = builder.active_record_class.new
           
           attributes = builder.to_hash(*args)
-          attributes.each do |key, value|
-            new_object.__send__("#{key}=", value)
+          attributes.each do |attr, value|
+            new_object.__send__("#{attr}=", value)
           end
           
           new_object
