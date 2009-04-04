@@ -44,22 +44,15 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module FixtureReplacement
-  
-  describe "String.random" do
+  describe "random_string" do
     before :each do
       @obj = use_module do
         attributes_for :user do |u|
           u.key = "foo"
-          u.username = random_string
+          u.username = random_string(55)
         end
 
         attributes_for :player, :class => Player, :from => :user
-
-      private
-
-        def random_string
-          String.random(55)
-        end
       end
     end
     

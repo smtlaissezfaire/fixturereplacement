@@ -5,7 +5,6 @@ load "#{dir}/version.rb"
 load "#{dir}/class_methods.rb"
 load "#{dir}/attribute_builder.rb"
 load "#{dir}/method_generator.rb"
-load "#{dir}/extensions/string.rb"
 
 module FixtureReplacement
   include FixtureReplacement::Version

@@ -8,7 +8,7 @@ module FixtureReplacement
       @obj = use_module do
         attributes_for :user do |u|
           u.username = random_string
-          u.key = String.random
+          u.key = random_string
         end
 
         attributes_for :scott, :from => :user
@@ -17,12 +17,6 @@ module FixtureReplacement
 
         attributes_for :admin do |a|
           a.admin_status = true
-        end
-
-      private
-
-        def random_string
-          String.random
         end
       end
     end
