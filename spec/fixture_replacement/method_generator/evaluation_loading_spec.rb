@@ -5,7 +5,7 @@ module FixtureReplacement
     it "should not raise an error if the a default_* method is referenced before it is defined" do
       lambda {
         use_module do
-          attributes_for :item_attributes do |o|
+          attributes_for :item do |o|
             o.category = default_category
           end
         end

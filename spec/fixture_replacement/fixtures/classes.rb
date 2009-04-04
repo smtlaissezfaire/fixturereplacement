@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   belongs_to :gender  
 end
 
+class Member < ActiveRecord::Base; end
+class Post   < ActiveRecord::Base; end
+
 class Player < ActiveRecord::Base
 end
 
