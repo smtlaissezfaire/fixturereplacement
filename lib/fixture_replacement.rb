@@ -11,6 +11,4 @@ module FixtureReplacement
   extend FixtureReplacement::ClassMethods
 end
 
-FR = FixtureReplacement unless defined?(FR)
-
 FixtureReplacement.load_example_data
