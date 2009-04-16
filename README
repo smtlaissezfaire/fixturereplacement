@@ -224,15 +224,9 @@ If you have other ideas for speeding up your test suite, I'm all ears.
 
 == Installation
 
-  ruby script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
-  
-Or use externals:
+  Install the plugin:
 
-  ruby script/plugin install -x http://thmadb.com/public_svn/plugins/fixture_replacement2/
-  
-Run the generator if you don't have the file <tt>db/example_data.rb</tt>:
-
-  ruby script/generate fixture_replacement
+    git://github.com/smtlaissezfaire/fixturereplacement.git
 
 === Using FixtureReplacement within <tt>script/console</tt>
 
