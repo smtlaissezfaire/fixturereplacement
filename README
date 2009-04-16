@@ -62,9 +62,9 @@ is taken care of, and even custom fixtures can be created.  Here are some exampl
     attributes_for :item do |i|    
       i.user = default_user
       i.category = default_category
-      i.title = "Test Title #{String.random}"
-      i.description = String.random
-      i.text = "Item Text #{String.random}"
+      i.title = "Test Title #{random_string}"
+      i.description = random_string
+      i.text = "Item Text #{random_string}"
     end
 
     attributes_for :writing, :from => :item, :class => Writing
@@ -92,12 +92,12 @@ attributes for a user:
   module FixtureReplacement
     
     attributes_for :user do |u|
-      password = String.random
+      password = random_string
     
       u.value                  = "a value",
       u.other                  = "other value",
-      u.another                = String.random,     # random string 10 characters long
-      u.one_more               = String.random(15), # 15 characters long
+      u.another                = random_string,     # random string 10 characters long
+      u.one_more               = random_string(15), # 15 characters long
       u.password               = password,
       u.password_confirmation  = password,
       u.associated_object      = default_bar        # expects attributes_for :bar to be setup
@@ -107,7 +107,7 @@ attributes for a user:
 
 Note that:
 
-- a String.random method is provided for attributes whose exact value isn't important; this means you can 
+- A 'random_string' method is provided for attributes whose exact value isn't important; this means you can 
   create multiple, unique model instances
 - you can perform arbitrary set-up and execute any Ruby code prior to returning the hash 
   (as shown here where a <tt>password</tt> is generated and then used for both the <tt>:password</tt> and 
@@ -123,7 +123,7 @@ A small generator is included to start setting up the db/example_data.rb file.  
 
 Based on the above definition FixtureReplacement makes the following methods available:
 
-- String.random: generates a random string as shown above
+- random_string: generates a random string as shown above
 - <tt>new_user</tt>: equivalent to <tt>User.new</tt> with the attributes for the user.
 - <tt>create_user</tt>: equivalent to <tt>User.create!</tt> with the user's attributes.
 - <tt>default_user</tt>: for use inside <tt>model_attributes</tt> definitions; this basically 
@@ -254,11 +254,11 @@ Once again, the test above doesn't care about usernames, so why should you?  But
   module FixtureReplacement   
     
     attributes_for :user do |u|
-      password = String.random
+      password = random_string
       
-      u.username => String.random,
-      u.password => password,
-      u.password_confirmation => password
+      u.username = random_string
+      u.password = password
+      u.password_confirmation = password
     end    
     
   end
