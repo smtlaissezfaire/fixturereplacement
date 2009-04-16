@@ -38,5 +38,15 @@ module FixtureReplacement
       1.upto(length) { |i| string << chars[rand(chars.size-1)]}
       string
     end
+
+    def load_example_data
+      load "#{rails_root}/db/example_data.rb"
+    rescue LoadError
+      # no-op.  If the file is not found, don't panic
+    end
+
+    def rails_root
+      defined?(RAILS_ROOT) ? RAILS_ROOT : "."
+    end
   end
 end
