@@ -12,3 +12,5 @@ module FixtureReplacement
 end
 
 FR = FixtureReplacement unless defined?(FR)
+
+FixtureReplacement.load_example_data
