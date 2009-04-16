@@ -15,75 +15,7 @@ Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Uni
 
 === What's new in 2.1:
 
-See the CHANGELOG
-
-=== What's new in Version 2:
-
-(Skip this section if you are new to fixture replacement)
-
-The format of the db/example_data.rb file is much more flexible.  Now namespacing
-is taken care of, and even custom fixtures can be created.  Here are some examples:
-
-  module FixtureReplacement
-  
-    # using Namespacing
-    attributes_for :credit_card, :class => Payment::CreditCard do |cc|
-      cc.user = default_user
-      cc.card_number = "5555-5555-5555-5555"
-    end
-    
-    attributes_for :user do |u|
-      email = random_email
-  
-      u.username = random_username                            
-      u.password = "my-pass"
-      u.password_confirmation = "my-pass"
-      u.education_level = default_education_level
-      u.gender = "male"
-      u.email_address = email
-      u.email_address_confirmation = email 
-      u.date_of_birth = Time.mktime('1985', '06', '12')
-    end
-    
-    # Here is the custom fixture.  The :from inherits 
-    # all the attributes from the user specified above,
-    # but specific attributes can be overriden as needed.
-    # This is especially helpful in script/console in development
-    # mode, when you need to login to your site.
-    #
-    # This will generate the methods create_scott, and new_scott,
-    # which can be passed hashes, as usual
-    attributes_for :scott, :from => :user do |u|
-      u.username = "scott"
-      u.password = "scott"
-      u.password_confirmation = "scott"
-    end
-    
-    # And here is an STI example.  Notice the :class needs
-    # to be specified, as well as the :from key, which will
-    # inherit the attributes.
-    
-    attributes_for :item do |i|    
-      i.user = default_user
-      i.category = default_category
-      i.title = "Test Title #{random_string}"
-      i.description = random_string
-      i.text = "Item Text #{random_string}"
-    end
-
-    attributes_for :writing, :from => :item, :class => Writing
-    
-Since all of this is in one file, editing it shouldn't be a big task.  Also,
-the create_*, new_* and default_* methods are still in place and function in the same
-manner as they did before, so none of your tests should need to change.
-
-Another note: If you are running FixtureReplacement on externals, you'll want to remove
-the old repository link (http://thmadb.com/public_svn/plugins/fixture_replacement/), and
-switch to the new one (http://thmadb.com/public_svn/plugins/fixture_replacement2/).
-
-Version 1 still works, and you are welcome to use it, but no new development will occur
-with it.  The old docs are still around[http://fixture_replacement.rubyforge.org/version_one/]
-
+See the CHANGELOG.  Most notably, String.random is gone in favor of the method random_string.
 
 == How to use FixtureReplacement
 
@@ -119,10 +51,6 @@ Note that:
 - a <tt>default_modelname</tt> method is automatically provided that allows you to set up dependent 
   model objects (in this case an instance of the <tt>Bar</tt> model)
   
-A small generator is included to start setting up the db/example_data.rb file.  Run:
-
-  ./script/generate fixture_replacement
-
 === Available methods
 
 Based on the above definition FixtureReplacement makes the following methods available:
