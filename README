@@ -13,6 +13,10 @@ to omit extraneous details and focus only on the attributes that are important f
 particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and 
 Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
 
+== What's new on HEAD:
+
+See the CHANGELOG
+
 === What's new in Version 2:
 
 (Skip this section if you are new to fixture replacement)
