@@ -261,19 +261,17 @@ If you have other ideas for speeding up your test suite, I'm all ears.
 
 Add the following to your <tt>spec/spec_helper.rb</tt> file, in the configuration section:
 
-Spec::Runner.configure do |config|
-  config.include FixtureReplacement
-end
+  Spec::Runner.configure do |config|
+    config.include FixtureReplacement
+  end
 
 === Using it with Test::Unit
 
 Add the following to your <tt>test/test_helper.rb</tt> file:
 
-class Test::Unit::TestCase
-
-  include FixtureReplacement
-
-end
+  class Test::Unit::TestCase
+    include FixtureReplacement
+  end
 
 == Running the Specs/Tests for FixtureReplacement
 
