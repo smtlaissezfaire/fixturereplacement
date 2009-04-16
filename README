@@ -230,8 +230,13 @@ If you have other ideas for speeding up your test suite, I'm all ears.
 
 === Using FixtureReplacement within <tt>script/console</tt>
 
-  % script/console
-  >> include FixtureReplacement
+  $ ./script/console 
+  Loading development environment
+  >> include FR
+  => Object
+  >> create_user
+  => #<User id: 1, crypted_password: "521faec1c095..." ...>
+
 
 === Using it with RSpec
 
