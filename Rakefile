@@ -5,6 +5,12 @@ require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
 require 'rake/contrib/rubyforgepublisher'
 
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/**/*test*.rb']
+  t.verbose = true
+end
+
 desc 'Default: run unit tests.'
 task :default => :spec
 
