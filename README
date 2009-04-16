@@ -15,7 +15,26 @@ Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Uni
 
 === What's new in 2.1:
 
-See the CHANGELOG.  Most notably, String.random is gone in favor of the method random_string.
+See the CHANGELOG.  
+
+Most notably, String.random is gone in favor of the method random_string.  Call random_string
+as you would previously in FixtureReplacement:
+
+  module FixtureReplacement
+    attributes_for :user do |u|
+      u.username = random_string
+    end
+  end
+
+To replace calls to String.random in your specs or elsewhere, use the FixtureReplacement
+module instead:
+
+  FixtureReplacement.random_string
+
+  # or:
+
+  FR.random_string # FR is a convenience alias for FixtureReplacement
+
 
 == How to use FixtureReplacement
 
