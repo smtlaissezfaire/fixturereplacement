@@ -13,7 +13,7 @@ to omit extraneous details and focus only on the attributes that are important f
 particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and 
 Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
 
-== What's new on HEAD:
+=== What's new in 2.1:
 
 See the CHANGELOG
 
