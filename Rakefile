@@ -12,7 +12,7 @@ Rake::TestTask.new do |t|
 end
 
 desc 'Default: run unit tests.'
-task :default => :spec
+task :default => [:spec, :test]
 
 # Create specs + Rake Task
 
