@@ -319,6 +319,7 @@ Thanks to the following for making this software better:
 - LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
   - bug reports
 - Brian Helmkamp: Our mutual hate of ActiveRecord
+- Pat Nakajima: Ideas from Fixjour
   
 If you would like to change how this software works, please submit a patch with specs through
 the lighthouse project page:
