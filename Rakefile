@@ -26,7 +26,7 @@ Rake::RDocTask.new(:rdoc_without_analytics) do |rdoc|
   rdoc.title    = 'FixtureReplacement'
   rdoc.options << '--line-numbers' << '--inline-source'
 
-  ["README", "CHANGELOG", "GPL_LICENSE", "MIT_LICENSE", "lib/**/*.rb"].each do |file|
+  ["README.rdoc", "CHANGELOG", "GPL_LICENSE", "MIT_LICENSE", "lib/**/*.rb"].each do |file|
     rdoc.rdoc_files.include(file)
   end
 end
