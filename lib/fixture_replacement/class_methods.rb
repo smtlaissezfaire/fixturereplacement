@@ -48,5 +48,9 @@ module FixtureReplacement
     def rails_root
       defined?(RAILS_ROOT) ? RAILS_ROOT : "."
     end
+
+    def reload!
+      load File.dirname(__FILE__) + "/../fixture_replacement.rb"
+    end
   end
 end
