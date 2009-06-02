@@ -79,5 +79,20 @@ module FixtureReplacement
         obj.new_user.save!
       }.should_not raise_error
     end
+    
+    it "should yield the object inside the block" do
+      pending 'TODO' do
+        obj = nil
+      
+        mod = use_module do
+          attributes_for :user do |u|
+            obj = u
+          end
+        end
+      
+        mod.new_user # trigger the block
+        obj.should be_a_kind_of(User)
+      end
+    end
   end
 end
