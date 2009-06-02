@@ -36,3 +36,11 @@ end
 class Subscription < ActiveRecord::Base
   has_and_belongs_to_many :subscribers
 end
+
+class Event < ActiveRecord::Base
+  has_one :schedule
+end
+
+class Schedule < ActiveRecord::Base
+  belongs_to :event
+end

@@ -43,7 +43,7 @@ module FixtureReplacement
     def instantiate(hash_to_merge = {}, instance = active_record_class.new)
       returning instance do
         instantiate_parent_fixture(instance)
-        call_attribute_body(instance)
+        call_attribute_body(instance, hash_to_merge)
         add_given_keys(instance, hash_to_merge)
       end
     end
@@ -54,8 +54,12 @@ module FixtureReplacement
       derived_fixture.instantiate({}, instance) if derived_fixture?
     end
   
-    def call_attribute_body(instance)
-      @attributes_proc.call(instance)
+    def call_attribute_body(instance, hash_to_merge)
+      if @attributes_proc.arity == 2
+        @attributes_proc.call(instance, hash_to_merge)
+      else
+        @attributes_proc.call(instance)
+      end
     end
     
     def add_given_keys(instance, hash_to_merge)

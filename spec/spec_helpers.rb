@@ -59,6 +59,15 @@ module SpecHelperFunctions
         t.column :subscriber_id, :integer
         t.column :subscription_id, :integer
       end
+      
+      create_table :events do |t|
+        t.column :created_at, :datetime
+        t.column :updated_at, :datetime
+      end
+      
+      create_table :schedules do |t|
+        t.integer :event_id
+      end
     end
     
     def use_module(&block)
