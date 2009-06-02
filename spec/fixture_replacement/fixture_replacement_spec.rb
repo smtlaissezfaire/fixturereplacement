@@ -78,4 +78,13 @@ describe FixtureReplacement do
       FR.rails_root.should == "."
     end
   end
+
+  describe "reload!" do
+    it "should call load on the main fixture replacement file" do
+      file_path = File.expand_path(File.dirname(__FILE__) + "/../../lib/fixture_replacement.rb")
+      FixtureReplacement.should_receive(:load).with(file_path)
+
+      FixtureReplacement.reload!
+    end
+  end
 end

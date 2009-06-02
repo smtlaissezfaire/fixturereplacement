@@ -32,7 +32,7 @@ module FixtureReplacement
     end
 
     def reload!
-      load File.dirname(__FILE__) + "/../fixture_replacement.rb"
+      load File.expand_path(File.dirname(__FILE__) + "/../fixture_replacement.rb")
     end
   end
 end
