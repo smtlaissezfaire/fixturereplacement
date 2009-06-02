@@ -81,18 +81,16 @@ module FixtureReplacement
     end
     
     it "should yield the object inside the block" do
-      pending 'TODO' do
-        obj = nil
-      
-        mod = use_module do
-          attributes_for :user do |u|
-            obj = u
-          end
+      obj = nil
+    
+      mod = use_module do
+        attributes_for :user do |u|
+          obj = u
         end
-      
-        mod.new_user # trigger the block
-        obj.should be_a_kind_of(User)
       end
+    
+      mod.new_user # trigger the block
+      obj.should be_a_kind_of(User)
     end
   end
 end

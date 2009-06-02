@@ -8,11 +8,11 @@ module FixtureReplacement
     def generate_methods
       builder       = @builder
       builder_name  = builder.fixture_name
-      builder_class = builder.active_record_class
       
       @evaluation_module.module_eval do
         define_method("valid_#{builder_name}_attributes") do |*args|
-          builder.to_hash(*args)
+          obj = __send__ "new_#{builder_name}"
+          obj.attributes
         end
 
         define_method("create_#{builder_name}") do |*args|
@@ -22,11 +22,7 @@ module FixtureReplacement
         end
         
         define_method("new_#{builder_name}") do |*args|
-          new_object = builder_class.new
-          
-          attributes = __send__("valid_#{builder_name}_attributes", *args)
-          attributes.each { |attr, value| new_object.__send__("#{attr}=", value) }
-          new_object
+          new_object = builder.instantiate(*args)
         end
       end
     end

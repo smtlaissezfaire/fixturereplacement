@@ -52,40 +52,28 @@ module FixtureReplacement
       end
     end
     
-    def procedure_hash
-      os = OpenStruct.new
-      @attributes_proc.call(os)
-      os.marshal_dump
-    end
-    
-    def to_hash(hash_to_merge=nil)
-      to_hash_with_procs(hash_to_merge)
-    end
-
-    # Procedure for building the hash:
-    #
-    # 1. Find the hash for the parent builder (specified by :from)
-    # 2. Merge #1 (or an empty hash) with the hash given in the body
-    # 3. If an extra hash is given to the method, merge that in.
-    #
-    # to_hash always prefers later key/value pairs in this sequence.
-    #
-    def to_hash_with_procs(hash_to_merge = nil)
-      if hash_to_merge
-        to_hash_with_procs.merge(hash_to_merge)
-      else
-        if derived_fixture?
-          derived_fixtures_hash.merge(procedure_hash)
-        else
-          procedure_hash
-        end
+    def instantiate(hash_to_merge = {}, instance = active_record_class.new)
+      returning instance do
+        instantiate_parent_fixture(instance)
+        call_attribute_body(instance)
+        add_given_keys(instance, hash_to_merge)
       end
     end
     
   private
   
-    def derived_fixtures_hash
-      derived_fixture.to_hash
+    def instantiate_parent_fixture(instance)
+      derived_fixture.instantiate({}, instance) if derived_fixture?
+    end
+  
+    def call_attribute_body(instance)
+      @attributes_proc.call(instance)
+    end
+    
+    def add_given_keys(instance, hash_to_merge)
+      hash_to_merge.each do |key, value|
+        instance.send("#{key}=", value)
+      end
     end
   
     def find_by_fixture_name(symbol)

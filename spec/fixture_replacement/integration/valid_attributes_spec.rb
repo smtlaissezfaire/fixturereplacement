@@ -21,25 +21,21 @@ module FixtureReplacement
     it "should have the attributes given as a hash" do
       obj = use_module do
         attributes_for :user do |x|
-          x.foo = 17
+          x.key = 17
         end
       end
       
-      obj.valid_user_attributes.should == {
-        :foo => 17
-      }
+      obj.valid_user_attributes.should include({ "key" => 17 })
     end
     
     it "should have the attributes given" do
       obj = use_module do
         attributes_for :user do |x|
-          x.bar = 18
+          x.key = 18
         end
       end
       
-      obj.valid_user_attributes.should == {
-        :bar => 18
-      }
+      obj.valid_user_attributes.should include({ "key" => 18 })
     end
   end
 end
