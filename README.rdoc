@@ -328,7 +328,9 @@ Thanks to the following for making this software better:
   - patch: classify should be camelize (applied in revision 74)
 - LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
   - bug reports
-- Brian Helmkamp: Our mutual hate of ActiveRecord
+- Bryan Helmkamp: Feedback on back associating models.
+- Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
+  of new_* methods.
   
 If you would like to change how this software works, please submit a patch with specs through
 the lighthouse project page:
