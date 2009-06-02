@@ -14,8 +14,7 @@ module FixtureReplacement
       end
       
       def add_instance(instance)
-        @instances ||= []
-        @instances << instance
+        instances << instance
       end
       
       def clear_out_instances!
