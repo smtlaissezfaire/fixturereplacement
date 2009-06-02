@@ -13,27 +13,41 @@ to omit extraneous details and focus only on the attributes that are important f
 particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and 
 Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
 
-=== What's new in 2.1:
+=== What's new since 2.0:
 
-See the CHANGELOG.  
+- Better Support for Reloading (call FR.reload! after calling reload! in the console or in your spec helper)
+- default_* is gone.  Use new_* instead.
+  This will necessitate that declarations of the form validates_presence_of :association_id 
+  will need to change to validates_presence_of :association
+- Cyclic dependencies can now be handled by checking the hash passed to the builders:
 
-Most notably, String.random is gone in favor of the method random_string.  Call random_string
-as you would previously in FixtureReplacement:
-
-  module FixtureReplacement
-    attributes_for :user do |u|
-      u.username = random_string
+    attributes_for :event do |e, hash|
+      e.schedule = new_schedule(:event => e) unless hash[:schedule]
     end
-  end
+  
+    attributes_for :schedule do |s, hash|
+      s.event = new_event(:schedule => s) unless hash[:event]
+    end
 
-To replace calls to String.random in your specs or elsewhere, use the FixtureReplacement
-module instead:
+- <tt>String.random</tt> is gone in favor of the method <tt>random_string</tt>.  Call random_string
+  as you would previously in FixtureReplacement:
 
-  FixtureReplacement.random_string
+    module FixtureReplacement
+      attributes_for :user do |u|
+        u.username = random_string
+      end
+    end
 
-  # or:
+  To replace calls to String.random in your specs or elsewhere, use the FixtureReplacement
+  module instead:
 
-  FR.random_string # FR is a convenience alias for FixtureReplacement
+    FixtureReplacement.random_string
+
+    # or:
+
+    FR.random_string # FR is a convenience alias for FixtureReplacement
+
+- Huge internal code cleanup
 
 
 == How to use FixtureReplacement
@@ -55,7 +69,7 @@ attributes for a user:
       u.one_more               = random_string(15), # 15 characters long
       u.password               = password,
       u.password_confirmation  = password,
-      u.associated_object      = default_bar        # expects attributes_for :bar to be setup
+      u.associated_object      = new_bar            # expects attributes_for :bar to be setup
     end
     
   end
@@ -67,20 +81,16 @@ Note that:
 - you can perform arbitrary set-up and execute any Ruby code prior to returning the hash 
   (as shown here where a <tt>password</tt> is generated and then used for both the <tt>:password</tt> and 
   <tt>:password_confirmation</tt> attributes)
-- a <tt>default_modelname</tt> method is automatically provided that allows you to set up dependent 
+- a <tt>new_modelname</tt> method is automatically provided that allows you to set up dependent 
   model objects (in this case an instance of the <tt>Bar</tt> model)
   
 === Available methods
 
 Based on the above definition FixtureReplacement makes the following methods available:
 
-- random_string: generates a random string as shown above
+- <tt>random_string</tt>: generates a random string as shown above
 - <tt>new_user</tt>: equivalent to <tt>User.new</tt> with the attributes for the user.
 - <tt>create_user</tt>: equivalent to <tt>User.create!</tt> with the user's attributes.
-- <tt>default_user</tt>: for use inside <tt>model_attributes</tt> definitions; this basically 
-  returns a <tt>Proc</tt> object which allows the actual creation of the object to be deferred 
-  until it is actually needed: in this way unnecessary object creation is avoided until it is 
-  known for sure that a particular attribute is not going to be overridden.
 
 === Overriding attributes
 
