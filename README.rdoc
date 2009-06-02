@@ -332,10 +332,10 @@ Thanks to the following for making this software better:
 - Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
   of new_* methods.
   
-If you would like to change how this software works, please submit a patch with specs through
-the lighthouse project page:
+If you would like to change how this software works or request a feature, use
+the github issue tracker[http://github.com/smtlaissezfaire/fixturereplacement/issues].
 
-http://fixture_replacement.lighthouseapp.com/
+
   
 
 == License
