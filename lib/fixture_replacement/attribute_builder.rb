@@ -114,8 +114,6 @@ module FixtureReplacement
       case value
       when Array
         value.map! { |element| evaluate_attribute(element) }
-      when Proc
-        value.call
       else
         value
       end
