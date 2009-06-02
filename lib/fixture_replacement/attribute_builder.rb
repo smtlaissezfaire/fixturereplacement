@@ -64,12 +64,8 @@ module FixtureReplacement
       end
     end
   
-    def find_by_fixture_name(symbol)
-      self.class.find_by_fixture_name(symbol)
-    end
-    
     def find_derived_fixture
-      find_by_fixture_name(from)
+      self.class.find_by_fixture_name(from)
     end
     
     def derived_fixture
