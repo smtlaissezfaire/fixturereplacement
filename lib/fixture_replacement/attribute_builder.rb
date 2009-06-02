@@ -61,7 +61,7 @@ module FixtureReplacement
     end
     
     def to_hash(hash_to_merge=nil)
-      evaluate_attributes(to_hash_with_procs(hash_to_merge))
+      to_hash_with_procs(hash_to_merge)
     end
 
     # Procedure for building the hash:
@@ -108,25 +108,6 @@ module FixtureReplacement
   
     def constantize(symbol)
       symbol.to_s.camelize.constantize
-    end
-    
-    def evaluate_attribute(value)
-      case value
-      when Array
-        value.map! { |element| evaluate_attribute(element) }
-      else
-        value
-      end
-    end
-    
-    def evaluate_attributes(hash)
-      new_hash = {}
-      
-      hash.each do |key, value|
-        new_hash[key] = evaluate_attribute(value)
-      end
-      
-      new_hash
     end
   end
 end
