@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'hanna/rdoctask'
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
 require 'rake/contrib/rubyforgepublisher'
@@ -25,6 +25,8 @@ Rake::RDocTask.new(:rdoc_without_analytics) do |rdoc|
   rdoc.rdoc_dir = doc_directory
   rdoc.title    = 'FixtureReplacement'
   rdoc.options << '--line-numbers' << '--inline-source'
+
+  rdoc.options << '--webcvs=http://github.com/mislav/will_paginate/tree/master/'
 
   ["README.rdoc", "CHANGELOG", "GPL_LICENSE", "MIT_LICENSE", "lib/**/*.rb"].each do |file|
     rdoc.rdoc_files.include(file)
