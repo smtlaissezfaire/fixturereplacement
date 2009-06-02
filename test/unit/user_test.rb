@@ -9,7 +9,7 @@ module ::FixtureReplacement
   attributes_for :user do |u|
     u.username = scott
     u.key = "something"
-    u.gender = default_gender
+    u.gender = new_gender
   end
   
 private
