@@ -295,7 +295,7 @@ cd into the fixture_replacement plugin directory:
   
   % cd vendor/plugins/fixture_replacement
   
-Then run with <tt>rake<tt>
+Then run with <tt>rake</tt>
 
   % rake
   
