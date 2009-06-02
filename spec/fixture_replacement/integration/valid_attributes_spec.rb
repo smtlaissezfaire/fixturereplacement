@@ -41,20 +41,5 @@ module FixtureReplacement
         :bar => 18
       }
     end
-    
-    it "should evaluate a default_* call" do
-      obj = use_module do
-        attributes_for :user do |x|
-          x.username = "smtlaissezfaire"
-          x.key = "something"
-        end
-        
-        attributes_for :post do |x|
-          x.user = default_user
-        end
-      end
-
-      obj.valid_post_attributes[:user].should be_a_kind_of(User)
-    end
   end
 end
