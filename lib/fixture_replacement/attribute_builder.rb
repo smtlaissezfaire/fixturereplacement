@@ -27,7 +27,9 @@ module FixtureReplacement
       # it will find the first one which was specified.  It will
       # return nil if no fixture with the name given was found
       def find_by_fixture_name(arg)
-        instances.each { |instance| return instance if instance.fixture_name == arg }
+        instances.each do |instance|
+          return instance if instance.fixture_name == arg
+        end
         nil
       end
     end
