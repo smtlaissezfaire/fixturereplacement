@@ -21,14 +21,14 @@ Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Uni
   change to validates_presence_of :association
 - attributes_for now yields the real active record object, not an OpenStruct, providing for increased
   flexibility
-- Cyclic dependencies can be handled by checking the hash passed to the builders:
+- Cyclic dependencies can be handled by checking the overrides hash passed to the builders:
 
-    attributes_for :event do |e, hash|
-      e.schedule = new_schedule(:event => e) unless hash[:schedule]
+    attributes_for :event do |event, hash|
+      e.schedule = new_schedule(:event => event) unless hash[:schedule]
     end
   
-    attributes_for :schedule do |s, hash|
-      s.event = new_event(:schedule => s) unless hash[:event]
+    attributes_for :schedule do |schedule, hash|
+      s.event = new_event(:schedule => schedule) unless hash[:event]
     end
 
 - <tt>String.random</tt> is gone in favor of the method <tt>random_string</tt>.  Call random_string
