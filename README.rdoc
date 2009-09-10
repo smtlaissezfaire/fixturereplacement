@@ -15,42 +15,7 @@ Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Uni
 
 === What's new since 2.0:
 
-- Better Support for Reloading (call FR.reload! after calling reload! in the console or in your spec helper)
-- default_* is gone.  Use new_* instead.
-  This will necessitate that declarations of the form validates_presence_of :association_id 
-  change to validates_presence_of :association
-- attributes_for now yields the real active record object, not an OpenStruct, providing for increased
-  flexibility
-- Cyclic dependencies can be handled by checking the overrides hash passed to the builders:
-
-    attributes_for :event do |event, hash|
-      e.schedule = new_schedule(:event => event) unless hash[:schedule]
-    end
-  
-    attributes_for :schedule do |schedule, hash|
-      s.event = new_event(:schedule => schedule) unless hash[:event]
-    end
-
-- <tt>String.random</tt> is gone in favor of the method <tt>random_string</tt>.  Call random_string
-  as you would previously in FixtureReplacement:
-
-    module FixtureReplacement
-      attributes_for :user do |u|
-        u.username = random_string
-      end
-    end
-
-  To replace calls to String.random in your specs or elsewhere, use the FixtureReplacement
-  module instead:
-
-    FixtureReplacement.random_string
-
-    # or:
-
-    FR.random_string # FR is a convenience alias for FixtureReplacement
-
-- Huge internal code cleanup
-
+See the CHANGELOG
 
 == How to use FixtureReplacement
 
