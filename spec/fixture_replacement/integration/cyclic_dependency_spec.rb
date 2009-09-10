@@ -25,7 +25,7 @@ describe "cyclic dependencies" do
     @mod.new_schedule.event.should be_a_kind_of(Event)
   end
   
-  it "should do back associations" do
+  it "should back associate" do
     schedule = @mod.new_schedule
     schedule.event.schedule.should == schedule
   end

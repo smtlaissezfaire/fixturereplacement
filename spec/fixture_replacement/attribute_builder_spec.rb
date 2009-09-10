@@ -57,7 +57,7 @@ module FixtureReplacement
     it "should use the class name of the inherited attribute, if specified" do
       AttributeBuilder.new(:foo, :class => Object)
       AttributeBuilder.new(:bar, :from => :foo).active_record_class.should == Object      
-    end    
+    end
     
     it "should not raise an error if the model ends with 's'" do
       AttributeBuilder.new(:actress).active_record_class.should == Actress
