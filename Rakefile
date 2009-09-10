@@ -43,7 +43,6 @@ task :rdoc => [:rdoc_without_analytics] do
   File.open(rdoc_index, "r+") do |file|
     file.write(contents)
   end
-
 end
 
 task :rerdoc => [:clobber_rdoc, :rdoc]
@@ -117,5 +116,3 @@ task :output_sloc => :create_doc_directory do
     f << sloc
   end
 end
-
-
