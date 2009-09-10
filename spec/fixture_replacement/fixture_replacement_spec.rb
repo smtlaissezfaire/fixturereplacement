@@ -87,4 +87,10 @@ describe FixtureReplacement do
       FixtureReplacement.reload!
     end
   end
+  
+  describe "method_added" do
+    it "should be private" do
+      FixtureReplacement.should_not respond_to(:method_added)
+    end
+  end
 end
