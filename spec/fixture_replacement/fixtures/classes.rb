@@ -44,3 +44,6 @@ end
 class Schedule < ActiveRecord::Base
   belongs_to :event
 end
+
+class Foo; end
+class Bar; end

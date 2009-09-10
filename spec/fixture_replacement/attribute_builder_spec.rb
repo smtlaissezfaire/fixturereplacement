@@ -56,7 +56,27 @@ module FixtureReplacement
     
     it "should use the class name of the inherited attribute, if specified" do
       AttributeBuilder.new(:foo, :class => Object)
-      AttributeBuilder.new(:bar, :from => :foo).active_record_class.should == Object      
+      AttributeBuilder.new(:bar, :from => :foo).active_record_class.should == Bar
+    end
+    
+    it "should prefer the constantized name to the derived name" do
+      AttributeBuilder.new(:user)
+      AttributeBuilder.new(:admin, :from => :user).active_record_class.should == Admin
+    end
+    
+    it "should use the derived name if the constantized name fails (doesn't exist)" do
+      AttributeBuilder.new(:foo)
+      no_constant = AttributeBuilder.new(:no_constant, :from => :foo)
+      no_constant.active_record_class.should == Foo
+    end
+    
+    it "should raise a name error if it has no class, the name can't be constantized, and is derived, but the derived class can't be constantized" do
+      builder_one = AttributeBuilder.new(:does_not_exist)
+      builder_two = AttributeBuilder.new(:also_does_not_exist, :from => :does_not_exist)
+      
+      lambda {
+        builder_two.active_record_class
+      }.should raise_error(NameError)
     end
     
     it "should not raise an error if the model ends with 's'" do

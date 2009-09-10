@@ -33,10 +33,16 @@ module FixtureReplacement
     def active_record_class
       if @class
         @class
-      elsif derived_fixture?
-        derived_fixture.active_record_class
       else
-        constantize(fixture_name)
+        begin
+          constantize(fixture_name)
+        rescue NameError => e
+          if derived_fixture?
+            derived_fixture.active_record_class
+          else
+            raise e
+          end
+        end
       end
     end
     
