@@ -68,6 +68,15 @@ module SpecHelperFunctions
       create_table :schedules do |t|
         t.integer :event_id
       end
+      
+      create_table :posts do |t|
+        t.timestamps
+      end
+      
+      create_table :comments do |t|
+        t.integer :post_id
+        t.timestamps
+      end
     end
     
     def use_module(&block)
