@@ -31,19 +31,7 @@ module FixtureReplacement
     attr_reader :from
 
     def active_record_class
-      if @class
-        @class
-      else
-        begin
-          constantize(fixture_name)
-        rescue NameError => e
-          if derived_fixture?
-            derived_fixture.active_record_class
-          else
-            raise e
-          end
-        end
-      end
+      @active_record_class ||= find_active_record_class
     end
     
     def instantiate(hash_to_merge = {}, instance = active_record_class.new)
@@ -88,6 +76,22 @@ module FixtureReplacement
   
     def constantize(symbol)
       symbol.to_s.camelize.constantize
+    end
+    
+    def find_active_record_class
+      if @class
+        @class
+      else
+        begin
+          constantize(fixture_name)
+        rescue NameError => e
+          if derived_fixture?
+            derived_fixture.active_record_class
+          else
+            raise e
+          end
+        end
+      end
     end
   end
 end
