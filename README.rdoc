@@ -18,8 +18,10 @@ Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Uni
 - Better Support for Reloading (call FR.reload! after calling reload! in the console or in your spec helper)
 - default_* is gone.  Use new_* instead.
   This will necessitate that declarations of the form validates_presence_of :association_id 
-  will need to change to validates_presence_of :association
-- Cyclic dependencies can now be handled by checking the hash passed to the builders:
+  change to validates_presence_of :association
+- attributes_for now yields the real active record object, not an OpenStruct, providing for increased
+  flexibility
+- Cyclic dependencies can be handled by checking the hash passed to the builders:
 
     attributes_for :event do |e, hash|
       e.schedule = new_schedule(:event => e) unless hash[:schedule]
