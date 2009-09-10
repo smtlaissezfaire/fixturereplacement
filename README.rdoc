@@ -1,4 +1,4 @@
-= FixtureReplacement
+= FixtureReplacement (version 3.0)
 
 == What is FixtureReplacement
 
