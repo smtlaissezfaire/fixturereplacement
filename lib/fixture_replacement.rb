@@ -1,5 +1,3 @@
-require 'ostruct'
-
 dir = File.dirname(__FILE__) + "/fixture_replacement"
 load "#{dir}/version.rb"
 load "#{dir}/class_methods.rb"

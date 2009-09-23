@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'hanna/rdoctask'
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
 require 'rake/contrib/rubyforgepublisher'
@@ -26,7 +26,17 @@ Rake::RDocTask.new(:rdoc_without_analytics) do |rdoc|
   rdoc.title    = 'FixtureReplacement'
   rdoc.options << '--line-numbers' << '--inline-source'
 
-  ["README", "CHANGELOG", "GPL_LICENSE", "MIT_LICENSE", "lib/**/*.rb"].each do |file|
+  rdoc.options << '--webcvs=http://github.com/smtlaissezfaire/fixturereplacement/tree/master/'
+
+  [
+    "README.rdoc",
+    "CHANGELOG.rdoc",
+    "GPL_LICENSE",
+    "MIT_LICENSE",
+    "contributions.rdoc",
+    "philosophy_and_bugs.rdoc",
+    "lib/**/*.rb"
+  ].each do |file|
     rdoc.rdoc_files.include(file)
   end
 end
@@ -41,7 +51,6 @@ task :rdoc => [:rdoc_without_analytics] do
   File.open(rdoc_index, "r+") do |file|
     file.write(contents)
   end
-
 end
 
 task :rerdoc => [:clobber_rdoc, :rdoc]
@@ -84,7 +93,7 @@ task :build_docs => [:rerdoc, :specdoc, :rcov, :flog_to_disk]
 desc "Run all examples with RCov"
 Spec::Rake::SpecTask.new(:rcov) do |t|
   t.rcov = true
-  t.rcov_opts = ['--exclude', 'spec']
+  t.rcov_opts = ['--exclude', 'spec', '--exclude', 'gems']
   t.rcov_dir = "doc/rcov"
 end
 
@@ -115,5 +124,3 @@ task :output_sloc => :create_doc_directory do
     f << sloc
   end
 end
-
-

@@ -1,0 +1,47 @@
+= Bugs & Contributing Code
+
+If you would like to change how this software works, report a bug, or request a feature, use
+the github issue tracker[http://github.com/smtlaissezfaire/fixturereplacement/issues].
+
+== Running the Specs/Tests for FixtureReplacement
+
+You will need rspec (version 1.0.8 or later) to run the specs, as well as the sqlite3-ruby gem
+(and sqlite3 installed):
+
+  % gem install rspec sqlite3-ruby
+
+cd into the fixture_replacement plugin directory:
+
+  % cd vendor/plugins/fixture_replacement
+
+Then run with <tt>rake</tt>
+
+  % rake
+
+There are also some tests for test/unit.  These mainly serve as regressions, but you are free
+to run them as well.
+
+== Test Coverage
+
+specdocs[http://replacefixtures.rubyforge.org/specdoc.html], rcov[http://replacefixtures.rubyforge.org/rcov/index.html], flog[http://replacefixtures.rubyforge.org/flog.txt]
+
+= Patches, Contributions:
+
+Thanks to the following for making this software better:
+
+- Greg Bluvshteyn (http://www.m001.net), for bugging me about the naming, and making the wonderful suggestion to use the plugin in the console.
+- Simon Peter Nicholls
+  - default_* methods can take a hash (applied in rev. 11)
+- Wincent Colaiuta (http://wincent.com/) - Huge Thanks
+  - patch for spelling error in comments (applied in revision 31)
+  - patch for specs with sqlite3 (applied in revision 35)
+  - patch to ignore attr_protected in mass assignment (applied in revision 57)
+  - Most of this README Documentation (applied in revision 62)
+  - patch: silencing sqlite3 in memory creation of table output (applied in revision 72)
+- Carl Porth
+  - patch: classify should be camelize (applied in revision 74)
+- LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
+  - bug reports
+- Bryan Helmkamp: Feedback on back associating models.
+- Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
+  of new_* methods.

@@ -1,33 +1,6 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
 describe FixtureReplacement do
-  before do
-    FixtureReplacement.reset!
-  end
-
-  after do
-    FixtureReplacement.reset!
-  end
-
-  it "should have create as the default" do
-    FixtureReplacement.create_dependent_objects?.should be_true
-  end
-
-  it "should be able to set dependent object creation" do
-    FixtureReplacement.create_dependent_objects = false
-    FixtureReplacement.create_dependent_objects?.should be_false
-  end
-
-  it "should have the default_method as :create when create_dependent_objects?" do
-    FixtureReplacement.create_dependent_objects = true
-    FixtureReplacement.default_method.should equal(:create)
-  end
-
-  it "should have the default_method as :new when create_dependent_objects == false" do
-    FixtureReplacement.create_dependent_objects = false
-    FixtureReplacement.default_method.should equal(:new)
-  end
-  
   describe "random_string" do
     before do
       @fr = FixtureReplacement
@@ -103,6 +76,21 @@ describe FixtureReplacement do
 
     it "should be '.' if not defined" do
       FR.rails_root.should == "."
+    end
+  end
+
+  describe "reload!" do
+    it "should call load on the main fixture replacement file" do
+      file_path = File.expand_path(File.dirname(__FILE__) + "/../../lib/fixture_replacement.rb")
+      FixtureReplacement.should_receive(:load).with(file_path)
+
+      FixtureReplacement.reload!
+    end
+  end
+  
+  describe "method_added" do
+    it "should be private" do
+      FixtureReplacement.should_not respond_to(:method_added)
     end
   end
 end

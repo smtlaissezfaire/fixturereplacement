@@ -24,14 +24,6 @@ module FixtureReplacement
     models = "user", "foo", "scott"
     
     models.each do |model|
-      it "should have the default_#{model} as a (module) method on the module" do
-        @obj.should respond_to("default_#{model}")
-      end
-      
-      it "should have the default_#{model} as a private method in the test case" do
-        @obj.private_methods.should include("default_#{model}")
-      end
-      
       it "should have the new_#{model} method as a (module) method on the module" do
         @obj.should respond_to("new_#{model}")
       end

@@ -6,24 +6,15 @@
 
 == Features
 
-- Loading.  Use load or require_dependency
 - Validate fixtures.  Steal any other good ideas from FactoryGirl, Fixjour, Machinist, etc.
-- Alias FR to FixtureReplacement for convenience
-- Call new_* for dependent records.
-- Back associations with new_* ?
 - Support SEQUEL & Datamapper.  Make it ORM independent
-- Support db/example_data.rb.  rescue from the LoadError if it doesn't exist
 
 == Code Cleanup
 
-- Remove Openstruct.  Make sure to yield real objects
 - Remove ugly method_added hack
-- Cleaner merging of attributes
-- Remove explicit require of db/example_data
 
 == ETC
 
-- cherry-pick commits from "version3" branch
 - Store old version 2 README
 - Update website info
 - Update with github info

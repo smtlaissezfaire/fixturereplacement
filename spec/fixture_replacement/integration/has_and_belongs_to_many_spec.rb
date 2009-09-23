@@ -6,7 +6,7 @@ module FixtureReplacement
       @obj = use_module do
         attributes_for :subscriber do |s|
           s.first_name = "Scott"
-          s.subscriptions = [default_subscription]
+          s.subscriptions = [new_subscription]
         end
 
         attributes_for :subscription do |s|
@@ -14,7 +14,7 @@ module FixtureReplacement
         end
 
         attributes_for :subscriber_with_two_subscriptions, :from => :subscriber, :class => Subscriber do |s|
-          s.subscriptions = [default_harpers_subscription, default_ny_times_subscription]
+          s.subscriptions = [new_harpers_subscription, new_ny_times_subscription]
         end
 
         attributes_for :harpers_subscription, :class => Subscription do |s|

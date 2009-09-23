@@ -3,7 +3,14 @@ class User < ActiveRecord::Base
 end
 
 class Member < ActiveRecord::Base; end
-class Post   < ActiveRecord::Base; end
+
+class Post < ActiveRecord::Base
+  has_many :comments
+end
+
+class Comment < ActiveRecord::Base
+  belongs_to :post
+end
 
 class Player < ActiveRecord::Base
 end
@@ -36,3 +43,14 @@ end
 class Subscription < ActiveRecord::Base
   has_and_belongs_to_many :subscribers
 end
+
+class Event < ActiveRecord::Base
+  has_one :schedule
+end
+
+class Schedule < ActiveRecord::Base
+  belongs_to :event
+end
+
+class Foo; end
+class Bar; end
