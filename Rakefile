@@ -26,9 +26,17 @@ Rake::RDocTask.new(:rdoc_without_analytics) do |rdoc|
   rdoc.title    = 'FixtureReplacement'
   rdoc.options << '--line-numbers' << '--inline-source'
 
-  rdoc.options << '--webcvs=http://github.com/mislav/will_paginate/tree/master/'
+  rdoc.options << '--webcvs=http://github.com/smtlaissezfaire/fixturereplacement/tree/master/'
 
-  ["README.rdoc", "CHANGELOG.rdoc", "GPL_LICENSE", "MIT_LICENSE", "lib/**/*.rb"].each do |file|
+  [
+    "README.rdoc",
+    "CHANGELOG.rdoc",
+    "GPL_LICENSE",
+    "MIT_LICENSE",
+    "contributions.rdoc",
+    "philosophy_and_bugs.rdoc",
+    "lib/**/*.rb"
+  ].each do |file|
     rdoc.rdoc_files.include(file)
   end
 end
