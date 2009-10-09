@@ -19,6 +19,8 @@ module FixtureReplacement
     end
     
     def initialize(fixture_name, options={}, &block)
+      check_valid_keys(options, [:from, :class])
+
       @fixture_name    = fixture_name
       @attributes_proc = block || lambda {}
       @from            = options[:from]
@@ -44,6 +46,16 @@ module FixtureReplacement
     
   private
   
+    class InvalidKeyError < StandardError; end
+
+    def check_valid_keys(options_given, valid_keys)
+      options_given.each do |key, _|
+        unless valid_keys.include?(key)
+          raise InvalidKeyError, "#{key.inspect} is not a valid option to attributes_for.  Valid keys are: #{valid_keys.inspect}"
+        end
+      end
+    end
+
     def instantiate_parent_fixture(instance)
       derived_fixture.instantiate({}, instance) if derived_fixture?
     end
