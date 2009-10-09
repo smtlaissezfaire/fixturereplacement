@@ -82,5 +82,23 @@ module FixtureReplacement
     it "should not raise an error if the model ends with 's'" do
       AttributeBuilder.new(:actress).active_record_class.should == Actress
     end
+    
+    it "should allow a string key" do
+      AttributeBuilder.new(:admin, "from" => :user).active_record_class.should == Admin
+    end
+    
+    it "should allow a string name for the builder" do
+      AttributeBuilder.new("admin").active_record_class.should == Admin
+    end
+    
+    it "should store the from key as a symbol, even when passed a string" do
+      builder = AttributeBuilder.new(:admin, "from" => "user")
+      builder.from.should == :user
+    end
+    
+    it "should convert the fixture name to a symbol" do
+      builder = AttributeBuilder.new("admin")
+      builder.fixture_name.should == :admin
+    end
   end  
 end

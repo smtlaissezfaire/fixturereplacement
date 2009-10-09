@@ -19,11 +19,13 @@ module FixtureReplacement
     end
     
     def initialize(fixture_name, options={}, &block)
+      options.symbolize_keys!
+
       check_valid_keys(options, [:from, :class])
 
-      @fixture_name    = fixture_name
+      @fixture_name    = fixture_name.to_sym
       @attributes_proc = block || lambda {}
-      @from            = options[:from]
+      @from            = options[:from].to_sym if options.has_key?(:from)
       @class           = options[:class]
 
       self.class.add_instance(self)
