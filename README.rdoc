@@ -110,6 +110,26 @@ will assign the field as if it wasn't protected, which is convenient for testing
   user = create_user(:username => "scott", :admin_status => true)
   user.admin_status # => true
   
+=== Validate your fixtures (thanks Fixjour)
+
+Validate your fixture definitions after including it in the spec helper or test helper:
+
+==== spec_helper.rb:
+
+  Spec::Runner.configuration do |config|
+    config.include FixtureReplacement
+  end
+
+  FixtureReplacement.validate!
+
+==== test_helper.rb
+
+  class Test::Unit::TestCase
+    include FixtureReplacement
+  end
+
+  FixtureReplacement.validate!
+
 === Using FixtureReplacement within <tt>script/console</tt>
 
   $ ./script/console 
