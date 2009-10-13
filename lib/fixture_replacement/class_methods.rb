@@ -4,6 +4,10 @@ module FixtureReplacement
       builder = AttributeBuilder.new(fixture_name, options, &block)
       MethodGenerator.new(builder, self).generate_methods
     end
+
+    def validate!
+      AttributeBuilder.validate_instances!
+    end
     
     def random_string(length=10)
       chars = ("a".."z").to_a
@@ -23,6 +27,7 @@ module FixtureReplacement
     end
 
     def reload!
+      AttributeBuilder.clear_out_instances!
       load File.expand_path(File.dirname(__FILE__) + "/../fixture_replacement.rb")
     end
     

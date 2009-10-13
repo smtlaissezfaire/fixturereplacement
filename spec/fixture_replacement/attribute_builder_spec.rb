@@ -1,7 +1,11 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
 module FixtureReplacement
-  describe AttributeBuilder do  
+  describe AttributeBuilder do
+    before do
+      AttributeBuilder.clear_out_instances!
+    end
+
     it "should add the instance to the global attributes" do
       a = AttributeBuilder.new(:foo)
       AttributeBuilder.instances.should == [a]
@@ -99,6 +103,60 @@ module FixtureReplacement
     it "should convert the fixture name to a symbol" do
       builder = AttributeBuilder.new("admin")
       builder.fixture_name.should == :admin
+    end
+
+    describe "validating all instances" do
+      it "should return true if there are no instances" do
+        AttributeBuilder.validate_instances!.should be_true
+      end
+
+      it "should raise an error if an instance is not valid" do
+        AttributeBuilder.new(:validate_name)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should raise_error
+      end
+
+      it "should not raise an error if there is only one instance, and it is valid" do
+        AttributeBuilder.new(:event)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should_not raise_error
+      end
+
+      it "should raise an error, giving the fixture name, and the error" do
+        AttributeBuilder.new(:validate_name)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should raise_error(FixtureReplacement::InvalidInstance, "new_validate_name is not valid! - Errors: [name: can't be blank]")
+      end
+
+      it "should use the correct name" do
+        AttributeBuilder.new(:validate_name_two)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should raise_error(FixtureReplacement::InvalidInstance, "new_validate_name_two is not valid! - Errors: [name: can't be blank]")
+      end
+
+      it "should use the correct errors" do
+        AttributeBuilder.new(:address_with_valid_city)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should raise_error(FixtureReplacement::InvalidInstance, "new_address_with_valid_city is not valid! - Errors: [city: can't be blank]")
+      end
+
+      it "should use multiple errors on a single model" do
+        AttributeBuilder.new(:address_with_valid_city_and_state)
+
+        lambda {
+          AttributeBuilder.validate_instances!
+        }.should raise_error(FixtureReplacement::InvalidInstance, "new_address_with_valid_city_and_state is not valid! - Errors: [city: can't be blank], [state: can't be blank]")
+      end
     end
   end  
 end

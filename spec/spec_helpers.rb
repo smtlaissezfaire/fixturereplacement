@@ -76,12 +76,38 @@ module SpecHelperFunctions
         t.integer :post_id
         t.timestamps
       end
+      
+      create_table :no_validations do |t|
+        t.timestamps
+      end
+
+      create_table :validate_names do |t|
+        t.string :name
+      end
+      
+      create_table :validate_name_twos do |t|
+        t.string :name
+      end
+      
+      create_table :address_with_valid_cities do |t|
+        t.string :city
+      end
+      
+      create_table :address_with_valid_city_and_states do |t|
+        t.string :city
+        t.string :state
+      end
     end
     
-    def use_module(&block)
+    def mock_fr_module(&block)
       mod = Module.new
       mod.extend(FixtureReplacement::ClassMethods)
       mod.instance_eval(&block)
+      mod
+    end
+    
+    def use_module(&block)
+      mod = mock_fr_module(&block)
 
       obj = Object.new
       obj.extend mod

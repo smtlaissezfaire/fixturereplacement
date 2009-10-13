@@ -5,6 +5,8 @@ load "#{dir}/attribute_builder.rb"
 load "#{dir}/method_generator.rb"
 
 module FixtureReplacement
+  class InvalidInstance < StandardError; end
+
   include FixtureReplacement::Version
   extend FixtureReplacement::ClassMethods
 end

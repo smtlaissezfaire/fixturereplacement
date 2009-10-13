@@ -1,6 +1,14 @@
 module FixtureReplacement
   class AttributeBuilder
     class << self
+      def validate_instances!
+        instances.each do |fixture|
+          fixture.validate!
+        end
+
+        true
+      end
+
       def instances
         @instances ||= []
       end
@@ -46,6 +54,16 @@ module FixtureReplacement
       end
     end
     
+    def validate!
+      new_instance = instantiate
+
+      unless new_instance.valid?
+        errors = "new_#{fixture_name} is not valid! - Errors: "
+        errors << new_instance.errors.map { |key, value| "[#{key}: #{value}]"}.join(", ")
+        raise InvalidInstance, errors
+      end
+    end
+
   private
   
     class InvalidKeyError < StandardError; end
