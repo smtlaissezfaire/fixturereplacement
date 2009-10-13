@@ -44,4 +44,4 @@ Thanks to the following for making this software better:
   - bug reports
 - Bryan Helmkamp: Feedback on back associating models.
 - Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
-  of new_* methods.
+  of new_* methods.  validation of new instances.
