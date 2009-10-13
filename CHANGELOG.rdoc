@@ -1,3 +1,7 @@
+== HEAD
+
+- validate instances with FixtureReplacement.validate!
+
 == 3.0.0
 
 - Better Support for Reloading (call FR.reload! after calling reload! in the console or in your spec helper)
