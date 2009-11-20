@@ -83,7 +83,7 @@ Based on the above definition FixtureReplacement makes the following methods ava
 - <tt>random_string</tt>: generates a random string as shown above
 - <tt>new_user</tt>: equivalent to <tt>User.new</tt> with the attributes for the user.
 - <tt>create_user</tt>: equivalent to <tt>User.create!</tt> with the user's attributes.
-- <tt>valid_user</tt>: returns a hash of the user's attributes including associations, specified in db/example_data.rb.
+- <tt>valid_user_attributes</tt>: returns a hash of the user's attributes including associations, specified in db/example_data.rb.
 
 === Overriding attributes
 
