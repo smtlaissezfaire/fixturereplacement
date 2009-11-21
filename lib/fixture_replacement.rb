@@ -11,4 +11,6 @@ module FixtureReplacement
   extend FixtureReplacement::ClassMethods
 end
 
+load "fr.rb"
+
 FixtureReplacement.load_example_data
