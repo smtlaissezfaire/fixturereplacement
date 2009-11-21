@@ -46,3 +46,5 @@ Thanks to the following for making this software better:
 - Bryan Helmkamp: Feedback on back associating models.
 - Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
   of new_* methods.  validation of new instances.
+
+Special thanks to Steve Spurgat over @ Urbis (urbis.com) - it grew out of that rails app, and wouldn't exist without it today.
