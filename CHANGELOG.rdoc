@@ -1,4 +1,4 @@
-== HEAD
+== 3.0.1
 
 - Made it into a rubygem.  Get it from gemcutter:
 
