@@ -44,6 +44,7 @@ reference other models) and add new objects on the fly.
      "etc/patches/2007_11_20_fixture_replacement_generator_should_not_reload_environment_or_boot.patch",
      "etc/patches/2007_11_20_string_random_refactor_and_extension.patch",
      "etc/patches/2007_11_20_string_random_refactor_and_extension_v2.patch",
+     "fixture_replacement.gemspec",
      "lib/fixture_replacement.rb",
      "lib/fixture_replacement/attribute_builder.rb",
      "lib/fixture_replacement/class_methods.rb",
