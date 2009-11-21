@@ -1,6 +1,6 @@
 == Motivation Behind FixtureReplacement
 
-As Dan Manges has outlined in his blog post, "Fixing Fixtures with Factory" (http://www.dcmanges.com/blog/38), 
+As Dan Manges has outlined in his blog post, "Fixing Fixtures with Factory" (http://www.dcmanges.com/blog/38),
 this approach to generating test data has a number of advantages:
 
 - The factory provides default values and relationships
@@ -70,7 +70,7 @@ data is often helpful.  Consider the following snippets of psudo-code (along wit
     @user_one.friends.should == [@user_two]
   end
 
-Notice that the above test adds a lot of extra noise in getting valid users into the database; The test, however, doesn't care what the usernames are, that the password is a good one, that the password matches the password confirmation, and so on.  The point of the test is not to check those things, but rather that a friendship can be established.  
+Notice that the above test adds a lot of extra noise in getting valid users into the database; The test, however, doesn't care what the usernames are, that the password is a good one, that the password matches the password confirmation, and so on.  The point of the test is not to check those things, but rather that a friendship can be established.
 
 Here would be a similar test with the FixtureReplacement:
 

@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 1151)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 1151)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -40,7 +40,8 @@
        def merge_unevaluated_method(obj, method_for_instantiation, hash={})
          hash.each do |key, value|
@@ -14,7 +14,7 @@ Index: lib/fixture_replacement/fixture_replacement.rb
        end
 @@ -63,9 +64,9 @@
        default_method = "default_#{model_name}".to_sym
- 
+
        fixture_module.module_eval do
 -        define_method(default_method) do
 +        define_method(default_method) do |*args|

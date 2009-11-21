@@ -1,21 +1,21 @@
 Index: lib/fixture_replacement/string.rb
 ===================================================================
---- lib/fixture_replacement/string.rb	(revision 83)
-+++ lib/fixture_replacement/string.rb	(working copy)
+--- lib/fixture_replacement/string.rb  (revision 83)
++++ lib/fixture_replacement/string.rb  (working copy)
 @@ -1,10 +1,21 @@
 +class String
 +  def random_chr
 +    self[rand(size)].chr
 +  end
-+  
++
 +  def random_str(length=10)
 +    (1..length).collect {random_chr}.join
 +  end
-+  
++
 +  def formatted_random_str(format, length=10)
 +    format.split(/(%s)/).map {|str| str.sub('%s', random_str(length))}.join
 +  end
- 
+
 -class String
    def self.random(length=10)
 -    chars = ("a".."z").to_a
@@ -24,7 +24,7 @@ Index: lib/fixture_replacement/string.rb
 -    return string
 +    ("a".."z").sort.join.random_str(length)
    end
-+  
++
 +  def self.formatted_random(format, length=10)
 +    ("a".."z").sort.join.formatted_random_str(format, length)
 +  end
@@ -32,10 +32,10 @@ Index: lib/fixture_replacement/string.rb
 -
 Index: spec/fixture_replacement/extentions_spec.rb
 ===================================================================
---- spec/fixture_replacement/extentions_spec.rb	(revision 83)
-+++ spec/fixture_replacement/extentions_spec.rb	(working copy)
+--- spec/fixture_replacement/extentions_spec.rb  (revision 83)
++++ spec/fixture_replacement/extentions_spec.rb  (working copy)
 @@ -2,7 +2,9 @@
- 
+
  describe "String.random" do
    it "should not be the same as another randomly generated string" do
 -    String.random.should_not == String.random
@@ -43,14 +43,14 @@ Index: spec/fixture_replacement/extentions_spec.rb
 +      String.random.should_not == String.random
 +    end
    end
-   
+
    it "should by default be 10 characters long" do
 @@ -12,9 +14,51 @@
    it "should be able to specify the length of the random string" do
      String.random(100).size.should == 100
    end
--  
-+    
+-
++
    it "should only generate lowercase letters" do
 -    s = String.random(100)
 -    s.upcase.should == s.swapcase

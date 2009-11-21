@@ -1,22 +1,22 @@
-= FixtureReplacement (version 3.0)
+= FixtureReplacement (version 3.0.1)
 
 == What is FixtureReplacement
 
-FixtureReplacement is a Rails[http://rubyonrails.org/] plugin that provides a simple way to 
-quickly populate your test database with model objects without having to manage multiple, 
-brittle fixture files. You can easily set up complex object graphs (with models which 
+FixtureReplacement is a Rails[http://rubyonrails.org/] plugin that provides a simple way to
+quickly populate your test database with model objects without having to manage multiple,
+brittle fixture files. You can easily set up complex object graphs (with models which
 reference other models) and add new objects on the fly.
 
-Not only can FixtureReplacement make your test data easier to maintain, it can also help 
-to make your tests and specs much more readable and intention-revealing by allowing you 
-to omit extraneous details and focus only on the attributes that are important for a 
-particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and 
+Not only can FixtureReplacement make your test data easier to maintain, it can also help
+to make your tests and specs much more readable and intention-revealing by allowing you
+to omit extraneous details and focus only on the attributes that are important for a
+particular behaviour. It works well with both RSpec[http://rspec.rubyforge.org/] and
 Test::Unit[http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html].
 
 == What's new since 2.0:
 
 * default_* is gone in favor of new_*.
-* Cyclic dependencies are no longer an issue.  The "overrides hash" (the hash passed to new_* or create_*) can now be processed. 
+* Cyclic dependencies are no longer an issue.  The "overrides hash" (the hash passed to new_* or create_*) can now be processed.
 
 See CHANGELOG.rdoc + test suite for further changes.
 
@@ -46,15 +46,15 @@ Add the following to your <tt>test/test_helper.rb</tt> file:
 
 === Defining default attributes
 
-At the heart of FixtureReplacement is the <tt>db/example_data.rb</tt> file where you 
+At the heart of FixtureReplacement is the <tt>db/example_data.rb</tt> file where you
 define the default attributes for each of your test models. This example shows the default
 attributes for a user:
 
   module FixtureReplacement
-    
+
     attributes_for :user do |u|
       password = random_string
-    
+
       u.value                  = "a value",
       u.other                  = "other value",
       u.another                = random_string,     # random string 10 characters long
@@ -63,19 +63,19 @@ attributes for a user:
       u.password_confirmation  = password,
       u.associated_object      = new_bar            # expects attributes_for :bar to be setup
     end
-    
+
   end
 
 Note that:
 
-- A 'random_string' method is provided for attributes whose exact value isn't important; this means you can 
+- A 'random_string' method is provided for attributes whose exact value isn't important; this means you can
   create multiple, unique model instances
-- you can perform arbitrary set-up and execute any Ruby code prior to returning the hash 
-  (as shown here where a <tt>password</tt> is generated and then used for both the <tt>:password</tt> and 
+- you can perform arbitrary set-up and execute any Ruby code prior to returning the hash
+  (as shown here where a <tt>password</tt> is generated and then used for both the <tt>:password</tt> and
   <tt>:password_confirmation</tt> attributes)
-- a <tt>new_modelname</tt> method is automatically provided that allows you to set up dependent 
+- a <tt>new_modelname</tt> method is automatically provided that allows you to set up dependent
   model objects (in this case an instance of the <tt>Bar</tt> model)
-  
+
 === Available methods
 
 Based on the above definition FixtureReplacement makes the following methods available:
@@ -83,21 +83,21 @@ Based on the above definition FixtureReplacement makes the following methods ava
 - <tt>random_string</tt>: generates a random string as shown above
 - <tt>new_user</tt>: equivalent to <tt>User.new</tt> with the attributes for the user.
 - <tt>create_user</tt>: equivalent to <tt>User.create!</tt> with the user's attributes.
-- <tt>valid_user</tt>: returns a hash of the user's attributes including associations, specified in db/example_data.rb.
+- <tt>valid_user_attributes</tt>: returns a hash of the user's attributes including associations, specified in db/example_data.rb.
 
 === Overriding attributes
 
 Overrides of specific attributes can be performed as follows:
 
-  new_user(:thing => "overridden") 
+  new_user(:thing => "overridden")
   create_user(:thing => "overridden")
-  
+
 Overrides can also be used with associations:
 
   scott = create_user(:username => "scott")
   post = create_post(:user => scott)
-  
-  
+
+
 === attr_protected / attr_accessible
 
 In the case that the model has an attr_protected field, FixtureReplacement
@@ -109,10 +109,30 @@ will assign the field as if it wasn't protected, which is convenient for testing
 
   user = create_user(:username => "scott", :admin_status => true)
   user.admin_status # => true
-  
+
+=== Validate your fixtures (thanks Fixjour)
+
+Validate your fixture definitions after including it in the spec helper or test helper:
+
+==== spec_helper.rb:
+
+  Spec::Runner.configuration do |config|
+    config.include FixtureReplacement
+  end
+
+  FixtureReplacement.validate!
+
+==== test_helper.rb
+
+  class Test::Unit::TestCase
+    include FixtureReplacement
+  end
+
+  FixtureReplacement.validate!
+
 === Using FixtureReplacement within <tt>script/console</tt>
 
-  $ ./script/console 
+  $ ./script/console
   Loading development environment
   >> include FR
   => Object

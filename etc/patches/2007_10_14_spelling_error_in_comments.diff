@@ -1,10 +1,10 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 31)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 31)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -22,7 +22,7 @@
        end
-       
+
        # This uses a DelayedEvaluationProc, not a typical proc, for type checking.
 -      # It maybe absurd to try to store a proc in a database, but even if someone tries,
 +      # It may be absurd to try to store a proc in a database, but even if someone tries,

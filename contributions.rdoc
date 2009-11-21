@@ -38,10 +38,11 @@ Thanks to the following for making this software better:
   - patch to ignore attr_protected in mass assignment (applied in revision 57)
   - Most of this README Documentation (applied in revision 62)
   - patch: silencing sqlite3 in memory creation of table output (applied in revision 72)
+  - doc patch: typo fix in readme
 - Carl Porth
   - patch: classify should be camelize (applied in revision 74)
 - LinoJ, JW, Matthew Bass, Andy Watts, Dave Spurr
   - bug reports
 - Bryan Helmkamp: Feedback on back associating models.
 - Pat Nakajima: Wonderful ideas from Fixjour.  Elimination of default_* methods in favor
-  of new_* methods.
+  of new_* methods.  validation of new instances.

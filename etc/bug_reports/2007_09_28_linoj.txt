@@ -2,7 +2,7 @@ Hi Scott,
 
 I'm wondering if you have insight into this or if I should go ask somewhere else.
 
-I installed 2 plug-in today, 
+I installed 2 plug-in today,
 first fixture_replacement plugin
 and been using it successfully
 
@@ -10,7 +10,7 @@ Then I installed validates_email_format_of plugin
 http://code.dunae.ca/validates_email_format_of
 
 and added this to my User model
-	validates_email_format_of :email
+  validates_email_format_of :email
 
 then script/server wont start
 When I comment out this line, it's fine

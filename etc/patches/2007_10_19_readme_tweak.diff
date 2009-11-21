@@ -1,7 +1,7 @@
 Index: README
 ===================================================================
---- README	(revision 65)
-+++ README	(working copy)
+--- README  (revision 65)
++++ README  (working copy)
 @@ -144,7 +144,6 @@
    - default_* methods can take a hash (applied in rev. 11)
  - Wincent Colaiuta (Huge Thanks)
