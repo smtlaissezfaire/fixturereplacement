@@ -2,7 +2,7 @@ Hi Scott,
 
 I'm wondering if you have insight into this or if I should go ask somewhere else.
 
-I installed 2 plug-in today, 
+I installed 2 plug-in today,
 first fixture_replacement plugin
 and been using it successfully
 

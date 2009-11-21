@@ -6,10 +6,10 @@ module FixtureReplacement
       obj = use_module do
         attributes_for :user
       end
-      
+
       obj.public_methods.should include("create_user")
     end
-    
+
     it "should respond_to? create_user" do
       obj = use_module do
         attributes_for :user

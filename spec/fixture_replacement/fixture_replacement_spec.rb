@@ -5,7 +5,7 @@ describe FixtureReplacement do
     before do
       @fr = FixtureReplacement
     end
-    
+
     it "should not be the same as another randomly generated string" do
       @fr.random_string.should_not == @fr.random_string
     end
@@ -87,7 +87,7 @@ describe FixtureReplacement do
       FixtureReplacement.reload!
     end
   end
-  
+
   describe "method_added" do
     it "should be private" do
       FixtureReplacement.should_not respond_to(:method_added)

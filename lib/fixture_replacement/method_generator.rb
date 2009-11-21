@@ -4,11 +4,11 @@ module FixtureReplacement
       @builder           = builder
       @evaluation_module = evaluation_module
     end
-    
+
     def generate_methods
       builder       = @builder
       builder_name  = builder.fixture_name
-      
+
       @evaluation_module.module_eval do
         define_method("valid_#{builder_name}_attributes") do |*args|
           obj = __send__ "new_#{builder_name}"
@@ -20,7 +20,7 @@ module FixtureReplacement
           obj.save!
           obj
         end
-        
+
         define_method("new_#{builder_name}") do |*args|
           new_object = builder.instantiate(*args)
         end

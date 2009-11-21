@@ -6,7 +6,7 @@
 
 - Better Support for Reloading (call FR.reload! after calling reload! in the console or in your spec helper)
 - default_* is gone.  Use new_* instead.
-  This will necessitate that declarations of the form validates_presence_of :association_id 
+  This will necessitate that declarations of the form validates_presence_of :association_id
   change to validates_presence_of :association
 - attributes_for now yields the real active record object, not an OpenStruct, providing for increased
   flexibility
@@ -15,7 +15,7 @@
     attributes_for :event do |event, hash|
       e.schedule = new_schedule(:event => event) unless hash[:schedule]
     end
-  
+
     attributes_for :schedule do |schedule, hash|
       s.event = new_event(:schedule => schedule) unless hash[:event]
     end
@@ -42,14 +42,14 @@
 
 - Add FR as an alias for FixtureReplacement.  This should make it considerably easier to
   use FR in the console:
-  
+
     smt$ ./script/console
     Loading development environment (Rails 2.2.2)
     >> include FR
     => Object
     >> create_user
     => #<User id: 14 ... >
-    
+
 - Use better loading.  Allow FixtureReplacement to be reloaded if cache_classes = false
 - Removed generator, since db/example_data.rb is no longer required.
 - Removed required db/example_data.rb.  fixture_replacement can now be used outside of a rails

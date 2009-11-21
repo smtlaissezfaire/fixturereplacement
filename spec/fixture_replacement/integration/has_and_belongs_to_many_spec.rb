@@ -28,34 +28,34 @@ module FixtureReplacement
     it "should have the fixture create_subscriber" do
       @obj.should respond_to(:create_subscriber)
     end
-    
+
     it "should have the fixture create_subscription" do
       @obj.should respond_to(:create_subscription)
     end
-    
+
     it "should be able to create a new subscriber" do
       lambda {
         @obj.create_subscriber
       }.should_not raise_error
     end
-    
+
     it "should have the subscriber with the default subscription" do
       subscriber = @obj.create_subscriber
       subscriber.should have(1).subscription
       subscriber.subscriptions.first.name.should == "The New York Times"
     end
-    
+
     it "should be able to create a subscriber with two subscriptions (inline)" do
       subscription_one = @obj.create_harpers_subscription
       subscription_two = @obj.create_ny_times_subscription
-      
+
       subscriptions = [subscription_one, subscription_two]
-      
+
       subscriber = @obj.create_subscriber(:subscriptions => subscriptions)
-      
+
       subscriber.subscriptions.should == subscriptions
     end
-    
+
     it "should be able to create a subscriber with two subscriptions, from the fixtures" do
       subscriber = @obj.create_subscriber_with_two_subscriptions
       subscriber.should have(2).subscriptions

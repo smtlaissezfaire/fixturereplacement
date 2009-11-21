@@ -8,6 +8,6 @@ Index: vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture
 -require 'config/environment'
 +require 'config/environment' unless RAILS_GEM_VERSION
 +require 'config/boot' unless RAILS_ROOT
- 
+
  class FixtureReplacementGenerator < Rails::Generator::Base
    DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],

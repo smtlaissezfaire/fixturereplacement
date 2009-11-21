@@ -8,7 +8,7 @@ module FixtureReplacement
     def validate!
       AttributeBuilder.validate_instances!
     end
-    
+
     def random_string(length=10)
       chars = ("a".."z").to_a
       string = ""
@@ -30,9 +30,9 @@ module FixtureReplacement
       AttributeBuilder.clear_out_instances!
       load File.expand_path(File.dirname(__FILE__) + "/../fixture_replacement.rb")
     end
-    
+
   private
-  
+
     # Any user defined instance methods need the module's class scope to be
     # accessible inside the block given to attributes_for
     #
