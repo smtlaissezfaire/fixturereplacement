@@ -1,7 +1,7 @@
 require 'hanna/rdoctask'
 
 def doc_directory
-  "doc"
+  File.dirname(__FILE__) + "/../doc"
 end
 
 desc 'Generate documentation for the fixture_replacement plugin.'
@@ -26,8 +26,8 @@ Rake::RDocTask.new(:rdoc_without_analytics) do |rdoc|
 end
 
 task :rdoc => [:rdoc_without_analytics] do
-  google_analytics = File.read(File.dirname(__FILE__) + "/etc/google_analytics")
-  rdoc_index = File.dirname(__FILE__) + "/#{doc_directory}/index.html"
+  google_analytics = File.read(File.dirname(__FILE__) + "/../etc/google_analytics")
+  rdoc_index = "#{doc_directory}/index.html"
 
   contents = File.read(rdoc_index)
   contents.gsub!("</head>", "#{google_analytics}\n</head>")
@@ -42,7 +42,7 @@ task :clobber_rdoc => [:clobber_rdoc_without_analytics]
 
 def create_doc_directory
   unless File.exists?(doc_directory)
-    `mkdir doc`
+    `mkdir File.expand_path(#{doc_directory})`
   end
 end
 
