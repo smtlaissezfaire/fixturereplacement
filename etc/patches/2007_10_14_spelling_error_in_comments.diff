@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 31)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 31)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -22,7 +22,7 @@
        end
 

@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 1151)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 1151)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -40,7 +40,8 @@
        def merge_unevaluated_method(obj, method_for_instantiation, hash={})
          hash.each do |key, value|

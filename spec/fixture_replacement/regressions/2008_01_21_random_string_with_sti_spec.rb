@@ -4,13 +4,13 @@
 #
 # [#17249] String.random in a STI base class works, but doesn't work with inherited classes
 # Date:
-# 2008-01-20 14:01 	Priority:
+# 2008-01-20 14:01   Priority:
 # 3
 # Submitted By:
-# andy watts (andywatts) 	Assigned To:
+# andy watts (andywatts)   Assigned To:
 # Nobody (None)
 # Category:
-# Console (script/console) 	State:
+# Console (script/console)   State:
 # Open
 # Summary:
 # String.random in a STI base class works, but doesn't work with inherited classes

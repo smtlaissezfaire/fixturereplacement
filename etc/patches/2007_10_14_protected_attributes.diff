@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 31)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 31)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -70,7 +70,9 @@
            hash_given = args[0] || Hash.new
            merged_hash = self.send(attributes_method).merge(hash_given)

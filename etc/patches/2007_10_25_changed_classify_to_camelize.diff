@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 70)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 70)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -40,7 +40,7 @@
 
      def initialize(method_name, fixture_mod=FixtureReplacement)
@@ -13,8 +13,8 @@ Index: lib/fixture_replacement/fixture_replacement.rb
        add_to_class_singleton(@model_class)
 Index: spec/fixture_replacement/fixture_replacement_spec.rb
 ===================================================================
---- spec/fixture_replacement/fixture_replacement_spec.rb	(revision 70)
-+++ spec/fixture_replacement/fixture_replacement_spec.rb	(working copy)
+--- spec/fixture_replacement/fixture_replacement_spec.rb  (revision 70)
++++ spec/fixture_replacement/fixture_replacement_spec.rb  (working copy)
 @@ -14,6 +14,7 @@
  end
 

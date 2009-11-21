@@ -1,7 +1,7 @@
 Index: vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture_replacement_generator.rb
 ===================================================================
---- vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture_replacement_generator.rb	(revision 83)
-+++ vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture_replacement_generator.rb	(working copy)
+--- vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture_replacement_generator.rb  (revision 83)
++++ vendor/plugins/fixture_replacement/generators/fixture_replacement/fixture_replacement_generator.rb  (working copy)
 @@ -1,6 +1,6 @@
  require 'rbconfig'
 -require 'config/boot'

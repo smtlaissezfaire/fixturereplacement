@@ -1,7 +1,7 @@
 Index: README
 ===================================================================
---- README	(revision 60)
-+++ README	(working copy)
+--- README  (revision 60)
++++ README  (working copy)
 @@ -1,32 +1,92 @@
  = FixtureReplacement
 

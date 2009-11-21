@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/string.rb
 ===================================================================
---- lib/fixture_replacement/string.rb	(revision 83)
-+++ lib/fixture_replacement/string.rb	(working copy)
+--- lib/fixture_replacement/string.rb  (revision 83)
++++ lib/fixture_replacement/string.rb  (working copy)
 @@ -1,10 +1,21 @@
 +class String
 +  def random_chr
@@ -32,8 +32,8 @@ Index: lib/fixture_replacement/string.rb
 -
 Index: spec/fixture_replacement/extentions_spec.rb
 ===================================================================
---- spec/fixture_replacement/extentions_spec.rb	(revision 83)
-+++ spec/fixture_replacement/extentions_spec.rb	(working copy)
+--- spec/fixture_replacement/extentions_spec.rb  (revision 83)
++++ spec/fixture_replacement/extentions_spec.rb  (working copy)
 @@ -2,7 +2,9 @@
 
  describe "String.random" do

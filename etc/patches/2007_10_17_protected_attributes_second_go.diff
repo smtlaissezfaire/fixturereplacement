@@ -1,7 +1,7 @@
 Index: lib/fixture_replacement/fixture_replacement.rb
 ===================================================================
---- lib/fixture_replacement/fixture_replacement.rb	(revision 52)
-+++ lib/fixture_replacement/fixture_replacement.rb	(working copy)
+--- lib/fixture_replacement/fixture_replacement.rb  (revision 52)
++++ lib/fixture_replacement/fixture_replacement.rb  (working copy)
 @@ -70,7 +70,12 @@
            hash_given = args[0] || Hash.new
            merged_hash = self.send(attributes_method).merge(hash_given)
@@ -31,8 +31,8 @@ Index: lib/fixture_replacement/fixture_replacement.rb
      end
 Index: spec/fixture_replacement/fixture_replacement_spec.rb
 ===================================================================
---- spec/fixture_replacement/fixture_replacement_spec.rb	(revision 52)
-+++ spec/fixture_replacement/fixture_replacement_spec.rb	(working copy)
+--- spec/fixture_replacement/fixture_replacement_spec.rb  (revision 52)
++++ spec/fixture_replacement/fixture_replacement_spec.rb  (working copy)
 @@ -9,9 +9,88 @@
    belongs_to :gender
  end
@@ -196,8 +196,8 @@ Index: spec/fixture_replacement/fixture_replacement_spec.rb
    end
 Index: spec/spec_helper.rb
 ===================================================================
---- spec/spec_helper.rb	(revision 52)
-+++ spec/spec_helper.rb	(working copy)
+--- spec/spec_helper.rb  (revision 52)
++++ spec/spec_helper.rb  (working copy)
 @@ -21,6 +21,11 @@
      t.column :gender_id, :string
    end

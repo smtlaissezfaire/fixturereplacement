@@ -1,7 +1,7 @@
 Index: spec/fixture_replacement/fixture_replacement_spec.rb
 ===================================================================
---- spec/fixture_replacement/fixture_replacement_spec.rb	(revision 31)
-+++ spec/fixture_replacement/fixture_replacement_spec.rb	(working copy)
+--- spec/fixture_replacement/fixture_replacement_spec.rb  (revision 31)
++++ spec/fixture_replacement/fixture_replacement_spec.rb  (working copy)
 @@ -1,53 +1,52 @@
 -
  require File.dirname(__FILE__) + "/../spec_helper"
