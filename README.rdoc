@@ -26,6 +26,10 @@ Install the plugin:
 
   git://github.com/smtlaissezfaire/fixturereplacement.git
 
+Or install it as a gem from gemcutter:
+
+  gem install fixture_replacement
+
 === Using it with RSpec
 
 Add the following to your <tt>spec/spec_helper.rb</tt> file, in the configuration section:
