@@ -1,5 +1,3 @@
-
-require 'rubygems'
 require 'sqlite3'
 require 'active_record'
 require 'active_support'
