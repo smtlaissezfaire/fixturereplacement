@@ -4,7 +4,7 @@ require 'active_support'
 
 require 'test/unit'
 
-RAILS_ROOT = "."
+RAILS_ROOT = "." unless defined?(RAILS_ROOT)
 
 require File.dirname(__FILE__) + "/../spec/spec_helpers"
 include SpecHelperFunctions
