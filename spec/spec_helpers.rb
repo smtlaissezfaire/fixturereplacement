@@ -13,8 +13,7 @@ FileUtils.cp_r File.join(File.dirname(__FILE__), "database.yml"),
                File.join(rails_root, "config", "database.yml")
 
 ENV["RAILS_ENV"] ||= "test"
-require rails_boot_file
-Rails::Initializer.run
+require File.join(rails_root, "config", "environment")
 
 $:.unshift project_root
 require 'lib/fixture_replacement'
