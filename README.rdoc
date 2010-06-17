@@ -26,7 +26,7 @@ Install the plugin:
 
   git://github.com/smtlaissezfaire/fixturereplacement.git
 
-Or install it as a gem from gemcutter:
+Or install it as a gem:
 
   gem install fixture_replacement
 
