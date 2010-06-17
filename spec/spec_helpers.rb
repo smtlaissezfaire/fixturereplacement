@@ -72,41 +72,41 @@ ActiveRecord::Schema.define do
     t.column :subscription_id, :integer
   end
 
-  create_table :events do |t|
+  create_table :events, :force => true do |t|
     t.column :created_at, :datetime
     t.column :updated_at, :datetime
   end
 
-  create_table :schedules do |t|
+  create_table :schedules, :force => true do |t|
     t.integer :event_id
   end
 
-  create_table :posts do |t|
+  create_table :posts, :force => true do |t|
     t.timestamps
   end
 
-  create_table :comments do |t|
+  create_table :comments, :force => true do |t|
     t.integer :post_id
     t.timestamps
   end
 
-  create_table :no_validations do |t|
+  create_table :no_validations, :force => true do |t|
     t.timestamps
   end
 
-  create_table :validate_names do |t|
+  create_table :validate_names, :force => true do |t|
     t.string :name
   end
 
-  create_table :validate_name_twos do |t|
+  create_table :validate_name_twos, :force => true do |t|
     t.string :name
   end
 
-  create_table :address_with_valid_cities do |t|
+  create_table :address_with_valid_cities, :force => true do |t|
     t.string :city
   end
 
-  create_table :address_with_valid_city_and_states do |t|
+  create_table :address_with_valid_city_and_states, :force => true do |t|
     t.string :city
     t.string :state
   end
