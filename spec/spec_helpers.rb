@@ -1,6 +1,5 @@
 module SpecHelperFunctions
   def setup_database_connection
-    require 'rubygems'
     require 'sqlite3'
     require 'active_record'
 
