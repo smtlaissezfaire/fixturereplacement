@@ -8,7 +8,8 @@ garlic do
   # target railses
   RAILS_TAREGETS = [
     "v2.3.8",
-    "v2.3.9"
+    "v2.3.9",
+    "v3.0.0"
   ]
 
   RAILS_TAREGETS.each do |rails|
