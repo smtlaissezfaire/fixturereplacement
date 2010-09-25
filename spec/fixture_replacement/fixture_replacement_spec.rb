@@ -53,8 +53,14 @@ describe FixtureReplacement do
   end
 
   describe "rails_root" do
-    it "should be the RAILS_ROOT constant" do
-      FR.rails_root.should == RAILS_ROOT
+    if Rails::VERSION::MAJOR <= 2
+      it "should be the RAILS_ROOT constant" do
+        FR.rails_root.should == RAILS_ROOT
+      end
+    else
+      it "should be the Rails.root.to_s constant" do
+        FR.rails_root.should == Rails.root.to_s
+      end
     end
   end
 

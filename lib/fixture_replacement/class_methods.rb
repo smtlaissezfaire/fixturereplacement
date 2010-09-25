@@ -23,7 +23,13 @@ module FixtureReplacement
     end
 
     def rails_root
-      defined?(RAILS_ROOT) ? RAILS_ROOT : "."
+      if rails3?
+        Rails.root.to_s
+      elsif defined?(RAILS_ROOT)
+        RAILS_ROOT
+      else
+        "."
+      end
     end
 
     def reload!
@@ -32,6 +38,10 @@ module FixtureReplacement
     end
 
   private
+
+    def rails3?
+      defined?(Rails) && ::Rails::VERSION::MAJOR == 3
+    end
 
     # Any user defined instance methods need the module's class scope to be
     # accessible inside the block given to attributes_for
