@@ -17,7 +17,7 @@ module FixtureReplacement
     end
 
     def load_example_data
-      load "#{rails_root}/db/example_data.rb"
+      load "#{::Rails.root.to_s}/db/example_data.rb"
     rescue LoadError
       # no-op.  If the file is not found, don't panic
     end

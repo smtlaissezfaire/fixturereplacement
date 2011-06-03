@@ -47,7 +47,7 @@ module FixtureReplacement
     end
 
     def instantiate(hash_to_merge = {}, instance = active_record_class.new)
-      returning instance do
+      instance.tap do
         instantiate_parent_fixture(instance)
         call_attribute_body(instance, hash_to_merge)
         add_given_keys(instance, hash_to_merge)
