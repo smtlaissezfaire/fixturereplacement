@@ -1,7 +1,7 @@
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 desc 'Run the specs'
-Spec::Rake::SpecTask.new do |t|
-  t.warning = false
-  t.spec_opts = ["--color"]
+RSpec::Core::RakeTask.new do |t|
+  # t.warning = false
+  t.rspec_opts = ["--color"]
 end

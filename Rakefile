@@ -1,6 +1,6 @@
 require 'rake'
 
-Dir.glob("rake_tasks/**/*.rb").each do |file|
+Dir.glob("./rake_tasks/**/*.rb").each do |file|
   require file
 end
 

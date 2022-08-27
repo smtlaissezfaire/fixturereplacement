@@ -28,9 +28,9 @@ Install the plugin:
 
 === Using it with RSpec
 
-Add the following to your <tt>spec/spec_helper.rb</tt> file, in the configuration section:
+Add the following to your <tt>spec/rails_helper.rb</tt> file, in the configuration section:
 
-  Spec::Runner.configure do |config|
+  RSpec.configure do |config|
     config.include FixtureReplacement
   end
 
@@ -97,18 +97,6 @@ Overrides can also be used with associations:
   scott = create_user(:username => "scott")
   post = create_post(:user => scott)
 
-
-=== attr_protected / attr_accessible
-
-In the case that the model has an attr_protected field, FixtureReplacement
-will assign the field as if it wasn't protected, which is convenient for testing:
-
-  class User < ActiveRecord::Base
-    attr_protected :admin_status
-  end
-
-  user = create_user(:username => "scott", :admin_status => true)
-  user.admin_status # => true
 
 === Validate your fixtures (thanks Fixjour)
 

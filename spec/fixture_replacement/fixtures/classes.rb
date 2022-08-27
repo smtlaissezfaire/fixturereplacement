@@ -21,7 +21,6 @@ unless defined?(User)
   end
 
   class Admin < ActiveRecord::Base
-    attr_protected :admin_status
   end
 
   class Gender < ActiveRecord::Base; end
