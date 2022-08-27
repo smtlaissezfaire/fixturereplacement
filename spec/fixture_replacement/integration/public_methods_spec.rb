@@ -15,7 +15,7 @@ module FixtureReplacement
         attributes_for :user
       end
 
-      obj.respond_to?(:create_user).should be_true
+      obj.respond_to?(:create_user).should be true
     end
   end
 end

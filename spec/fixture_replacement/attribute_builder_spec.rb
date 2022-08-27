@@ -107,7 +107,7 @@ module FixtureReplacement
 
     describe "validating all instances" do
       it "should return true if there are no instances" do
-        AttributeBuilder.validate_instances!.should be_true
+        AttributeBuilder.validate_instances!.should be true
       end
 
       it "should raise an error if an instance is not valid" do
