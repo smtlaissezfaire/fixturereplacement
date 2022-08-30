@@ -26,56 +26,29 @@ describe FixtureReplacement do
 
   describe "requiring the fixtures file" do
     before do
-      FixtureReplacement.stub!(:load)
+      FixtureReplacement.stub(:load)
     end
 
     it "should require db/example_data" do
-      FixtureReplacement.stub!(:rails_root).and_return "/foo/bar"
+      FixtureReplacement.stub(:rails_root).and_return "/foo/bar"
       FixtureReplacement.should_receive(:load).with("/foo/bar/db/example_data.rb")
 
       FixtureReplacement.load_example_data
     end
 
     it "should use the correct rails root" do
-      FixtureReplacement.stub!(:rails_root).and_return "/rails/root"
+      FixtureReplacement.stub(:rails_root).and_return "/rails/root"
       FixtureReplacement.should_receive(:load).with("/rails/root/db/example_data.rb")
 
       FixtureReplacement.load_example_data
     end
 
     it "should not blow up if the file is not found" do
-      FixtureReplacement.stub!(:load).and_raise LoadError
+      FixtureReplacement.stub(:load).and_raise LoadError
 
       lambda {
         FixtureReplacement.load_example_data
       }.should_not raise_error
-    end
-  end
-
-  describe "rails_root" do
-    def use_rails_root(rails_root, &block)
-      silence_warnings do
-        Object.const_set(:RAILS_ROOT, rails_root)
-      end
-      block.call
-    ensure
-      Object.send :remove_const, :RAILS_ROOT
-    end
-
-    it "should be the RAILS_ROOT constant if given" do
-      use_rails_root "/rails/root" do
-        FR.rails_root.should == "/rails/root"
-      end
-    end
-
-    it "should use the correct RAILS_ROOT" do
-      use_rails_root "/foo/bar" do
-        FR.rails_root.should == "/foo/bar"
-      end
-    end
-
-    it "should be '.' if not defined" do
-      FR.rails_root.should == "."
     end
   end
 

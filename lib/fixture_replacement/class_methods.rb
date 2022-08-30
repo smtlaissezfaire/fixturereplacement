@@ -17,7 +17,7 @@ module FixtureReplacement
     end
 
     def load_example_data
-      load "#{::Rails.root.to_s}/db/example_data.rb"
+      load "#{rails_root}/db/example_data.rb"
     # rescue NameError
     #   load "./db/example_data.rb"
     rescue LoadError, NameError
@@ -25,7 +25,9 @@ module FixtureReplacement
     end
 
     def rails_root
-      defined?(RAILS_ROOT) ? RAILS_ROOT : "."
+      ::Rails.root
+    rescue NameError
+      "."
     end
 
     def reload!

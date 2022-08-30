@@ -20,7 +20,7 @@ describe "default_* warnings" do
   end
 
   it "should return a new instance" do
-    Kernel.stub!(:warn).and_return nil
+    Kernel.stub(:warn).and_return nil
 
     post = @mod.default_post
     post.should be_a_kind_of(Post)

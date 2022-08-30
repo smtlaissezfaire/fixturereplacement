@@ -32,7 +32,7 @@ module FixtureReplacement
       check_valid_keys(options, [:from, :class])
 
       @fixture_name    = fixture_name.to_sym
-      @attributes_proc = block || lambda {}
+      @attributes_proc = block || proc {}
       @from            = options[:from].to_sym if options.has_key?(:from)
       @class           = options[:class]
 

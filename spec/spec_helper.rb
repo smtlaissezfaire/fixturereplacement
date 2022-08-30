@@ -1,3 +1,4 @@
+require 'debug'
 require File.dirname(__FILE__) + "/spec_helpers"
 include SpecHelperFunctions
 setup_database_connection

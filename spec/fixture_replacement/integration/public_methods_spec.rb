@@ -7,7 +7,7 @@ module FixtureReplacement
         attributes_for :user
       end
 
-      obj.public_methods.should include("create_user")
+      obj.public_methods.should include(:create_user)
     end
 
     it "should respond_to? create_user" do

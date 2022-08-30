@@ -41,7 +41,7 @@ module FixtureReplacement
 
     it "should have the subscriber with the default subscription" do
       subscriber = @obj.create_subscriber
-      subscriber.should have(1).subscription
+      subscriber.subscriptions.count.should == 1
       subscriber.subscriptions.first.name.should == "The New York Times"
     end
 
@@ -58,7 +58,7 @@ module FixtureReplacement
 
     it "should be able to create a subscriber with two subscriptions, from the fixtures" do
       subscriber = @obj.create_subscriber_with_two_subscriptions
-      subscriber.should have(2).subscriptions
+      subscriber.subscriptions.count.should == 2
     end
   end
 end
