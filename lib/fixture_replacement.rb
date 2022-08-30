@@ -13,4 +13,3 @@ end
 
 load "fr.rb"
 
-FixtureReplacement.load_example_data

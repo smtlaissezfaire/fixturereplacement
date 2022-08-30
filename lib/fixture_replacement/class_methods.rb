@@ -1,5 +1,9 @@
 module FixtureReplacement
   module ClassMethods
+    def included(_other_mod)
+      FixtureReplacement.load_example_data
+    end
+
     def attributes_for(fixture_name, options={}, &block)
       builder = AttributeBuilder.new(fixture_name, options, &block)
       MethodGenerator.new(builder, self).generate_methods
