@@ -59,7 +59,9 @@ module FixtureReplacement
 
       unless new_instance.valid?
         errors = "new_#{fixture_name} is not valid! - Errors: "
-        errors << new_instance.errors.map { |key, value| "[#{key}: #{value}]"}.join(", ")
+        errors << new_instance.errors.map do |error|
+          "[#{error.attribute}: #{error.message}]"
+        end.join(", ")
         raise InvalidInstance, errors
       end
     end

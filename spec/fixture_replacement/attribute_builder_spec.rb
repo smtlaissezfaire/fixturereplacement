@@ -115,7 +115,7 @@ module FixtureReplacement
 
         lambda {
           AttributeBuilder.validate_instances!
-        }.should raise_error
+        }.should raise_error(FixtureReplacement::InvalidInstance)
       end
 
       it "should not raise an error if there is only one instance, and it is valid" do

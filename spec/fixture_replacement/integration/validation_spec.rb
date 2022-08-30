@@ -20,7 +20,7 @@ module FixtureReplacement
 
       lambda {
         fr.validate!
-      }.should raise_error
+      }.should raise_error(FixtureReplacement::InvalidInstance)
     end
 
     it "should not raise if the record is valid" do
