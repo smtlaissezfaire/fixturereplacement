@@ -29,7 +29,7 @@ See CHANGELOG.rdoc + test suite for further changes.
 Add it to your Gemfile:
 
   group :development, :test do
-    gem "fixture_replacement", ">= 4.0"
+    gem "fixture_replacement", "~> 4.0"
   end
 
 === Using it with RSpec
