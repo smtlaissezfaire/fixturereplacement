@@ -1,3 +1,8 @@
+== 4.0.0
+
+ - Update for most recent rails / rspec (rails 7+).
+ - This gem hasn't been updated for over 10+ years.  So this is a welcome change!
+
 == 3.0.1
 
 - Made it into a rubygem.  Get it from gemcutter:
