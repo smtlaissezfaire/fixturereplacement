@@ -14,4 +14,5 @@ group :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'hannah'
   gem 'sqlite3'
+  gem 'test-unit'
 end
