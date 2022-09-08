@@ -11,7 +11,7 @@ begin
     gemspec.name        = "fixture_replacement"
     gemspec.summary     = "The original fixture replacement solution for rails"
     gemspec.email       = "scott@railsnewbie.com"
-    gemspec.homepage    = "http://replacefixtures.rubyforge.org"
+    gemspec.homepage    = "https://github.com/smtlaissezfaire/fixturereplacement"
     gemspec.authors     = ["Scott Taylor"]
     gemspec.description = <<-DESC
 FixtureReplacement is a Rails plugin that provides a simple way to
