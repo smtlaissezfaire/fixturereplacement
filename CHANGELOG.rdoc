@@ -1,7 +1,11 @@
+== 4.0.1
+
+- Minor release fixes
+
 == 4.0.0
 
- - Update for most recent rails / rspec (rails 7+).
- - This gem hasn't been updated for over 10+ years.  So this is a welcome change!
+- Update for most recent rails / rspec (rails 7+).
+- This gem hasn't been updated for over 10+ years.  So this is a needed change!
 
 == 3.0.1
 
