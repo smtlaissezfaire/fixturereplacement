@@ -10,7 +10,6 @@ group :test do
   gem 'rake'
   gem 'rspec'
   gem 'rails'
-  gem 'jeweler'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'hannah'
   gem 'sqlite3'
