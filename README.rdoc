@@ -1,11 +1,15 @@
 = FixtureReplacement
 
-== What is FixtureReplacement
+== What is FixtureReplacement?
 
-FixtureReplacement is a Rails[http://rubyonrails.org/] plugin that provides a simple way to
+FixtureReplacement is a Rails gem that provides a simple way to
 quickly populate your test database with model objects without having to manage multiple,
 brittle fixture files. You can easily set up complex object graphs (with models which
 reference other models) and add new objects on the fly.
+
+(If you've ever used FactoryGirl / FactoryBot, you're probably already quite familiar with
+fixture_replacement, as it proceeded FactoryGirl.  Also, FR is much more opinionated, and
+much less PC!)
 
 Not only can FixtureReplacement make your test data easier to maintain, it can also help
 to make your tests and specs much more readable and intention-revealing by allowing you
@@ -22,9 +26,11 @@ See CHANGELOG.rdoc + test suite for further changes.
 
 == Installation
 
-Install the plugin:
+Add it to your Gemfile:
 
-  git://github.com/smtlaissezfaire/fixturereplacement.git
+  group :development, :test do
+    gem "fixture_replacement", ">= 4.0"
+  end
 
 === Using it with RSpec
 
@@ -139,4 +145,4 @@ See contributions.rdoc
 
 This software is dual licensed under the MIT and the GPLv3 Licenses (it's your pick).
 
-Copyright 2007-2009 Scott Taylor / smtlaissezfaire[http://github.com/smtlaissezfaire] (scott@railsnewbie.com)
+Copyright 2007-2022 Scott Taylor / smtlaissezfaire[http://github.com/smtlaissezfaire] (scott@railsnewbie.com)
