@@ -25,7 +25,7 @@ class UserTest < Test::Unit::TestCase
     extend FixtureReplacement
   end
 
-  def test_true_should_be true
+  def test_true_should_be_true
     assert_equal true, true
   end
 
