@@ -1,7 +1,7 @@
 module FixtureReplacement
   module ClassMethods
     def included(_other_mod)
-      FixtureReplacement.load_example_data
+      FixtureReplacement.load!
     end
 
     def attributes_for(fixture_name, options={}, &block)
@@ -20,7 +20,7 @@ module FixtureReplacement
       string
     end
 
-    def load_example_data
+    def load!
       load "#{rails_root}/db/example_data.rb"
     rescue LoadError, NameError
       # no-op.  If the file is not found, don't panic

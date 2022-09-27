@@ -33,21 +33,21 @@ describe FixtureReplacement do
       FixtureReplacement.stub(:rails_root).and_return "/foo/bar"
       FixtureReplacement.should_receive(:load).with("/foo/bar/db/example_data.rb")
 
-      FixtureReplacement.load_example_data
+      FixtureReplacement.load!
     end
 
     it "should use the correct rails root" do
       FixtureReplacement.stub(:rails_root).and_return "/rails/root"
       FixtureReplacement.should_receive(:load).with("/rails/root/db/example_data.rb")
 
-      FixtureReplacement.load_example_data
+      FixtureReplacement.load!
     end
 
     it "should not blow up if the file is not found" do
       FixtureReplacement.stub(:load).and_raise LoadError
 
       lambda {
-        FixtureReplacement.load_example_data
+        FixtureReplacement.load!
       }.should_not raise_error
     end
   end
