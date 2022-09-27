@@ -7,6 +7,12 @@ module FixtureReplacement
       string
     end
 
+    def random_incrementing_number
+      @increment ||= 0
+      @increment += 1
+      @increment
+    end
+
     def random_email(*args)
       require 'faker'
       Faker::Internet.email(*args)
