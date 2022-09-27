@@ -24,14 +24,6 @@ module FixtureReplacement
         define_method("new_#{builder_name}") do |*args|
           new_object = builder.instantiate(*args)
         end
-
-        define_method("default_#{builder_name}") do |*args|
-          warning = "default_#{builder_name} has been deprecated. "
-          warning << "Please replace instances of default_#{builder_name} with the new_#{builder_name} method"
-          Kernel.warn(warning)
-
-          __send__ "new_#{builder_name}"
-        end
       end
     end
   end
