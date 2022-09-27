@@ -1,3 +1,17 @@
+== 4.1.0
+
+* add more helpers:
+  * random_incrementing_number
+  * random_email
+  * random_first_name
+  * random_last_name
+  * random_name
+
+  Most of these call faker; so you'll need that library for most of these methods.
+* rename FixtureReplacement.load_example_data => FixtureReplacement.load!
+* bug fixes pertaining to module_method
+* remove default_* methods, which were deprecated
+
 == 4.0.1
 
 - Minor release fixes
