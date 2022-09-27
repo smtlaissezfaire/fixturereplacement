@@ -1,5 +1,7 @@
 module FixtureReplacement
   module ClassMethods
+    include FixtureReplacement::RandomDataGenerators
+
     def included(_other_mod)
       FixtureReplacement.load!
     end
@@ -11,13 +13,6 @@ module FixtureReplacement
 
     def validate!
       AttributeBuilder.validate_instances!
-    end
-
-    def random_string(length=10)
-      chars = ("a".."z").to_a
-      string = ""
-      1.upto(length) { |i| string << chars[rand(chars.size-1)]}
-      string
     end
 
     def load!
