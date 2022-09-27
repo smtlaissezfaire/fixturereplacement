@@ -9,6 +9,7 @@ module FixtureReplacement
 
   include FixtureReplacement::Version
   extend FixtureReplacement::ClassMethods
+  extend self
 end
 
 load "fr.rb"

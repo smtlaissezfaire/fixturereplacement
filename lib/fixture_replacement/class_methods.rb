@@ -38,16 +38,5 @@ module FixtureReplacement
       AttributeBuilder.clear_out_instances!
       load File.expand_path(File.dirname(__FILE__) + "/../fixture_replacement.rb")
     end
-
-  private
-
-    # Any user defined instance methods need the module's class scope to be
-    # accessible inside the block given to attributes_for
-    #
-    # Addresses bug #16858 (see CHANGELOG)
-    def method_added(method)
-      module_function method if method != :method_added
-      public method
-    end
   end
 end

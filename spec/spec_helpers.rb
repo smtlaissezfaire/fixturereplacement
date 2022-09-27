@@ -100,8 +100,10 @@ module SpecHelperFunctions
     end
 
     def mock_fr_module(&block)
-      mod = Module.new
-      mod.extend(FixtureReplacement::ClassMethods)
+      mod = Module.new do
+        extend self
+        extend FixtureReplacement::ClassMethods
+      end
       mod.instance_eval(&block)
       mod
     end
